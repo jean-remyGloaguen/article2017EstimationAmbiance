@@ -124,7 +124,7 @@ In a similar way as to solve the equation \ref{eq:min-D-WH}, $\mathbf{W_r}$, $\m
 \end{align}
 \end{subequations}}
 
-This approach has been used TO COMPLETE.
+%This approach has been used TO COMPLETE.
 
 \section{Experimental protocol}\label{part:protocol}
 
@@ -169,7 +169,7 @@ with the \textit{Traffic Perturbator Ratio} $TPR = \left[-12, -6, 0, 6, 12\right
 
 \subsection{Experiment}
 
-The experiment consists in estimating the traffic road sound level on the environmental sound corpus. NMF is used and compared to a simple approach which consist in a frequency low-pass filter (this second method relies on the fact that road traffic is mainly composed of low frequencies, compared to main of the confounded sounds (voices, birds, etc.)) with the cut-off frequency $f_c$. Similarly, for NMF, the frequency low-pass filter is applied on the spectrogram $\mathbf{V}$ and on the dictionary $\mathbf{W}$ renamed $\mathbf{V}_{f_c}$ and $\mathbf{W}_{f_c}$ respectively. The aim to focus the reconstruction of the signal on the frequencies where the traffic components are. The figure \ref{fig:block_diagram_protocol} summarizes the different steps of the process depending on the chosen method, which consist of 3 steps: 
+The experiment consists in estimating the traffic road sound level on the environmental sound corpus. NMF is used and compared to a simple approach which consist in a frequency low-pass filter (this second method relies on the fact that road traffic is mainly composed of low frequencies, compared to main of the confounded sounds (voices, birds, etc.)) with the cut-off frequency $f_c$. The spectrogram $\mathbf{V}$ is built with a window size $w = 2^{14}$ with a 75 $\%$ overlapping and a number of point $nfft = 2^{14}$. Therefore, the dimensions of $V$ are $F$ = 8192 and $N$ = 772.  Similarly, the frequency low-pass filter is applied on the spectrogram $\mathbf{V}$ and on the dictionary $\mathbf{W}$ ( renamed $\mathbf{V}_{f_c}$ and $\mathbf{W}_{f_c}$ respectively). The aim to focus the reconstruction of the signal on the frequencies where the traffic components are. The figure \ref{fig:block_diagram_protocol} summarizes the different steps of the process depending on the chosen method, which consist of 3 steps: 
 
 \begin{itemize}
 \item the dictionary building for NMF,
@@ -193,7 +193,7 @@ The experiment consists in estimating the traffic road sound level on the enviro
 
 \subsubsection{Dictionary building}
 
-The dictionary is built from a sound database dedicated specially to this task. It is composed of 53 audio files of car passages. First, for each audio file, its spectrogram is calculated with fixed parameters (window size $w = 2^{14}$ with a 75 $\%$ overlapping and a number of point $nfft = 2^{14}$). Then a temporal rectangular window is applied without overlapping on the spectrogram in order to consider several spectrum for each audio file. The size of the window is set up at 0.5 and 1 second. In each window, the root mean square value is calculated on each frequency bin to reduce the different spectrum in one spectra.  An example that illustrates the process can be found on figure \ref{fig:dictionaryExtraction} in the ease of a large window of 4 seconds. 
+The dictionary is built from a sound database dedicated specially to this task. It is composed of 53 audio files of car passages. First, for each audio file, its spectrogram is calculated with fixed parameters ($w$, 75 $\%$ overlap, $nfft$). Then a temporal rectangular window is applied without overlapping on the spectrogram in order to consider several spectrum for each audio file. The size of the window is set up at 0.5 and 1 second. In each window, the root mean square value is calculated on each frequency bin to reduce the different spectrum in one spectra.  An example that illustrates the process can be found on figure \ref{fig:dictionaryExtraction} in the ease of a large window of 4 seconds. 
 
 \begin{figure}[!t]
 \centering
@@ -205,11 +205,22 @@ The dictionary is built from a sound database dedicated specially to this task. 
 		\centering
 		\includegraphics[width=\linewidth]{../image/extractionDictionary2Example.pdf} 
 	\end{minipage}
-	\caption{Example of the extraction of the spectrum with a 4 seconds window. On left, the original spectrogram with the temporal window, on the left, the 4 spectrum obtained (dB scale)}
+	\caption{Example of the extraction of the spectrum with a 1 second window. On left, the original spectrogram with the temporal window, on the left, the 4 spectrum obtained (dB scale)}
 	\label{fig:dictionaryExtraction}
 \end{figure}
 
-As the number of elements got on all the sound database does not respect the constraint imposed about the dimension of NMF ($F \times K + K \times N < F \times N$), a $K$-medoid clustering is applied to reduce the number of spectrum to $K = \left[ 25, 50, 100 \right]$. A special case is added where the root mean square of the entire spectrogram is applied. One spectra is then generated by audio file.
+However, the number of elements got on all the sound database does not respect the constraint imposed about the dimension of NMF ($F \times K + K \times N < F \times N$). With a 1 second window, $K$ = 1003. In consequence, a $K$-medoid clustering is applied to reduce the number of spectrum to $K = \left[ 25, 50, 100 \right]$. A special case is added where the root mean square of \textit{all} the spectrogram is applied. One spectra is then generated by audio file.
+Each element is normalized such as $\vert \vert \mathbf{W_k} \vert \vert = 1$ with $\vert \vert \bullet \vert\vert$ is the $\ell-1$ norm. Table \ref{tab:dictionary_factors} summarizes the parameters and their related values.
+
+\begin{table}[h]
+\centering
+\begin{tabular}{cccc}
+$K$ & 25  & 50 & 100 \\ \hline
+\begin{tabular}[c]{@{}c@{}}\textbf{temporal} \\ \textbf{window (s)}\end{tabular} & 0.5 & 1  & \textit{all}
+\end{tabular} 
+\caption{Summary of the dictionary parameters}
+\label{tab:dictionary_factors}
+\end{table}
 
 \subsubsection{Estimation of the traffic sound level}
 The traffic sound level is estimated according to the choice of the estimator (a frequency low-pass filter or NMF). These methods are applied on the totality of the corpus (\textit{alert} (al), \textit{animals} (an), \textit{humans} (hu), \textit{climate} (cl), \textit{mechanics} (me), \textit{transportation} (tr)), for all the cut-off frequencies $f_c$ ([500 1k 2k 5k 10k 20k] Hz) and for 5 $TPR$ ([-12 -6 0 6 12] dB).
@@ -224,7 +235,22 @@ The second estimator is supervised and semi-supervised NMF (see part \ref{part:n
 \mathbf{\tilde{V}}_{traffic} = \left[\mathbf{WH}_{f_c}\right]_{traffic}
 \end{equation}
 
-Then for each spectrogram, the estimated equivalent traffic sound level in dB of the entire scene, $\tilde{L}_{p,traffic}$, is calculated as well as the 1 second equivalent sound pressure level, $\tilde{p}_{1s,traffic}$. 
+For the third octave frequency scale, only the case $f_c = 20$ kHz is applied. 
+During the iteration process, the estimated equivalent traffic sound level in dB of the entire scene, $\tilde{L}_{p,traffic}$, is calculated as well as the 1 second equivalent sound pressure level, $\tilde{p}_{1s,traffic}$. Table \ref{tab:estimation_factors} summarizes the parameters and their related values.
+
+\begin{table*}[]
+\centering
+\begin{tabular}{lcccccc}
+$\mathbf{f_c}$ (kHz) & 0.5 & 1 & 2 & 5 & 10 & 20 \\ \hline
+$\mathbf{TPR}$ (dB) & -12 & -6 & 0 & 6 & 12 &  \\ \hline
+\textbf{sub-classes} & alert & animals & climate & humans & transportation & mechanics \\ \hline
+\textbf{method} & \multicolumn{2}{c}{filter} & \multicolumn{2}{c}{supervised NMF} & \multicolumn{2}{c}{semi-supervised NMF} \\ \hline
+$\mathbf{\beta}$ & \multicolumn{3}{c}{1} & \multicolumn{3}{c}{2} \\ \hline
+\begin{tabular}[c]{@{}c@{}}\textbf{frequency} \\ \textbf{scale}\end{tabular} & \multicolumn{3}{c}{linear} & \multicolumn{3}{c}{third octave}
+\end{tabular}
+\caption{Summary of the different parameters and their values for the estimation of the traffic sound level}
+\label{tab:estimation_factors}
+\end{table*}
 
 \subsubsection{Metric}
 The performances of the two estimators of the road traffic sound level are assessed through the calculation of two metrics. 
@@ -237,16 +263,6 @@ The performances of the two estimators of the road traffic sound level are asses
 MAE = \frac{\sum_{n = 1}^N\vert L^n_{p,traffic}-\tilde{L}^n_{p,traffic} \vert}{N}.
 \end{equation}
 
-
-
-%\item the global RMSE, \textit{gRMSE}, which consists in calculate for each combination of factors the error between the exact and estimated global traffic sound level in dB of the $N$ scenes.
-%
-%\begin{equation}
-%gRMSE = \sqrt{\frac{1}{N}\sum_{n = 1}^N \left(L^n_{p,traffic}-\tilde{L}^n_{p,traffic}\right)^2}
-%\end{equation}
-%
-%This metric expresses the quality of the long-term reconstruction of the signal. 
-
 \item The normalized short-term Root Mean Square Error, $nRMSE$, calculates, for each sound scene, the error between the exact and estimated road traffic 1-s equivalent sound level of each file normalized by the 1-s equivalent sound level of the global scene, $p^t_{1s,global}$, in the linear scale, 
 
 \begin{equation}
@@ -256,7 +272,7 @@ nRMSE = \sqrt{\frac{1}{T}\sum_{t = 1}^T \left(\frac{p^t_{1s,traffic}-\tilde{p}^t
 with $T$ is the number of temporal bin in the signal. The linear scale is here more relevant as it is more sensitive to the error on the high sound levels than the dB scale. Then for one combination of factors, the $N$ $nRMSE$ calculated are averaged.\\
 \end{itemize}
 
-In all, 5940 settings are performed.
+In all, according the table \ref{tab:dictionary_factors} and \ref{tab:estimation_factors}, 6848 settings are performed between the different dictionary $\mathbf{W}$ and the multiple parameters of the estimation step.
 
 \section{Results}\label{part:results}
 

@@ -40,11 +40,13 @@ One of the first and the most widely used techniques to do so is the Independent
 
 We propose in this paper a method based on the Non-Negative Matrix Factorization technique to estimate the traffic sound level. To validate the approach, we consider a corpus of simulated (artifically created) scenes. The use of simulated sound scenes is necessary as it offers a full control on the design of the scenes and the knowledge of the exact contribution of the traffic component which would hardly be extracted from a recording of a urban scene.
 
-The remaining of the paper is organized as follows. Section \ref{part:nmf} details the technical aspect of NMF. Section \ref{part:protocol} described on the experimental protocol set up. Then Section \ref{part:results} shows and discusses the results obtained during the parametric study.
+The remaining of the paper is organized as follows. Section \ref{part:nmf} details the technical aspect of NMF. Section \ref{part:protocol} described on the experimental protocol setup. Then Section \ref{part:results} shows and discusses the results obtained during the parametric study.
+
+\ml{faire une figure avec un diagrame de bloc et une section proposed approach avec des sub temps/frequence nmfsup nmfsemi}
 
 \section{Non-negative Matrix Factorization}\label{part:nmf}
 \subsection{Description of NMF}
-Non-negative Matrix Factorization (NMF) is an approximation method introduced by Lee and Seung, \cite{lee_learning_1999}, which estimates the spectrogram (get from a Short-Term Fourier Transform) of an audio file, $\mathbf{V}$, $\in \mathbb{R}^+_{F \times N}$ as :
+Non-negative Matrix Factorization (NMF) is a matrix approximation method introduced by Lee and Seung, \cite{lee_learning_1999}, which can be used to approximate the spectrogram (obtained using a Short-Term Fourier Transform) of an audio file, $\mathbf{V}$, $\in \mathbb{R}^+_{F \times N}$ as :
 
 \begin{equation}\label{eq:nmf}
 \mathbf{V} = \mathbf{\tilde{V}} \approx \mathbf{WH}
@@ -59,7 +61,7 @@ where $\mathbf{W} \in \mathbb{R}^+_{F \times K}$ is the \textit{dictionary} (or 
 \label{fig:example_NMF}
 \end{figure}
 
-The choice of the dimensions is imposes such as $F\times K + K \times N < F \times N$. To estimate the quality of the approximation, an objective function is used
+The choice of the dimensions should be such that $F\times K + K \times N < F \times N$. To estimate the quality of the approximation, an objective function is used
 
 \begin{equation}\label{eq:min-D-WH}
 \underset{\mathbf{H} \geq 0, \mathbf{W} \geq 0}{\min} D\left(\mathbf{V} \vert \vert \mathbf{\tilde{V}}\right)
@@ -80,12 +82,12 @@ and usually belongs to the $\beta-$divergence class \cite{fevotte_nonnegative_20
 \end{numcases}
 \end{subequations}
 
-The prior knowledges on the content can be adjusted with the add of constraints (like the smoothness or the sparsness criteria \cite{virtanen_monaural_2007}) in the objective function (equation (\ref{eq:min-D-WH})) to better take account prior knowledge of the sources.
+Prior knowledge on the content can be adjusted with the addition of constraints (like the smoothness or the sparsness criteria \cite{virtanen_monaural_2007}) in the objective function (equation (\ref{eq:min-D-WH})) to better take account prior knowledge of the sources.
 
-Algorithms have been proposed to solve the minimization problem (\ref{eq:min-D-WH}) iteratively such as the multiplicative upatde, the alternating least square method \cite{cichocki_regularized_2007}, the projected gradient \cite{lin_projected_2007} \dots Here, the multiplicative update is chosen \cite{lee_algorithms_2000} as it ensure non-negative results of which convergence has been proved \cite{fevotte_algorithms_2011}.
+Algorithms have been proposed to solve the minimization problem (\ref{eq:min-D-WH}) iteratively such as the multiplicative update, the alternating least square method \cite{cichocki_regularized_2007}, the projected gradient \cite{lin_projected_2007} \dots Here, the multiplicative update is chosen \cite{lee_algorithms_2000} as it ensure non-negative results of which convergence has been proved \cite{fevotte_algorithms_2011}.
 
 \subsection{Supervised NMF}
-First, supervised NMF is used: the \textit{dictionary} includes audio spectrum of urban sound sources as, in the urban environments, a lot of different sound sources present are known and their spectrum can be obtained. The \textit{basis} are then the unknown to find. In the first iteration, $\mathbf{H}$ is initialized randomly, then it is updated by the generic algorithm
+First, supervised NMF is used: the \textit{dictionary} includes audio spectrum of urban sound sources as, in the urban environments, a lot of different sound sources present are known and their spectrum can be obtained. The \textit{basis} are then the unknown to estimate. In the first iteration, $\mathbf{H}$ is initialized randomly, then it is updated by the generic algorithm
 
 \begin{equation}
 \textbf{H}^{(i+1)} \leftarrow \textbf{H}^{(i)}.\left(\frac{\textbf{W}^T \left[\left(\textbf{WH}^{(i)} \right)^{(\beta-2)}.\textbf{V} \right]}{\textbf{W}^T \left[\textbf{WH}^{(i)} \right]^{(\beta-1)}}\right)^{\gamma(\beta)}
@@ -111,7 +113,7 @@ with $\gamma(\beta) = \frac{1}{2-\beta},$ for $\beta < 1$, $ \gamma(\beta) = 1$,
 
 \subsection{Semi-supervised NMF}
 
-One of the main issue with the supervised approach is this is not always adapted to different sound environments as the fixed dictionary has to sum up all the sound sources that can be present. In consequence, as the dictionary dimension is limited and cannot include all the urban sounds, to offer more flexibility, semi-supervised NMF has been proposed \cite{lee_semi-supervised_2010}. This method consists in composing the \textit{dictionary} with a fixed part $\mathbf{W_s} \in \mathbb{R}^+_{F\times K}$ (composed here of traffic audio spectrum) and with a mobile part, $\mathbf{W_r} \in \mathbb{R}^+_{F\times J}$ with $J <<K$, that is updated. Here, $J = 2$. The aim is to include in $\mathbf{W_r}$ the element that are not related with the traffic. The problem (\ref{eq:nmf}) become
+One of the main issue with the supervised approach is To better acount for the diverse nature of urban scenes, semi-supervised NMF can be useful as it has been proposed \cite{lee_semi-supervised_2010}  to offer more flexibility. This method consists in composing the \textit{dictionary} with a fixed part $\mathbf{W_s} \in \mathbb{R}^+_{F\times K}$, composed in our case of spectrum representative of road traffic and with a mobile part, $\mathbf{W_r} \in \mathbb{R}^+_{F\times J}$ with $J <<K$, that is updated. Here, $J = 2$. The aim is to include in $\mathbf{W_r}$ the element that are not related with the traffic. The problem (\ref{eq:nmf}) become
 
 \begin{equation}
 \mathbf{V} \approx \mathbf{W_s H_s}+ \mathbf{W_r H_r}
@@ -132,11 +134,11 @@ In a similar way as to solve the equation \ref{eq:min-D-WH}, $\mathbf{W_r}$, $\m
 
 \section{Experimental protocol}\label{part:protocol}
 
-Simulated sound scenes are used to assess the performance of NMF. This offers a controlled framework to design specific sound environments in which all the traffic component is known. Then, the road traffic sound levels estimated with the method can be compared to the real ones, introduced within each simulated sound scene.
+In order to vzlidate the usefulness of considering the NMF framewrok to estimate the road traffic noise level, one need to have a reference level. It can hardly de measured or even annotated from real life recordings. Thus,  simulated sound scenes are used to assess the performance of the propsed NMF. This offers a controlled framework to design specific sound environments in which all the traffic component is known. Then, the road traffic sound levels estimated with the method can be compared to the real ones, introduced within each simulated sound scene.
 
 \subsection{Environmental sound scene corpus}
 
-A corpus is designed with the \textit{simScene} software\footnote{Open-source project available at: \url{https://bitbucket.org/mlagrange/simscene}}. \textit{simScene} \cite{rossignol_simscene:_2015} is a simulator that creates sound scenes in a .wav format by superposing audio samples that come from an isolated sound database. This database is divided in two categories: $i)$ the \textit{event} category which are the brief sounds (from 1 to 20 seconds) that are considered as salient, $ii)$ the \textit{background} category includes all the sounds that are of long duration and whose acoustic properties do not vary with respect to time. Inside each category, the sound samples are grouped in sound classes (\textit{bird, car, foot steps} \dots), each of them being composed of multiples samples (bird01.wav, bird02.wav \dots).
+A corpus is designed with the \textit{simScene} software\footnote{Open-source project available at: \url{https://bitbucket.org/mlagrange/simscene}}. \textit{simScene} \cite{rossignol_simscene:_2015} is a simulator that creates sound scenes in a .wav format by summing audio samples that come from an isolated sound database. This database is divided in two categories: $i)$ the \textit{event} category which are the brief sounds (from 1 to 20 seconds) that are considered as salient, $ii)$ the \textit{background} category includes all the sounds that are of long duration and whose acoustic properties do not vary with respect to time. Inside each category, the sound samples are grouped in sound classes (\textit{bird, car, foot steps} \dots), each of them being composed of multiples samples (bird01.wav, bird02.wav \dots).
 
 The software allows the user to control some parameters (number of events of each class that appear in the mixture, elapsed time between each sample of a same class, presence of a fade in and a fade out \dots) completed with a standard deviation that may brings some random behavior between the scenes. Furthermore, an audio file of each sound class present in the scene can be generated that allows to know its exact contribution as well as a text file that summarizes the time presence of all the events.\\
 
@@ -147,13 +149,13 @@ The software allows the user to control some parameters (number of events of eac
 \caption{Example of a sound scene composed of 3 sound classes (car, bird, car horn)}
 \end{figure}
 
-A sound database has been built including 245 sound event samples divided in 19 sound classes (\textit{ringing bell, birds, sweeping broom, car horn, car passages, hammer, drill, coughing, barking dog, rolling suitcase, closing door, plane, siren, footstep, storm, street noise, train, tramway, truck and voice}) and 154 sound background samples divided in 9 sound classes (\textit{birds, construction site noise, crowd, park, rain, children playing in schoolyard, constant traffic noise, ventilation, wind}). The sound class \textit{car passages} comes from recordings of 4 cars made on the Ifsttar's runway on different speeds with multiple gear ratio. The other audio files have been found online (\textit{freesound.org}) and with the help of the \textit{UrbanSound8k} database \cite{salamon_dataset_nodate}. This database enables creating realistic urban sound scenes from the road traffic point of view \cite{gloaguen_creation_2017}. A sound mixing corpus is composed of 6 sub-corpuses of 25 audio files each lasting 30 seconds. Each sub-corpus is characterized by a specific generic sound class : \textit{alert} (car horn, siren), \textit{animals} (barking dog , whistling birds), \textit{climate} (wind, rain), \textit{humans} (crowd noise and voice), \textit{mechanics} (different metallic and construction site noise) and \textit{transportation} (train, tramway and plane). In each file, traffic component is present as the sum of the background and event traffic sounds and is mixed with the sound classes. The sound classes that are not related to the traffic component are summed up as the \textit{perturbator} (n'existe pas comme terme, disruptive à la place ?) class. To test different scenarios, each audio file is duplicated with the traffic sound level of the entire sound scene, $L_{p,traffic}$, fixed to a specific level according to the sound level of the \textit{perturbator} class, $L_{p,perturbator}$ following the relation (\ref{eq:tpr}).
+A sound database has been built including 245 sound event samples divided in 19 sound classes (\textit{ringing bell, birds, sweeping broom, car horn, car passages, hammer, drill, coughing, barking dog, rolling suitcase, closing door, plane, siren, footstep, storm, street noise, train, tramway, truck and voice}) and 154 sound background samples divided in 9 sound classes (\textit{birds, construction site noise, crowd, park, rain, children playing in schoolyard, constant traffic noise, ventilation, wind}). The sound class \textit{car passages} comes from recordings of 4 cars made on the Ifsttar's runway on different speeds with multiple gear ratio. The other audio files have been found online (\textit{freesound.org}) and within the \textit{UrbanSound8k} database \cite{salamon_dataset_nodate}. This database enables creating realistic urban sound scenes from the road traffic point of view \cite{gloaguen_creation_2017}. A sound mixing corpus is composed of 6 sub-corpuses of 25 audio files each lasting 30 seconds. Each sub-corpus is characterized by a specific generic sound class that summed with traffic will make the estimation of the traffic level more difficult. The classes are : \textit{alert} (car horn, siren), \textit{animals} (barking dog , whistling birds), \textit{climate} (wind, rain), \textit{humans} (crowd noise and voice), \textit{mechanics} (different metallic and construction site noise) and \textit{transportation} (train, tramway and plane). In each file, traffic component is present as the sum of the background and event traffic sounds and is mixed with the sound classes. The sound classes that are not related to the traffic component are summed up as the \textit{interfering} sound class. To test different scenarios, each audio file is duplicated with the traffic sound level of the entire sound scene, $L_{p,traffic}$, fixed to a specific level according to the sound level of the \textit{interfering} class, $L_{p,interfering}$ following the relation (\ref{eq:tpr}).
 
 \begin{equation}\label{eq:tpr}
-TPR = L_{p,traffic}-L_{p,perturbator}
+TPR = L_{p,traffic}-L_{p,interfering}
 \end{equation}
 
-with the \textit{Traffic Perturbator Ratio} $TPR = \left[-12, -6, 0, 6, 12\right]$. When $TPR = -12$, the traffic component is then less present than when $TPR = 12$ where it is predominant on the \textit{perturbator} class. The 1 second equivalent sound pressure level, $p_{1s,traffic}$, is also calculated (figure \ref{fig:exampleScene}). Finally, the number of scenes designed is 750 (6 sub-corpus $\times$ 25 scenes $\times$  5 TPR values).
+with the \textit{Traffic Interference Ratio} $TIR = \left[-12, -6, 0, 6, 12\right]$. When $TIR = -12$, the traffic component is then less present than when $TIR = 12$ where it is predominant on the \textit{perturbator} class. The 1 second equivalent sound pressure level, $p_{1s,traffic}$, is also calculated (figure \ref{fig:exampleScene}). Finally, the number of scenes designed is 750 (6 sub-corpus $\times$ 25 scenes $\times$  5 TPR values).
 
 \begin{figure*}
 \centering

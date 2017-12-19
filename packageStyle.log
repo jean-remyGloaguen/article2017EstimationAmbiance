@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (MiKTeX 2.9 64-bit) (preloaded format=pdflatex 2016.1.7)  25 SEP 2017 15:50
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (MiKTeX 2.9 64-bit) (preloaded format=pdflatex 2016.1.7)  18 DEC 2017 15:49
 entering extended mode
 **./packageStyle.tex
 (packageStyle.tex
@@ -59,8 +59,8 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.15 \usepackage{
-                 amssymb}
+l.13 \usepackage{
+                 nth}	% pour ^th près des chiffres
 \usepackage may only appear in the document preamble, i.e.,
 between \documentclass and \begin{document}.
 
@@ -72,7 +72,7 @@ Type  H <return>  for immediate help.
  ...                                              
                                                   
 l.16 \usepackage{
-                 amsmath}
+                 amssymb}
 \usepackage may only appear in the document preamble, i.e.,
 between \documentclass and \begin{document}.
 
@@ -84,7 +84,7 @@ Type  H <return>  for immediate help.
  ...                                              
                                                   
 l.17 \usepackage{
-                 fancybox}
+                 amsmath}
 \usepackage may only appear in the document preamble, i.e.,
 between \documentclass and \begin{document}.
 
@@ -96,7 +96,7 @@ Type  H <return>  for immediate help.
  ...                                              
                                                   
 l.18 \usepackage{
-                 xfrac}	% fraction de type "1/4"
+                 fancybox}
 \usepackage may only appear in the document preamble, i.e.,
 between \documentclass and \begin{document}.
 
@@ -108,6 +108,18 @@ Type  H <return>  for immediate help.
  ...                                              
                                                   
 l.19 \usepackage{
+                 xfrac}	% fraction de type "1/4"
+\usepackage may only appear in the document preamble, i.e.,
+between \documentclass and \begin{document}.
+
+
+! LaTeX Error: \usepackage before \documentclass.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.20 \usepackage{
                  cases}	% système équation
 \usepackage may only appear in the document preamble, i.e.,
 between \documentclass and \begin{document}.
@@ -119,7 +131,7 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.20 \usepackage[overload]{
+l.21 \usepackage[overload]{
                            empheq}
 \usepackage may only appear in the document preamble, i.e.,
 between \documentclass and \begin{document}.
@@ -131,7 +143,7 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.21 \usepackage{
+l.22 \usepackage{
                  bm}		% pour mettre en gras .
 \usepackage may only appear in the document preamble, i.e.,
 between \documentclass and \begin{document}.
@@ -143,7 +155,7 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.22 \usepackage{
+l.23 \usepackage{
                  units} 	% x/y barre latérale pour les fractions
 \usepackage may only appear in the document preamble, i.e.,
 between \documentclass and \begin{document}.
@@ -155,7 +167,7 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.25 \usepackage{
+l.26 \usepackage{
                  graphicx}	% insérer des graphiques
 \usepackage may only appear in the document preamble, i.e.,
 between \documentclass and \begin{document}.
@@ -167,7 +179,7 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.26 \usepackage{
+l.27 \usepackage{
                  subfigure}	% utiliser subfigure
 \usepackage may only appear in the document preamble, i.e.,
 between \documentclass and \begin{document}.
@@ -179,7 +191,7 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.27 \usepackage{
+l.28 \usepackage{
                  float}	% utiliser H dans les figures
 \usepackage may only appear in the document preamble, i.e.,
 between \documentclass and \begin{document}.
@@ -191,7 +203,7 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.30 \usepackage{
+l.31 \usepackage{
                  array,multirow,makecell}
 \usepackage may only appear in the document preamble, i.e.,
 between \documentclass and \begin{document}.
@@ -203,7 +215,7 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.32 \usepackage[table,xcdraw]{
+l.33 \usepackage[table,xcdraw]{
                                xcolor} % pour avoir des lignes colorées dan...
 
 \usepackage may only appear in the document preamble, i.e.,
@@ -216,19 +228,7 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.33 \usepackage{
-                 slashbox} % pour les \backslashbox
-\usepackage may only appear in the document preamble, i.e.,
-between \documentclass and \begin{document}.
-
-
-! LaTeX Error: \usepackage before \documentclass.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.35 \usepackage{
+l.36 \usepackage{
                  hhline}	% pour les lignes horizontales
 \usepackage may only appear in the document preamble, i.e.,
 between \documentclass and \begin{document}.
@@ -240,13 +240,25 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.36 \usepackage{
+l.37 \usepackage{
                  tabularx} % permet itemize dans les cellules
 \usepackage may only appear in the document preamble, i.e.,
 between \documentclass and \begin{document}.
 
+
+! LaTeX Error: \usepackage before \documentclass.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.38 \usepackage{
+                 booktabs}
+\usepackage may only appear in the document preamble, i.e.,
+between \documentclass and \begin{document}.
+
 ! Undefined control sequence.
-l.39 \newcolumntype
+l.40 \newcolumntype
                    {L}[1]{>{\raggedright\let\newline\\\arraybackslash\hspace...
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -261,7 +273,7 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.39 \newcolumntype{L
+l.40 \newcolumntype{L
                      }[1]{>{\raggedright\let\newline\\\arraybackslash\hspace...
 
 You're in trouble here.  Try typing  <return>  to proceed.
@@ -273,40 +285,7 @@ Missing character: There is no 1 in font nullfont!
 Missing character: There is no ] in font nullfont!
 Missing character: There is no > in font nullfont!
 ! Undefined control sequence.
-l.39 ...{\raggedright\let\newline\\\arraybackslash
-                                                  \hspace{0pt}}m{#1}}
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-Missing character: There is no m in font nullfont!
-! You can't use `macro parameter character #' in horizontal mode.
-l.39 ...t\newline\\\arraybackslash\hspace{0pt}}m{#
-                                                  1}}
-Sorry, but I'm not programmed to handle this case;
-I'll just pretend that you didn't ask for it.
-If you're in the wrong mode, you might be able to
-return to the right one by typing `I}' or `I$' or `I\par'.
-
-Missing character: There is no 1 in font nullfont!
-! Undefined control sequence.
-l.40 \newcolumntype
-                   {C}[1]{>{\centering\let\newline\\\arraybackslash\hspace{0...
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-Missing character: There is no C in font nullfont!
-Missing character: There is no [ in font nullfont!
-Missing character: There is no 1 in font nullfont!
-Missing character: There is no ] in font nullfont!
-Missing character: There is no > in font nullfont!
-! Undefined control sequence.
-l.40 ...{>{\centering\let\newline\\\arraybackslash
+l.40 ...{\raggedright\let\newline\\\arraybackslash
                                                   \hspace{0pt}}m{#1}}
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -326,20 +305,20 @@ return to the right one by typing `I}' or `I$' or `I\par'.
 Missing character: There is no 1 in font nullfont!
 ! Undefined control sequence.
 l.41 \newcolumntype
-                   {R}[1]{>{\raggedleft\let\newline\\\arraybackslash\hspace{...
+                   {C}[1]{>{\centering\let\newline\\\arraybackslash\hspace{0...
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
 misspelled it (e.g., `\hobx'), type `I' and the correct
 spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
-Missing character: There is no R in font nullfont!
+Missing character: There is no C in font nullfont!
 Missing character: There is no [ in font nullfont!
 Missing character: There is no 1 in font nullfont!
 Missing character: There is no ] in font nullfont!
 Missing character: There is no > in font nullfont!
 ! Undefined control sequence.
-l.41 ...>{\raggedleft\let\newline\\\arraybackslash
+l.41 ...{>{\centering\let\newline\\\arraybackslash
                                                   \hspace{0pt}}m{#1}}
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -357,8 +336,41 @@ If you're in the wrong mode, you might be able to
 return to the right one by typing `I}' or `I$' or `I\par'.
 
 Missing character: There is no 1 in font nullfont!
+! Undefined control sequence.
+l.42 \newcolumntype
+                   {R}[1]{>{\raggedleft\let\newline\\\arraybackslash\hspace{...
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
 
-Overfull \hbox (20.0pt too wide) in paragraph at lines 39--42
+Missing character: There is no R in font nullfont!
+Missing character: There is no [ in font nullfont!
+Missing character: There is no 1 in font nullfont!
+Missing character: There is no ] in font nullfont!
+Missing character: There is no > in font nullfont!
+! Undefined control sequence.
+l.42 ...>{\raggedleft\let\newline\\\arraybackslash
+                                                  \hspace{0pt}}m{#1}}
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+Missing character: There is no m in font nullfont!
+! You can't use `macro parameter character #' in horizontal mode.
+l.42 ...t\newline\\\arraybackslash\hspace{0pt}}m{#
+                                                  1}}
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+Missing character: There is no 1 in font nullfont!
+
+Overfull \hbox (20.0pt too wide) in paragraph at lines 40--43
 []
  []
 
@@ -369,7 +381,7 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.44 \usepackage{
+l.45 \usepackage{
                  url}	% gérer les adresses www.
 \usepackage may only appear in the document preamble, i.e.,
 between \documentclass and \begin{document}.
@@ -382,7 +394,7 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.47 \cleardoublepage
+l.48 \cleardoublepage
                      
 Your command was ignored.
 Type  I <command> <return>  to replace it with another command,

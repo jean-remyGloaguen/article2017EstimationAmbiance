@@ -113,18 +113,6 @@ with $\gamma(\beta) = \frac{1}{2-\beta},$ for $\beta < 1$, $ \gamma(\beta) = 1$,
 \mathbf{\tilde{V}}_{traffic} = \left[ \mathbf{WH} \right]_{traffic}.
 \end{equation}
 
-%or by generating a soft mask, $\mathbf{M_s}$,
-%
-%\begin{equation} \label{eq:definitionMask}
-%\mathbf{M_s} = \frac{\left[\mathbf{W} \mathbf{H}\right]_{traffic}}{\mathbf{W H}},
-%\end{equation}
-%
-%which allows to determine the spectrogram of the traffic component, $ \mathbf{\tilde{V}}_{traffic}$
-%
-%\begin{equation}\label{eq:separation}
-%\mathbf{\tilde{V}}_{traffic} = \mathbf{M_s}.\mathbf{V}.
-%\end{equation}
-
 \subsection{Semi-supervised NMF}
 
 One of the main issue with the supervised approach is the generalization issue: how to be adapted to different sound mixtures with a fixed dictionary ? To better take account for the diverse nature of urban scenes, semi-supervised NMF can be useful as it has been proposed \cite{lee_semi-supervised_2010} to offer more flexibility. This method consists in composing the \textit{dictionary} with a fixed part $\mathbf{W_s} \in \mathbb{R}^+_{F\times K}$, composed in our case of spectrum representative of road traffic and with a mobile part, $\mathbf{W_r} \in \mathbb{R}^+_{F\times J}$ with $J <<K$, that is updated. Here, $J = 2$. The aim is to include in $\mathbf{W_r}$ the element that are not related with the traffic. The problem (\ref{eq:nmf}) become
@@ -267,13 +255,13 @@ $\mathbf{w_t}$ (s)& 0.5 & 1  & \textit{all}
 
 \subsubsection{Performed NMF}
 
-Supervised and semi-supervised NMF are performed for 400 iterations which is sufficiently enough to get a stabilized reconstruction. ThC-NMF is performed on a lower number of iteration (60) to prevent $\mathbf{W}$ to not deviate to much from the initial dictionary. The spectrogram $\mathbf{V}$ and the dictionary $\mathbf{W}$ are expressed on two different formats: with a linear frequency scale ($\Delta f \approx 10.8$ Hz) and with third octave bands (29 bands). Theses two methods are considered to compare a fine grain approach (the linear scale) with a coarser one (the third octave bands) as it reduces the number of frequency bins and allows to reduces the number of bands in the high frequencies where the traffic component is less present.  Furthermore, in the case of the linear frequency scale and for supervised and semi-supervised NMF, $\mathbf{V}$ and $\mathbf{W}$ are filtered at the frequencies $f_c$ in order to focused the reconstruction of the signal of the low frequency bins. Nevertheless, if NMF is performed with filtered elements ($\mathbf{V}_{f_c}$ and $\mathbf{W}_{f_c}$) to determine $\mathbf{H}_{f_c}$, the traffic signal reconstruction is done with the original dictionary $\mathbf{W}$, as
+Supervised and semi-supervised NMF are performed for 400 iterations which is sufficiently enough to get a stabilized reconstruction. ThC-NMF is performed on a lower number of iteration (60) to prevent $\mathbf{W}$ to not deviate to much from the initial dictionary. The spectrogram $\mathbf{V}$ and the dictionary $\mathbf{W}$ are expressed on two different spectral representation: with a linear frequency scale ($\Delta f \approx 10.8$ Hz) and with third octave bands (29 bands). Theses two methods are considered to compare a fine grain approach (the linear scale) with a coarser one (the third octave bands) as it reduces the number of frequency bins and allows to reduces the number of bands in the high frequencies where the traffic component is less present.  Furthermore, in the case of the linear frequency scale and for supervised and semi-supervised NMF, $\mathbf{V}$ and $\mathbf{W}$ are filtered at the frequencies $f_c$ in order to focused the reconstruction of the signal of the low frequency bins. Nevertheless, if NMF is performed with filtered elements ($\mathbf{V}_{f_c}$ and $\mathbf{W}_{f_c}$) to determine $\mathbf{H}_{f_c}$, the traffic signal reconstruction is done with the original dictionary $\mathbf{W}$, as
 
 \begin{equation}
 \mathbf{\tilde{V}}_{traffic} = \left[\mathbf{WH}_{f_c}\right]_{traffic}.
 \end{equation}
 
-With the third octave frequency scale, only the case $f_c = 20$ kHz is applied. Finally, for the ThC NMF, the threshold is define between 0.20 and 0.70 with a 0.01 step. Table \ref{tab:estimation_factors} summarizes the parameters and the related values.
+With the third octave spectral representation, only the case $f_c = 20$ kHz is applied. Finally, for the ThC NMF, the threshold is define between 0.20 and 0.70 with a 0.01 step. Table \ref{tab:estimation_factors} summarizes the parameters and the related values.
 
 \begin{table*}[]
 \centering
@@ -333,8 +321,8 @@ $\mathbf{K}$ & $\mathbf{w_t}$ (s) & $\mathbf{f_c}$ (kHz) &\begin{tabular}[c]{@{}
 100 & 0.5 & 20 & spectra & 2 & semi-supervised NMF &  & \textbf{2.34 ($\pm$ 1.35)} \\ 
 100 & 0.5  & 20 & third octave & 1 & semi-supervised NMF &  & \textbf{2.38 ($\pm$ 1.26)} \\ 
 100 & 0.5 & 20 & third octave & 2 & semi-supervised NMF &  & \textbf{2.43 ($\pm$ 1.43)} \\ \hline \hline
- &  &  & spectra & 1 & ThC NMF &  &  \\ 
-100 & all & 20 & spectra & 2 & ThC NMF & 0.37 & \textbf{2.22 ($\pm$ 2.37)} \\ 
+50 & all & 5 & spectra & 1 & ThC NMF & 0.39 & \textbf{2.23 ($\pm$ 2.21)} \\ 
+50 & all & 2 & spectra & 2 & ThC NMF & 0.37 & \textbf{2.17 ($\pm$ 2.28)} \\ 
 100 & all & 20 & third octave & 1 & ThC NMF & 0.57 & \textbf{2.19 ($\pm$ 2.01)} \\ 
 100 & all & 20 & third octave & 2 & ThC NMF & 0.54 & \textbf{2.16 ($\pm$ 2.24)}\\ \bottomrule
 \end{tabular}
@@ -367,7 +355,9 @@ The two first lines resume the error produced by the filter. $f_c = 20 $ kHz is 
 \end{figure*}
 
 
-The results of different versions of NMF are summarized next to the filter results with, in bold, the NMF errors lower than the baseline. With the exception of supervised NMF with third octave spectral representation, all NMF have a lower mean error than the baseline. However, the best combination is got with a ThC NMF with a third octave spectral representation, $\beta$ = 2 and a threshold $t$ = 0.54. For each method (supervised, semi-supervised and ThC NMF), the best scenario is detailed according the sub-classes and the $TIR$ (Figure \ref{fig:TIR_class_filter}, \ref{fig:TIR_class_sup}, \ref{fig:TIR_class_semi} and \ref{fig:W_ThC_NMF}). 
+The results of different versions of NMF are summarized next to the filter results with the NMF errors lower than the baseline in bold. With the exception of supervised NMF with third octave spectral representation, all NMF have a lower mean error than the baseline. The best combination is got with a ThC NMF with a third octave spectral representation, $\beta$ = 2 and a threshold $t$ = 0.54. 
+
+Between the dictionary parameters ($K$ and $w_t$) and the cut-off frequency $f_c$, no parameters is common to all the settings. For each method (supervised, semi-supervised and ThC NMF), the best scenario is detailed according the sub-classes and the $TIR$ (Figure \ref{fig:TIR_class_filter}, \ref{fig:TIR_class_sup}, \ref{fig:TIR_class_semi} and \ref{fig:W_ThC_NMF}). 
 
 \begin{table*}[t]
 \centering
@@ -388,12 +378,12 @@ $f_c$ (kHz) & 20 & 0.5 & 0.5 & 20 & 20 \\ \hline
 \end{table*}
 
 
-\begin{figure*}[t!]
+\begin{figure*}[t]
     \centering
     \begin{subfigure}[t]{0.45\textwidth}
         \centering
         \includegraphics[width=\linewidth]{../image/filter_bar.pdf}
-        \caption{filter method with $f_c$ = 500 Hz}
+        \caption{Frequency low-pass filter with $f_c$ = 500 Hz}
         \label{fig:TIR_class_filter}
     \end{subfigure}%
     \hfill
@@ -423,9 +413,9 @@ $f_c$ (kHz) & 20 & 0.5 & 0.5 & 20 & 20 \\ \hline
 
 In the case of supervised NMF, on all the $TIR$, if the mean score is lower than the baseline method, it offers similar performances as for $TIR = [0, 6, 12]$, the mean score are nearly close. The performance of supervised NMF is mainly visible for $TIR = -12$ where the error with the baseline decrease by more than 1 dB. 
 
-The gain of the semi-supervised approach is most of all significant for these low $TIR$ where the add of a mobile part, $\mathbf{W_r}$, into $\mathbf{W}$ allows to take into account the other predominant sound sources (example in Figure \ref{fig:Y_alert-12}) while supervised NMF is constrained to use traffic elements to reduce the distance/divergence between $\mathbf{V}$ and $\mathbf{WH}$. This improvement, according to supervised NMF results, can be seen in Figure \ref{fig:TIR_class_semi} where the error on each sub class for $TIR = -12$ and $TIR$ = -6 are much lower.  Nevertheless, these degrees of freedom are restrictive for high $TIR$. Indeed, without constraint semi-supervised NMF is free to include traffic components in $W_r$ decreasing the rebuilt of the traffic component (Figure \ref{fig:Y_alert_12}). The error are then increasing for theses $TIR$. In the opposite, supervised NMF has to use the \textit{traffic} element present in $W$ which improve the performances. 
+The gain of the semi-supervised approach is most of all significant for these low $TIR$ where the add of a mobile part, $\mathbf{W_r}$, into $\mathbf{W}$ allows to take into account the other predominant sound sources (example in Figure \ref{fig:Y_alert-12}) while supervised NMF is constrained to use traffic elements to reduce the distance/divergence between $\mathbf{V}$ and $\mathbf{WH}$. This improvement, according to supervised NMF results, can be seen in Figure \ref{fig:TIR_class_semi} where the error on each sub class for $TIR = -12$ and $TIR$ = -6 are much lower.  Nevertheless, these degrees of freedom are restrictive for high $TIR$. Indeed, without constraint semi-supervised NMF is free to include traffic components in $\mathbf{W_r}$ decreasing the rebuilt of the traffic component (Figure \ref{fig:Y_alert_12}). The error are then increasing for theses $TIR$. In the opposite, supervised NMF has to use the \textit{traffic} element present in $W$ which improve the performances. \\
 
-\begin{figure}[t!]
+\begin{figure*}[t]
     \centering
     \begin{subfigure}[t]{0.45\textwidth}
         \centering
@@ -440,22 +430,21 @@ The gain of the semi-supervised approach is most of all significant for these lo
         \caption{$\mathbf{W_r}$ for an \textit{alert} scene at $TIR$ = 12}
 		\label{fig:Y_alert_12}
     \end{subfigure}
-\end{figure}
+\end{figure*}
     
 
 
-Finally, ThC NMF with a threshold fixed at $t = 0.54$ offers the most lower results. The dictionary update allows to the method to adapt to the different $TIR$ and to only keep the closest elements of the \textit{traffic} component \ref{fig:dist_-12_12}.
+Finally, ThC NMF with a hard threshold fixed at $t = 0.54$ offers the lowest results. The dictionary update allows to the method to adapt to the different $TIR$ and to only keep the closest elements of the \textit{traffic} component \ref{fig:dist_-12_12}. 
 
-\begin{figure}
+\begin{figure}[t]
     \centering
     \includegraphics[width=\linewidth]{../image/dist_-12_12.pdf}    
     \caption{Example of the similarity $\cos \theta$ for an sound mixture of the \textit{alert} sub-class for two $TIR$ and with the threshold $t$: $TIR = -12$ (a) and $TIR = 12$ (b)}
     \label{fig:dist_-12_12}
 \end{figure}
 
-
-The gain is significant on all $TIR$ with the exception of $TIR = 0$. On figure \ref{fig:ThC_error}, we can see the improvement of .
-While supervised NMF have high errors on low $TIR$ for the sub-classes \textit{human} and \textit{transport}, ThC NMF succeed to have error inferior to 4 dB. The error for \textit{climate} and \textit{mechanics} are, on the other hand, similar to those of supervised NMF. 
+The gain is significant on all $TIR$ with the exception of $TIR = 0$. On Figure \ref{fig:TIR_class_thc}, we can see the improvement bringing by this approach. For low $TIR$, only a reduce number of $\mathbf{W}$ are considered as traffic components, the performance on \textit{alert}, \textit{animals}, \textit{humans} and \textit{tranportation} are then similar to semi-supervised NMF. However, for \textit{climate} and \textit{mechanics}, the error are important as in supervised NMF. On high $TIR$, the similarity of the initial dictionary and $\mathbf{W}$ allows to keep more elements. In these cases, ThC NMF is the most powerful of the proposed methods. 
+Consequently, if the average error is lower than semi-supervised NMF, with good performances on high $TIR$, it is a more variable method. 
 
 \section{Conclusion}
 \footnotesize

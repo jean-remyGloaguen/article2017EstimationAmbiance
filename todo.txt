@@ -1,0 +1,5 @@
+figures/semi-sup_bar.pdf missing
+
+fill an experiments directory with code
+
+put the ambience dataset on zenodo, look at dcase datasets for guidance

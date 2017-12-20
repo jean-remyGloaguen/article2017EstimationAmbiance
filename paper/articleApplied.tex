@@ -16,8 +16,8 @@
   \and
     Mathieu Lagrange\\
 	Jean-François Petiot \\
-    LS2N\\
-    Central School of Nantes\\
+    LS2N, CNRS\\
+    Ecole Centrale de  Nantes\\
 }
 \date{}
 \begin{document}
@@ -46,17 +46,11 @@ In consequence, to be effective on a wide range of sound environments, we propos
 One of the first and the most widely \ml{faux} used techniques to do so is the Independent Component Analysis \cite{comon_independent_1994}. The principle is to decompose $N$ recorded signals to a sum of $P$ independent sound sources weighted by linear relations. This method is most of all suited for the 'cocktail party' issue where one tries to capture a signal among noise.  However, ICA is limited to only over determined cases ($N > P$). Furthermore, if it is suited for indoor environments where the number of sound sources is constant, it can not be fitted for an outdoor environment where the number of sources is unknown and variable and, moreover, it would be necessary to mount multiples sensors on one point to perform the source separation \ml{je ne vois pas ou est le probleme, il y a des gens qui le font}. A more convenient method is Non-negative Matrix Factorization (NMF) \cite{lee_learning_1999} which consists in approximating the magnitude spectrogram of an audio file from the product of two matrices. It has been widely used in the audio domain, \cite{smaragdis_non-negative_2003} \cite{wilson_speech_2008} \cite{mesaros_sound_2015}, and has already been employed for the source separation task of monaural signals of speech and music \cite{wang_musical_2005} \cite{wilson_speech_2008}. By design, this method deals reasonably well with the overlaping sound sources as soon as the overlap can be resolved on the time/frequency plane. For the environmental sounds, the method has been used for the geo-localisation and classification of the sound environment, like in \cite{kumar_audio_2016} where NMF is used to classify the audio files according to the 10 cities where they have been recorded. It has also been used by Innami and Kasai in the unsupervised case \cite{satoshi_innami_nmf-based_2012} for source separation. They proposed a source separation in two steps by separating the sound background from the events first and by separating the events between them. The audio files tested results of a simulation process where a sound background (river or wind) are added to two sound events (school chime, announcement, frog croaking, dog barging and bell ringing).
 
  If the method proposed is interesting, the main issue here is the small size of the database (only 9 sounds) on which the algorithms are tested while some sounds (frog and river) are not representative of sounds that can be found in cities.
- \ml{encore une fois, utilise la critique implicite. On peut tout critiquer, surtout un papier qui n'est pas encore publié, fais attention.
-
- faire une liste des contributions avec 1) 2) 3) et finir par un paragraphe de structure}
-
-
+ \ml{encore une fois, utilise la critique implicite. On peut tout critiquer, surtout un papier qui n'est pas encore publié, fais attention. faire une liste des contributions avec 1) 2) 3) et finir par un paragraphe de structure}
 
 \subsection{Proposed approach}
 
-\ml{tu melange contribution technique et protocole experimental, ca va pas
-
-pas de soussection a l'intro}
+\ml{tu melange contribution technique et protocole experimental, ca va pas. pas de soussection a l'intro}
 
 We propose in this paper a method based on the Non-Negative Matrix Factorization (NMF) technique to estimate the global, $\tilde{L}_{p,traffic}$, and the 1-s equivalent, $\tilde{p}_{1s,traffic}$ sound level of the traffic through the supervised and the semi-supervised approaches as well as a method using thresholding. To validate these approaches, we consider a corpus of simulated scenes artificially created with the simulator software \textit{simScene}. The use of simulated sound scenes is necessary as it offers a full control on the design of the scenes and the knowledge of the exact contribution of the traffic component which would hardly be extracted from a recording of an urban scene ($L_{p,traffic}$ and $p_{1s,traffic}$). Both the sound scene simulation and NMF require the creation of two sound databases (figure  \ref{fig:blocDiagramNMF}). In parallel, a baseline method built from a frequency low-pass filter is computed. This method considers that road traffic is mainly composed of low frequencies and therefore can be filtered by a low-pass filter at the cut-off frequency $f_c$ (figure \ref{fig:blocDiagramFilter}). The performance of the frequency low-pass filter and NMF are then compared with the calculation of two metrics (Mean Absolute Error, normalized Root Mean Square Error).
 
@@ -339,7 +333,7 @@ $\mathbf{K}$ & $\mathbf{w_t}$ (s) & $\mathbf{f_c}$ (kHz) &\begin{tabular}[c]{@{}
 100 & all & 20 & third octave & 1 & ThC NMF & 0.57 & \textbf{2.19 ($\pm$ 2.01)} \\
 100 & all & 20 & third octave & 2 & ThC NMF & 0.54 & \textbf{2.16 ($\pm$ 2.24)}\\ \bottomrule
 \end{tabular}
-\caption{Best results according to $\beta$, method and  spectral representation}
+\caption{Best results according to $\beta$, method and  spectral representation \ml{ne mettre en gras que le meilleur et expliciter le gras dans la caption}})}
 \label{tab:results}
 \end{table*}
 
@@ -416,7 +410,7 @@ $\mathbf{\beta}$ &  &  & 2 & 2 & 2 \\ \hline
 
     \begin{subfigure}[t]{0.45\textwidth}
         \centering
-        \includegraphics[width=\linewidth]{figures/semi-sup_bar.pdf}
+      %  \includegraphics[width=\linewidth]{figures/semi-sup_bar.pdf}
         \caption{Semi-supervised NMF, $\beta$ = 2, linear spectral representation, $f_c$ = 20 kHz}
                 \label{fig:TIR_class_semi}
     \end{subfigure}%
@@ -479,7 +473,6 @@ ThC NMF adapté pour d'autres sources sonores \\
 Scènes grafic ensuite
 
 \ml{non, une conclusion conclue, c'est tout.
-
 rappel des resultats experimentaux et conclusion sur l'approche. Rappel des contributions et impact sur la communaute.
 Petite ouverture sur le potentiel de l'approche: agnostique en terme de source, peut etre contraint temporellement citation, reste raisonable en terme de cout de calcul. }
 

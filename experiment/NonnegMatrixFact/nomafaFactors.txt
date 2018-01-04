@@ -20,7 +20,7 @@ SS_sizeWrand = 2: = 15/2 = [2 3]
 SS_weight = 2: = 15/2 = [0 10^9 10^12 10^15]  
 SS_betaM = 2: =  15/2 = [0 1 2]  
 SS_sensitivity = 2: = 20/2 = [1 10 100]
-iteration = 2:s = 15/[1 2] = (1:10)*40
+iteration = 2:s = 1/2 = (1:10)*40
 formW = 3: = 1/2 = {'full','cut'}
 temporalInterval =  =  = 1
 window =  =  = 2^12

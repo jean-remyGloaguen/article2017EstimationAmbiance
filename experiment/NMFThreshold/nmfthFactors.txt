@@ -6,7 +6,7 @@ reduceSizeW	 = 1: = 1/2 = {'kmeans','kmeansMedoids','rand'}
 domain = 2: = 1/2 = {'spectra','mel','thirdOctave'}
 numberMel = 2:  = 6/2 = [40 50]
 cutOffFreq = 2: =  = [500 1000 2000 5000 10000 20000];  
-sceneSelect = 2: =  = [5 15 25 50]
+sceneSelect = 2: =  = [0 50 90]
 dataset = 2: =  = {'ambience','grafic'}
 aType = 2: = 10/1 = {'alert', 'animals', 'climate', 'human', 'transportation', 'mechanics'}
 gType = 2: = 10/2 = {'park', 'quietStreet', 'noisyStreet', 'veryNoisyStreet'}
@@ -14,11 +14,11 @@ TIR = 2: = 10/1 = [-12 -6 0 6 12]
 beta = 2: = 1/2 = [0:2]
 iteration = 2:s = 1/2 = (1:30)*2
 distanceMethod = 3: = 1/2 = {'cosine','none'}
-methodThreshold = 3: = 15/1 = {'hard','soft','firm'}
-displayDistance = 3: = 15/1  = {'linear','sigmoid','RBF'}
-threshold = 3: = 16/[1 2] = 0.30:0.01:0.70
-thresholdFirmHigh = 3: = 16/3 = 0.40:0.01:0.55
-thresholdFirmLow = 3: = 16/3 = 0.30:0.01:0.55
+methodThreshold = 3: = 16/1 = {'hard','soft','firm'}
+displayDistance = 3: = 16/1  = {'linear','sigmoid','RBF'}
+threshold = 3: = 17/[1 2] = 0.30:0.01:0.70
+thresholdFirmHigh = 3: = 17/3 = 0.40:0.01:0.55
+thresholdFirmLow = 3: = 17/3 = 0.30:0.01:0.55
 temporalInterval =  =  = 1
 window =  =  = 2^12
 noverlap =  =  = 50

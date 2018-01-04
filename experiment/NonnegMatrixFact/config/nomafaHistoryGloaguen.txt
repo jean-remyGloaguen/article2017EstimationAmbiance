@@ -1,0 +1,3 @@
+NonnegMatrixFact('addStep', 'TPRadjust')
+NonnegMatrixFact('addFactor',{'numberClass','[1:2]','3', });
+NonnegMatrixFact('f')

@@ -52,7 +52,7 @@ globalName = cell(1,length(files)/3);
 ind = 1;
 
 for ii = 1:length(files)
-    if isempty(strfind(files(ii).name,'traffic')) && isempty(strfind(files(ii).name,'perturbator'))
+    if isempty(strfind(files(ii).name,'traffic')) && isempty(strfind(files(ii).name,'interfering'))
         globalName{ind} = files(ii).name(1:end-4);
         ind = ind+1;
     end
@@ -70,7 +70,7 @@ end
 parfor ii = 1:numberScene
     
     fileTraffic = audioread([creationSceneDir globalName{ii} '_traffic.wav']);
-    fileRest = audioread([creationSceneDir globalName{ii} '_perturbator.wav']);
+    fileRest = audioread([creationSceneDir globalName{ii} '_interfering.wav']);
     
     if strcmp(dataset,'ambience')
         

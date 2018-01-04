@@ -7,12 +7,12 @@ domain = 2: = 1/2 = {'spectra','mel','thirdOctave'}
 numberMel = 2:  = 6/2 = [40 50]
 cutOffFreq = 2: =  = [500 1000 2000 5000 10000 20000];  
 sceneSelect = 2: =  = [0 50 75 90]
-dataset = 2: =  = {'ambience','grafic','cars'}
+dataset = 2: =  = {'ambience','grafic'}
 aType = 2: = 10/1 = {'alert', 'animals', 'climate', 'human', 'transportation', 'mechanics'}
 gType = 2: = 10/2 = {'park', 'quietStreet', 'noisyStreet', 'veryNoisyStreet'}
 TIR = 2: = 10/1 = [-12 -6 0 6 12]
 beta = 2: = 1/2 = [0:2]
-nmfType = 2: = 1/2 = {'supervised', 'semi-supervised','unsupervised'}
+nmfType = 2: = 1/2 = {'supervised', 'semi-supervised'}
 sparsity = 2: = 1/2 = [0 0.2 0.5]
 SM_weight = 2: = 1/2 = [0 1 5 10 20]
 smoothnessForm = 2: = 17/[2:4] = {'all', 'traffic'}
@@ -20,11 +20,7 @@ SS_sizeWrand = 2: = 15/2 = [2 3]
 SS_weight = 2: = 15/2 = [0 10^9 10^12 10^15]  
 SS_betaM = 2: =  15/2 = [0 1 2]  
 SS_sensitivity = 2: = 20/2 = [1 10 100]
-distanceMethod = 3: = 15/3 = {'cosine'}
-displayDistance = 3: = 23/[1 2]  = {'linear','sigmoid','RBF'}
-thresholdCosine = 3: = 23/2 = 0.50:0.01:0.70
 iteration = 2:s = 15/[1 2] = (1:10)*40
-iterationUnSupervised = 2:s = 15/[3] = (1:30)*2
 formW = 3: = 1/2 = {'full','cut'}
 temporalInterval =  =  = 1
 window =  =  = 2^12
@@ -32,8 +28,6 @@ noverlap =  =  = 50
 nfft =  =  = 2^12
 sr =  =  = 44100
 p0 =  =  = 2e-5
-orderFiltre =  =  = 6
-
 
 
 %% COMMENTS

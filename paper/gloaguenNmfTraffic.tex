@@ -17,7 +17,7 @@
     Mathieu Lagrange\\
 	Jean-François Petiot \\
     LS2N, CNRS\\
-    Ecole Centrale de  Nantes\\
+    \'Ecole Centrale de  Nantes\\
 }
 \date{}
 \begin{document}
@@ -54,24 +54,15 @@ One of the first and the most widely \ml{faux} used techniques to do so is the I
 
 We propose in this paper a method based on the Non-Negative Matrix Factorization (NMF) technique to estimate the global, $\tilde{L}_{p,traffic}$, and the 1-s equivalent, $\tilde{p}_{1s,traffic}$ sound level of the traffic through the supervised and the semi-supervised approaches as well as a method using thresholding. To validate these approaches, we consider a corpus of simulated scenes artificially created with the simulator software \textit{simScene}. The use of simulated sound scenes is necessary as it offers a full control on the design of the scenes and the knowledge of the exact contribution of the traffic component which would hardly be extracted from a recording of an urban scene ($L_{p,traffic}$ and $p_{1s,traffic}$). Both the sound scene simulation and NMF require the creation of two sound databases; see Figure \ref{fig:blocDiagramNMF}. In parallel, a baseline method built from a frequency low-pass filter is computed. This method considers that road traffic is mainly composed of low frequencies and therefore can be filtered by a low-pass filter at the cut-off frequency $f_c$; see Figure \ref{fig:blocDiagramFilter}. The performance of the frequency low-pass filter and NMF are then compared with the calculation of two metrics (Mean Absolute Error, normalized Root Mean Square Error).
 
-\begin{figure*}
-    \centering
-    \begin{subfigure}[t]{0.45\textwidth}
-        \centering
-        \includegraphics[width=.45\linewidth]{figures/bloc_diagram_NMF_EN.pdf}
-        \caption{Frequency low-pass filter with $f_c$ = 500 Hz}
-        \label{fig:TIR_class_filter}
-    \end{subfigure}%
-    \hfill
-    \begin{subfigure}[t]{0.45\textwidth}
-        \centering
-        \includegraphics[width=.45\linewidth]{figures/bloc_diagram_filtrage_EN.pdf}
-        \caption{Block diagrams summed up the different step of the process for the frequency low-pass filter \ref{fig:blocDiagramFilter} and for NMF \ref{fig:blocDiagramNMF}}
-		\label{fig:TIR_class_sup}
-    \end{subfigure}
+\begin{figure*}[t]
+\centering
+\includegraphics[width=0.7\textwidth]{figures/bloc_diagram_source_separation.pdf}
+\caption{Bloc diagram of the source separation method}
 \end{figure*}
 
 The remaining of the paper is organized as follows. Section \ref{part:nmf} details the technical aspect of NMF. Section \ref{part:protocol} described on the design of the environmental sound scene corpus and the experimental protocol setup. Then Section \ref{part:results} shows and discusses the results obtained during the parametric study.
+
+The experience is lead with the Matlab software. In order to be a reproductive experience, all the programs\footnote{\url{https://github.com/jean-remyGloaguen/article2017EstimationAmbiance}} and the sound database\footnote{\url{https://sandbox.zenodo.org/record/176695#.Wk4ow3kiGos}} (TEMPORAIRE) used are available online.
 
 \section{Non-negative Matrix Factorization}\label{part:nmf}
 \subsection{Description of NMF}
@@ -223,13 +214,33 @@ with the \textit{Traffic Interference Ratio} $TIR = \left[-12, -6, 0, 6, 12\righ
 
 The experiment consists in estimating the traffic road sound level of the 6 environmental sound sub-corpus (\textit{alert} (al), \textit{animals} (an), \textit{humans} (hu), \textit{climate} (cl), \textit{mechanics} (me), \textit{transportation} (tr)) and for 5 $TIR$ ([-12 -6 0 6 12] dB). First, the spectrogram $\mathbf{V}$ of each sound scene is built with a window size $w = 2^{12}$ with a 50 $\%$ overlap and a number of point $nfft = 2^{12}$. Therefore, the dimensions of $\mathbf{V}$ are $F$ = 2049 and $N$ = 664.
 
-The first estimator to determine the traffic sound level is a frequency low-pass filter which depend only on the cut-off frequencies $f_c$ = [500 1k 2k 5k 10k 20k] Hz. The spectrograms $\mathbf{V}$ are filtered and the remaining energy is then considered as traffic component (eq. \ref{eq:v_tr_filtered}).
+The first estimator to determine the traffic sound level is a frequency low-pass filter which depend only on the cut-off frequencies $f_c$ = [500 1k 2k 5k 10k 20k] Hz (see Figure \ref{fig:bloc_filtre}). The spectrograms $\mathbf{V}$ are filtered and the remaining energy is then considered as traffic component (eq. \ref{eq:v_tr_filtered}).
 
 \begin{equation}\label{eq:v_tr_filtered}
 \mathbf{\tilde{V}}_{traffic} = \mathbf{V}_{f_c}.
 \end{equation}
 
-The second estimator is the proposed scheme, based on several flavors of the NMF framework. Multiples experimental factors are involved here between the dictionary learning and the own parameters of the NMF.
+The second estimator is the proposed scheme, based on several flavors of the NMF framework. Multiples experimental factors are involved here between the dictionary learning and NMF (see bloc diagram in Figure \ref{fig:bloc_nmf}).
+
+\begin{figure}
+
+    \centering
+    \begin{subfigure}[t]{0.45\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{figures/bloc_diagram_filtrage_EN.pdf}
+  		\caption{}
+  		\label{fig:bloc_filtre}
+    \end{subfigure}%
+    \vfill
+    \begin{subfigure}[t]{0.45\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{figures/bloc_diagram_NMF_EN.pdf}
+		\caption{}
+		\label{fig:bloc_nmf}
+    \end{subfigure}
+    
+    \caption{Block diagrams summed up the different step of the process for the frequency low-pass filter (a) and for NMF (b)}
+\end{figure}
 
 \subsubsection{Dictionary building}\label{part:dictionary_learning}
 
@@ -256,7 +267,7 @@ The dictionary is built from a second sound database dedicated specifically to t
 
 Each $k$ element of $\mathbf{W}$ is normalized such as $\vert \vert \mathbf{W_k} \vert \vert = 1$ with $\vert \vert \bullet \vert\vert$ the $\ell$-1 norm.\\
 
-Table \ref{tab:dictionary_factors} summarizes the parameters and their related values.
+Table \ref{tab:dictionary_factors} summarizes the experimental factors and their related values.
 
 \begin{table}[h]
 \centering
@@ -265,11 +276,11 @@ Parameter &  \multicolumn{3}{c}{value}\\ \hline
 $K$ & 25  & 50 & 100 \\ \hline
 $\mathbf{w_t}$ (s)& 0.5 & 1  & \textit{all}
 \end{tabular}
-\caption{Summary of the dictionary parameters}
+\caption{Summary of experimental factors of the dictionary}
 \label{tab:dictionary_factors}
 \end{table}
 
-\subsubsection{NMF parameters}
+\subsubsection{Experimental factors of the NMF}
 
 Supervised and semi-supervised NMF are performed for 400 iterations which is sufficiently enough to get a stabilized reconstruction. ThC-NMF is performed on a lower number of iteration (60) to prevent $\mathbf{W}$ to not deviate too much from the initial dictionary. The spectrogram $\mathbf{V}$ and the dictionary $\mathbf{W}$ are expressed on two different spectral representations: with a linear frequency scale ($\Delta f \approx 10.8$ Hz) and with third octave bands (29 bands). These two methods are considered to compare a fine grain approach (the linear scale) with a coarser one (the third octave bands) as it reduces the number of frequency bins in the high frequencies where the traffic component is less present and generates less calculations. Furthermore, in the case of the linear frequency scale and for supervised and semi-supervised NMF, $\mathbf{V}$ and $\mathbf{W}$ are filtered at the frequencies $f_c$ in order to focused the reconstruction of the signal of the low frequency bins. Nevertheless, if NMF is performed with filtered elements ($\mathbf{V}_{f_c}$ and $\mathbf{W}_{f_c}$) to determine $\mathbf{H}_{f_c}$, the traffic signal reconstruction is done with the original dictionary $\mathbf{W}$, as
 
@@ -277,7 +288,7 @@ Supervised and semi-supervised NMF are performed for 400 iterations which is suf
 \mathbf{\tilde{V}}_{traffic} = \left[\mathbf{WH}_{f_c}\right]_{traffic}.
 \end{equation}
 
-With the third octave spectral representation, only the case $f_c = 20$ kHz is applied. For the TI-NMF, the threshold is define between 0.20 and 0.70 with a 0.01 step. Table \ref{tab:estimation_factors} summarizes the parameters and their related values.
+With the third octave spectral representation, only the case $f_c = 20$ kHz is applied. For the TI-NMF, the threshold is define between 0.20 and 0.70 with a 0.01 step. Table \ref{tab:estimation_factors} summarizes the experimental factors and their related values.
 
 \begin{table*}[]
 \centering
@@ -290,7 +301,7 @@ $\mathbf{f_c}$ (kHz) & 0.5 & 1 & 2 & 5 & 10 & 20 \\ \hline
 \textbf{method} & \multicolumn{2}{c}{filter} & supervised NMF & semi-supervised NMF & TI-NMF \\ \hline
 $\mathbf{t}$ & \multicolumn{6}{c}{0.20:0.01:0.70} \\ \hline
 \end{tabular}
-\caption{Summary of the different parameters taken into account in the frequency low-pass filter and NMF process and their values for the estimation of the traffic sound level}
+\caption{Summary of the different experimental factors taken into account in the frequency low-pass filter and NMF process and their values for the estimation of the traffic sound level}
 \label{tab:estimation_factors}
 \end{table*}
 
@@ -302,13 +313,11 @@ The performances of the two estimators of the road traffic sound level are asses
 MAE = \frac{\sum_{n = 1}^N\vert L^n_{p,traffic}-\tilde{L}^n_{p,traffic} \vert}{N}.
 \end{equation}
 
-In all, according Tables \ref{tab:dictionary_factors} and \ref{tab:estimation_factors}, 24540 settings are performed between the different form of the dictionary $\mathbf{W}$ (table \ref{tab:dictionary_factors}) and the multiple parameters taken into account by NMF:  for the filter estimator, between the $TIR$, the sub-classes and $f_c$, 180 settings are performed whereas for supervised and semi-supervised, 7560 associations of parameters are made. For TI-NMF, 16800 combinations can be calculated.
+In all, according Tables \ref{tab:dictionary_factors} and \ref{tab:estimation_factors}, 24540 settings are performed between the different form of the dictionary $\mathbf{W}$ (table \ref{tab:dictionary_factors}) and the multiple experimental factors taken into account by NMF:  for the filter estimator, between the $TIR$, the sub-classes and $f_c$, 180 settings are performed whereas for supervised and semi-supervised, 7560 associations of factors are made. For TI-NMF, 16800 combinations can be calculated.
 
 \section{Results}\label{part:results}
 
-Table \ref{tab:results} summarized, according to the 3 main parameters (method, $\beta$ and spectral representation), the $MAE$ error averaged on all sub-classes and all $TIR$ (750 sound mixtures in all).\\
-
-\ml{replace parameters by experimental factors}
+Table \ref{tab:results} summarized, according to the 3 main factors (method, $\beta$ and spectral representation), the $MAE$ error averaged on all sub-classes and all $TIR$ (750 sound mixtures in all).\\
 
 \begin{table*}[]
 \centering
@@ -355,10 +364,10 @@ The two first lines show the error produced by the baseline filter. $f_c = 20 $ 
 
 The results of different versions of NMF are summarized next to the filter results in Table \ref{tab:results_TIR}. NMF errors lower than the baseline are put in bold letter. With the exception of supervised NMF with third octave spectral representation, all NMF have a lower mean error than the baseline. The best combination is got with a TI-NMF with a third octave spectral representation, $\beta$ = 2 and a threshold $t$ = 0.54.
 
-Between the dictionary parameters ($K$ and $w_t$) and the cut-off frequency $f_c$, none is common to all the settings. If for the third octave spectral representation, $f_c$ has been fixed at 20 kHz, in linear representation, this parameters is variable depending on chosen method.
+Between the dictionary factors ($K$ and $w_t$) and the cut-off frequency $f_c$, none is common to all the settings. If for the third octave spectral representation, $f_c$ has been fixed at 20 kHz, in linear representation, this factors is variable depending on chosen method.
 
-For supervised NMF, the spectrogram $\mathbf{V}$ has to be filtered at 500 Hz to focused the reconstruction of the signals on the part where most of the traffic energy is. According to the choice of $\beta$, the dictionary parameters are different. It is the only case where it is.
-In the opposite, in semi-supervised NMF, an unique set of parameters is used to get high performance : $K$ = 100, $w_t$ = 0.5 second and $f_c$ = 20 kHz. It is with $f_c = 20$ kHz that the approximation is better as it includes easily other sound sources. With a lower cut-off frequency ($ f_c <$ 5 kHz), focusing on traffic energy, the risk is then to include \textit{traffic} component in $\mathbf{W_r}$ and to deteriorate the traffic signal reconstruction. The influence of the spectral representation and $\beta$ is here weak as the errors are similar with a low standard deviation. The third approaches, TI-NMF, proposed, in the four cases, the lowest errors. Like supervised NMF, in linear spectral representation, it is necessary to filter $\mathbf{V}$ to focus on the traffic energy. Here $f_c$ is higher (5000 Hz and 2000 Hz respectively for $\beta = 1$ and $\beta$ = 2). The choice of the spectral representation influence also the order of magnitude of the threshold $t$: in the interval [0.37 0.39] and [0.54 0.57] respectively for a linear and third octave spectral representation.\\
+For supervised NMF, the spectrogram $\mathbf{V}$ has to be filtered at 500 Hz to focused the reconstruction of the signals on the part where most of the traffic energy is. According to the choice of $\beta$, the dictionary factors are different. It is the only case where it is.
+In the opposite, in semi-supervised NMF, an unique set of factors is used to get high performance : $K$ = 100, $w_t$ = 0.5 second and $f_c$ = 20 kHz. It is with $f_c = 20$ kHz that the approximation is better as it includes easily other sound sources. With a lower cut-off frequency ($ f_c <$ 5 kHz), focusing on traffic energy, the risk is then to include \textit{traffic} component in $\mathbf{W_r}$ and to deteriorate the traffic signal reconstruction. The influence of the spectral representation and $\beta$ is here weak as the errors are similar with a low standard deviation. The third approaches, TI-NMF, proposed, in the four cases, the lowest errors. Like supervised NMF, in linear spectral representation, it is necessary to filter $\mathbf{V}$ to focus on the traffic energy. Here $f_c$ is higher (5000 Hz and 2000 Hz respectively for $\beta = 1$ and $\beta$ = 2). The choice of the spectral representation influence also the order of magnitude of the threshold $t$: in the interval [0.37 0.39] and [0.54 0.57] respectively for a linear and third octave spectral representation.\\
 
 For each method (supervised, semi-supervised and TI-NMF), the best parameter combinations are detailed according to the sub-classes and the $TIR$ (Table \ref{tab:results_TIR},  Figure \ref{fig:TIR_class_filter}, \ref{fig:TIR_class_sup}, \ref{fig:TIR_class_semi} and \ref{fig:TIR_class_thc}). \\
 

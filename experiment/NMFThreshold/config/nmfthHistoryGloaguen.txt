@@ -1,0 +1,4 @@
+NMFThreshold('addStep','dictionary')
+NMFThreshold('addStep','estimation')
+NMFThreshold('addStep','threshold')
+NMFThreshold('addStep','metric')

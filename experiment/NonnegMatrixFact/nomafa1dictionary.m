@@ -11,7 +11,7 @@ function [config, store, obs] = nomafa1dictionary(config, setting, data)
 % Date: 13-Jan-2017
 
 % Set behavior for debug mode
-if nargin==0, NonnegMatrixFact('do', 1); return; else, store=[]; obs=[]; end
+if nargin==0, NonnegMatrixFact('do', 1, 'mask',{1 1 1 1 1}); return; else, store=[]; obs=[]; end
 
 if strcmp(setting.type,'nmf')
     K = setting.numberElementW;

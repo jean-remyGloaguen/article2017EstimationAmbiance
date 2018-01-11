@@ -86,7 +86,7 @@ where $\mathbf{W} \in \mathbb{R}^+_{F \times K}$ is the \textit{dictionary} (or 
 \label{fig:example_NMF}
 \end{figure}
 
-The choice of the dimensions is often made as that $F\times K + K \times N < F \times N$. NMF is then considered as a low rank approximation method. However, this constraint is not mandatory. To estimate the quality of the approximation, an objective function is used
+The choice of the dimensions is often made so that $F\times K + K \times N < F \times N$. NMF is then considered as a low rank approximation method. However, this constraint is not mandatory. To estimate the quality of the approximation, an objective function is used
 
 \begin{equation}\label{eq:min-D-WH}
 \underset{\mathbf{H} \geq 0, \mathbf{W} \geq 0}{\min} D\left(\mathbf{V} \vert \vert \mathbf{\tilde{V}}\right).
@@ -98,7 +98,7 @@ D\left(\textbf{V} \vert\vert \mathbf{\tilde{V}} \right) = \sum_{f = 1}^{F} \sum_
 \left(\textbf{V}_{fn} \vert \left[ \textbf{WH} \right]_{fn} \right)
 \end{equation}
 
-and usually belongs to the $\beta-$divergence class \cite{fevotte_nonnegative_2009} in which the well known Euclidean distance (eq. \ref{eq:def_distEUC}) and the Kullback-Leibler divergence (eq. \ref{eq:def_divKL}) belong
+and usually belongs to the $\beta-$divergence class \cite{fevotte_nonnegative_2009} in which the well known Euclidean distance (eq. \ref{eq:def_distEUC}), the Kullback-Leibler divergence (eq. \ref{eq:def_divKL}) and the Itakura-Saito divergence belong
 
 \begin{subequations}\label{eq:divBetaGenerale}
 \begin{numcases}{d_{\beta}(x\vert y) =}
@@ -107,18 +107,18 @@ and usually belongs to the $\beta-$divergence class \cite{fevotte_nonnegative_20
 \end{numcases}
 \end{subequations}
 
-To better take account prior knowledge on the sources,  constraints (like the smoothness or the sparsness criteria \cite{virtanen_monaural_2007}) can be added to the objective function.
+To better take into account prior knowledge about the sources of interest, constraints (like the smoothness or the sparsness criteria \cite{virtanen_monaural_2007}) can be added to the objective function.
 
-Algorithms have been proposed to solve the minimization problem (\ref{eq:min-D-WH}) iteratively such as the multiplicative update \cite{lee_algorithms_2000}, the alternating least square method \cite{cichocki_regularized_2007}, the projected gradient \cite{lin_projected_2007} \dots Here, the multiplicative update is chosen as it ensures non-negative results of which convergence has been proved \cite{fevotte_algorithms_2011}.
+Algorithms have been proposed to solve the minimization problem (\ref{eq:min-D-WH}) iteratively such as the multiplicative update \cite{lee_algorithms_2000}, the alternating least square method \cite{cichocki_regularized_2007}, the projected gradient \cite{lin_projected_2007} \dots Here, the multiplicative update is chosen as it ensures convergence as proven in \cite{fevotte_algorithms_2011}.
 
 \subsection{Supervised NMF}
-First, supervised NMF (SUP NMF) is used: the \textit{dictionary} includes audio spectrum of urban sound sources. In the urban environments, a lot of different sound sources present are known whose spectrum can be obtained and be a basis of $\mathbf{W}$. The \textit{activator} are then the unknown to estimate. In the first iteration, $\mathbf{H}$ is initialized randomly, then it is updated by the generic algorithm
+First, supervised NMF (Sup-NMF) is used: the \textit{dictionary} includes audio spectrum of urban sound sources. In the urban environments, a lot of different sound sources present are known whose spectrum can be obtained and be a basis of $\mathbf{W}$. The \textit{activator} are then the unknown to estimate. In the first iteration, $\mathbf{H}$ is initialized randomly, then it is updated by the generic algorithm
 
 \begin{equation}\label{eq:updateH_Sup}
 \textbf{H}^{(i+1)} \leftarrow \textbf{H}^{(i)}.\left(\frac{\textbf{W}^T \left[\left(\textbf{WH}^{(i)} \right)^{(\beta-2)}.\textbf{V} \right]}{\textbf{W}^T \left[\textbf{WH}^{(i)} \right]^{(\beta-1)}}\right)^{\gamma(\beta)}
 \end{equation}
 
-with $\gamma(\beta) = \frac{1}{2-\beta},$ for $\beta < 1$, $ \gamma(\beta) = 1$, for $\beta \in \left[1,2\right]$ and $\gamma(\beta) = \frac{1}{\beta-1}$ for $\beta > 2$. The product $A.B$ and $A/B$ symbolized the Hadamard product and ratio. As in the supervised approach, the position in $\mathbf{W}$ of traffic component is known, the separation of this sound source is made by extracting the related basis and activators,
+with $\gamma(\beta) = \frac{1}{2-\beta},$ for $\beta < 1$, $ \gamma(\beta) = 1$, for $\beta \in \left[1,2\right]$ and $\gamma(\beta) = \frac{1}{\beta-1}$ for $\beta > 2$. The product $A.B$ and $A/B$ are respectively the Hadamard product and ratio. As in the supervised approach the indexes of traffic components in $\mathbf{W}$  are known, the separation of the corresponding sound source is made by extracting the related basis and activators,
 
 \begin{equation}\label{eq:separationExtraction}
 \mathbf{\tilde{V}}_{traffic} = \left[ \mathbf{WH} \right]_{traffic}.
@@ -126,7 +126,7 @@ with $\gamma(\beta) = \frac{1}{2-\beta},$ for $\beta < 1$, $ \gamma(\beta) = 1$,
 
 \subsection{Semi-supervised NMF}
 
-One of the main issue with the supervised approach is the generalization issue: how to be adapted to different sound mixtures with a fixed dictionary ? To better take into account the diverse nature of urban scenes, semi-supervised NMF (S-S NMF)\cite{lee_semi-supervised_2010} can be useful as it has been proposed  to offer more flexibility. This method consists in composing the \textit{dictionary} with a fixed part $\mathbf{W_s} \in \mathbb{R}^+_{F\times K}$, composed in our case of road traffic spectrum, and with a mobile part, $\mathbf{W_r} \in \mathbb{R}^+_{F\times J}$ with $J <<K$, that is updated. Here, $J = 2$. The aim is to include in $\mathbf{W_r}$ the elements that are not related with the traffic. The problem (\ref{eq:nmf}) becomes
+The supervised approach is useful when prior knowldge can be assumed for all the sources in the mixture, which is not a reasnable assumption in our application scenario. To some extend, prior knowledge can be considered for the traffic but not for the numerous kind of intereferences that can occur in a realistic scenario. To better take into account the diverse nature of urban scenes, semi-supervised NMF (Sem-NMF)\cite{lee_semi-supervised_2010} is good candidate as it offer more flexibility. This method assumes a \textit{dictionary} with a fixed part $\mathbf{W_s} \in \mathbb{R}^+_{F\times K}$, composed in our case of road traffic spectrum, and with a mobile part, $\mathbf{W_r} \in \mathbb{R}^+_{F\times J}$ with $J <<K$, that is updated during optimization. In the literature, $J$ is set to a small number with respect to $K$ so as to force the optimization to still consider the fixed part of the dictionnary \cite{fevotte ?} \ml{mettre les parametres dnas la partie experimentale Here, $J = 2$}. The aim is to include in $\mathbf{W_r}$ the elements that are not related with the traffic. The problem (\ref{eq:nmf}) becomes
 
 \begin{equation}
 \mathbf{V} \approx \mathbf{W_s H_s}+ \mathbf{W_r H_r}
@@ -143,29 +143,31 @@ One of the main issue with the supervised approach is the generalization issue: 
 \end{align}
 \end{subequations}}
 
-Applications of S-S NMF for speech denoising from background noise or musical content can be found in \cite{joder2012real} and \cite{weninger2012supervised}.
+Applications of Sem NMF for speech denoising from background noise or musical content can be found in \cite{joder2012real} and \cite{weninger2012supervised}.
 
 \subsection{Thresholded initialized NMF}
 
-A last approach is tested based on unsupervised NMF. Usually, $\mathbf{W}$ is learnt with the help of a learning corpus by initiated it randomly. Here, as the concerned sound source is known and audio samples of car passages are available, a initial dictionary, $\mathbf{W_0}$, is learnt by converting the audio files in the spectra domain; see part \ref{part:dictionary_learning}. Then NMF is performed where $\mathbf{W}$ (eq. \ref{eq:updateW_unsup}) and $\mathbf{H}$ (eq.  \ref{eq:updateH_Sup}) are updated alternatively. $\mathbf{W}$ is therefore updated by forcing its initiation with \textit{a priori} knowledge.
+As it will be demonstrated in the experiments described in Section \ref{part:results}, those last approaches fails to provide consistent results in a wide range of urban areas and TIR ratios due generalization capabilities issues.
+
+We therefore propose an alternative scheme based on the unsupervised NMF. Usually in unsupervised, $\mathbf{W}$, as  $\mathbf{H}$, is initialized randomly. Here, as the concerned sound source is known and audio samples of car passages are available, a initial dictionary, $\mathbf{W_0}$, is learnt by converting the audio files in the spectra domain; see part \ref{part:dictionary_learning}. Then NMF is performed where $\mathbf{W}$ (eq. \ref{eq:updateW_unsup}) and $\mathbf{H}$ (eq.  \ref{eq:updateH_Sup}) are updated alternatively. $\mathbf{W}$ is therefore updated by forcing its initiation with \textit{a priori} knowledge but allowing it to adapt to the actual content of the scene under study.
 
 \begin{equation}\label{eq:updateW_unsup}
 \textbf{W}^{(i+1)} \leftarrow \mathbf{W}^{(i)}.\left(\frac{\left[\left(\mathbf{W}^{(i)}\mathbf{H} \right)^{(\beta-2)}.\mathbf{V} \right]\mathbf{H}^T}{\left[\mathbf{W}^{(i)}\mathbf{H} \right]^{(\beta-1)}\mathbf{H}^T}\right)^{\gamma(\beta)}
 \end{equation}
 
-After $N$ iterations, a measure of similarity $D_{\theta}\left(\mathbf{W_0} \vert \vert \mathbf{W} \right)$ between $\mathbf{W_0}$ and the get dictionary $\mathbf{W}$ for each element $k$ is computed through a cosine similarity,
+After $N$ iterations, a measure of similarity $D_{\theta}\left(\mathbf{W_0} \vert \vert \mathbf{W} \right)$ between $\mathbf{W_0}$ and the obtained dictionary $\mathbf{W}$ for each element $k$ is computed using a cosine similarity metric,
 
 \begin{equation}
 D_{\theta}\left(\mathbf{W_0} \vert \vert \mathbf{W} \right) = \frac{\mathbf{W}.\mathbf{W_0}}{\vert \vert \mathbf{W}  \vert \vert . \vert \vert \mathbf{W_0} \vert \vert}.
 \end{equation}
 
-$D_{\theta}\left(\mathbf{W_0} \vert \vert \mathbf{W} \right) = 1$ means that the elements are identical (the $k$-th element of $\mathbf{W}$ is then considered as traffic element) whereas $D_{\theta}\left(\mathbf{W_0} \vert \vert \mathbf{W} \right)$ = 0 means that the elements are significantly different. This measure is bounded between 1 and 0 and is an invariant scale estimation of the similarity. Then, $D_{\theta}\left(\mathbf{W_0} \vert \vert \mathbf{W} \right)$ is sorted in descending order. The elements in $\mathbf{W}$ that can belong to $\mathbf{W}_{traffic}$ are then selected by a \textit{hard thresholding} method. It is defined as:
+$D_{\theta}\left(\mathbf{W_0} \vert \vert \mathbf{W} \right) = 1$ means that the elements are identical (the $k$-th element of $\mathbf{W}$ is then considered as traffic element) whereas $D_{\theta}\left(\mathbf{W_0} \vert \vert \mathbf{W} \right)$ = 0 means that the elements are significantly different. This measure is bounded between 1 and 0 and is an invariant with respect to scale. \ml{ $D_{\theta}\left(\mathbf{W_0} \vert \vert \mathbf{W} \right)$ is next sorted in descending order. } The elements in $\mathbf{W}$ that can belong to $\mathbf{W}_{traffic}$ are then selected by a \textit{hard thresholding} method. It is defined as:
 
 \begin{equation}
 \mathbf{W}_k \in \mathbf{W}_{k,traffic} \quad \text{iff} \quad D\left(\mathbf{W}_{0,k} \vert \vert \mathbf{W}_{k} \right) > t
 \end{equation}
 
-An illustrative example can be see in Figure \ref{fig:W_TI_NMF}.\\
+An illustrative example is shown on Figure \ref{fig:W_TI_NMF}.\\
 
 \begin{figure}[hbtp]
 \centering
@@ -174,7 +176,7 @@ An illustrative example can be see in Figure \ref{fig:W_TI_NMF}.\\
 \label{fig:W_TI_NMF}
 \end{figure}
 
-This approach is named \textit{Thresholded inititialized NMF} (TI NMF). Other thresholding methods as the \textit{soft} \cite{donoho1995noising} and the \textit{firm} \cite{fornasier2008iterative} and multiples way to display the similarity through a sigmoïd or a Radial Basis Function have been investigated. A fast parametric study has revealed that the \textit{hard} thresholding method  with a linear representation of the similarity according to $K$, as in  Figure \ref{fig:W_TI_NMF}, was the best way to get better performances.
+This approach is named \textit{Thresholded inititialized NMF} (TI NMF). Other thresholding methods as the \textit{soft} \cite{donoho1995noising} and the \textit{firm} \cite{fornasier2008iterative} and multiples way to process the similarity using a sigmoïd or a radial basis functions have been investigated. A fast parametric study revealed that the \textit{hard} thresholding method  with a linear representation of the similarity according to $K$, as in  Figure \ref{fig:W_TI_NMF}, was the most reliable approach.
 
 \section{Experimental protocol}\label{part:protocol}
 
@@ -260,7 +262,7 @@ $\mathbf{TIR}$ (dB) & -12 & -6 & 0 & 6 & 12 &  \\
 $\mathbf{\beta}$ & \multicolumn{3}{c}{1} & \multicolumn{3}{c}{2} \\
 \rowcolor[HTML]{EFEFEF}
 $\mathbf{f_c}$ (kHz) & 0.5 & 1 & 2 & 5 & 10 & 20 \\
-\textbf{method} & \multicolumn{2}{c}{filter} & SUP NMF & S-S NMF & TI NMF \\
+\textbf{method} & \multicolumn{2}{c}{filter} & Sup NMF & Sem NMF & TI NMF \\
 \rowcolor[HTML]{EFEFEF}
 $\mathbf{t}$ & \multicolumn{6}{c}{0.20:0.01:0.70} \\ \bottomrule
 \end{tabular}
@@ -298,7 +300,7 @@ The obtained dictionary is expressed with third octave bands and each basis vect
 
 \subsubsection{Experimental factors of NMF}
 
-SUP and S-S NMF are performed for 400 iterations which is sufficiently enough to get a stabilized reconstruction. TI NMF is performed on a lower number of iteration (60) to prevent $\mathbf{W}$ to not deviate too much from the initial dictionary.
+SUP and Sem NMF are performed for 400 iterations which is sufficiently enough to get a stabilized reconstruction. TI NMF is performed on a lower number of iteration (60) to prevent $\mathbf{W}$ to not deviate too much from the initial dictionary.
 
 The spectrogram $\mathbf{V}$ and the dictionary $\mathbf{W}$ are expressed with third octave bands ($F$ = 29). This coarser method allows the matrix reduction and decrease the computation time. But,  must of all, by expressing the frequency axis on a log frequency axis,  the low frequencies, where the traffic energy is focused, are described more finely than the high frequencies. The case of a linear frequency axis has been investigated and offer similar results which were not better.
 
@@ -311,10 +313,10 @@ For TI NMF, the threshold is define between 0.20 and 0.70 with a 0.01 step. Tabl
 \textbf{method} & $\mathbf{\beta}$ & $\mathbf{K}$ & $\mathbf{w_t}$ (s) &   $\mathbf{t}$ & \textbf{$MAE$ (dB)} \\ \midrule
 filter 20 kHz &  &  &  &  & 4.69 ($\pm$ 4.52) \\
 filter 0.5 kHz&  &   &  &  & 2.89 ($\pm$ 2.84) \\ \hline \hline
-SUP NMF &  1 & 50 & 0.5  &  & 3.44 ($\pm$ 3.70) \\
-SUP NMF &  2 & 50 & 0.5  &   & 3.02 ($\pm$ 3.33) \\ \hline \hline
-S-S NMF &  1 & 100 & 0.5 &   & 2.33 ($\pm$ 1.10) \\
-S-S NMF &  2 & 100 & 0.5 &   & 2.32 ($\pm$ 1.26) \\ \hline \hline
+Sup NMF &  1 & 50 & 0.5  &  & 3.44 ($\pm$ 3.70) \\
+Sup NMF &  2 & 50 & 0.5  &   & 3.02 ($\pm$ 3.33) \\ \hline \hline
+Sem NMF &  1 & 100 & 0.5 &   & 2.33 ($\pm$ 1.10) \\
+Sem NMF &  2 & 100 & 0.5 &   & 2.32 ($\pm$ 1.26) \\ \hline \hline
 TI NMF &  1 & 200 & 0.5 &  0.42 &\textbf{2.19 ($\pm$ 2.18)} \\
 TI NMF &  2 & 25 & all &  0.54 & 2.20 ($\pm$ 2.26)\\ \bottomrule
 \end{tabular}
@@ -326,7 +328,7 @@ TI NMF &  2 & 25 & all &  0.54 & 2.20 ($\pm$ 2.26)\\ \bottomrule
 \centering
 \begin{tabular}{@{}cccccc@{}}
 \toprule
-\textbf{method} & filter & filter & SUP NMF & S-S NMF & TI NMF \\ \midrule
+\textbf{method} & filter & filter & Sup NMF & Sem NMF & TI NMF \\ \midrule
 $f_c$ (kHz) & 20 & 0.5 & 20 & 20 & 20 \\
 $\mathbf{\beta}$ &  &  & 2 & 2 & 1 \\ \hline
 \textbf{-12} & 12.25 ($\pm$ 0.05) & 7.36 ($\pm$ 3.00) & 8.65 ($\pm$ 1.88) & 3.88 ($\pm$ 1.52) & 5.35 ($\pm$ 2.71) \\
@@ -347,7 +349,7 @@ The performances of the two estimators (filter and NMF) of the road traffic soun
 MAE = \frac{\sum_{m = 1}^M\vert L^m_{p,traffic}-\tilde{L}^m_{p,traffic} \vert}{M}.
 \end{equation}
 
-In all, according Table \ref{tab:experimental_factors}, 24540 settings are performed between the different form of the dictionary $\mathbf{W}$ and the multiple experimental factors taken into account by NMF. For the filter estimator, between the $TIR$, the sub-classes and $f_c$, 180 settings are performed whereas for SUP and S-S NMF, 3780 associations of factors are made. For TI NMF, 8400 combinations can be calculated.
+In all, according Table \ref{tab:experimental_factors}, 24540 settings are performed between the different form of the dictionary $\mathbf{W}$ and the multiple experimental factors taken into account by NMF. For the filter estimator, between the $TIR$, the sub-classes and $f_c$, 180 settings are performed whereas for SUP and Sem NMF, 3780 associations of factors are made. For TI NMF, 8400 combinations can be calculated.
 
 \section{Results}\label{part:results}
 
@@ -392,14 +394,14 @@ Compare to the filter errors, the choice of some NMF approaches make it possible
     \begin{subfigure}[t]{0.45\textwidth}
         \centering
         \includegraphics[width=\linewidth]{figures/sup_bar.pdf}
-        \caption{$MAE$ error for each $TIR$ and sub-class with SUP NMF and $\beta$ = 2}
+        \caption{$MAE$ error for each $TIR$ and sub-class with Sup NMF and $\beta$ = 2}
                 \label{fig:TIR_class_sup}
     \end{subfigure}
 
     \begin{subfigure}[t]{0.45\textwidth}
         \centering
       	\includegraphics[width=\linewidth]{figures/semi-sup_bar.pdf}
-        \caption{$MAE$ error for each $TIR$ and sub-class with S-S NMF and $\beta$ = 2}
+        \caption{$MAE$ error for each $TIR$ and sub-class with Sem NMF and $\beta$ = 2}
                 \label{fig:TIR_class_semi}
     \end{subfigure}%
     \hfill
@@ -413,7 +415,7 @@ Compare to the filter errors, the choice of some NMF approaches make it possible
     \label{fig:TIR_bar}
 \end{figure*}
 
-According to Table \ref{tab:results_TIR} and Figures \ref{fig:TIR_bar}, the behavior between the 3 versions of NMF differs. In the case of SUP NMF, it fails to improve the filtering performances despite good results in high $TIR$.  the error are too important for low $TIR$ and this for all the sub-classes. This method reveals to be to rigid as $\mathbf{W}$ is composed of fixed traffic spectrum. In the case of low $TIR$, in the aim to reduce the objective function, see eq. \ref{eq:min-D-WH}, traffic elements are used whatever the sound event in the  sound scene. The case of a scene of the \textit{alert} sub-class is presented in Figure \ref{fig:lp_alert_-12}. Here when the car horn sounds, some elements of $\mathbf{W}$ are activated and are then considered as traffic component generating a wrong estimation of the sound level. This behavior disappear when the traffic component become predominant to the \textit{interfering} class, see Figure \ref{fig:lp_alert_12}. Thus composed the dictionary of only fixed traffic spectrum is not a sufficient way to estimate correctly the traffic sound level, $\tilde{L}_{p,traffic}$.
+According to Table \ref{tab:results_TIR} and Figures \ref{fig:TIR_bar}, the behavior between the 3 versions of NMF differs. In the case of Sup NMF, it fails to improve the filtering performances despite good results in high $TIR$.  the error are too important for low $TIR$ and this for all the sub-classes. This method reveals to be to rigid as $\mathbf{W}$ is composed of fixed traffic spectrum. In the case of low $TIR$, in the aim to reduce the objective function, see eq. \ref{eq:min-D-WH}, traffic elements are used whatever the sound event in the  sound scene. The case of a scene of the \textit{alert} sub-class is presented in Figure \ref{fig:lp_alert_-12}. Here when the car horn sounds, some elements of $\mathbf{W}$ are activated and are then considered as traffic component generating a wrong estimation of the sound level. This behavior disappear when the traffic component become predominant to the \textit{interfering} class, see Figure \ref{fig:lp_alert_12}. Thus composed the dictionary of only fixed traffic spectrum is not a sufficient way to estimate correctly the traffic sound level, $\tilde{L}_{p,traffic}$.
 
 Consequently, with the add of a mobile part in the dictionary, $\mathbf{W_r}$, the semi-supervised approach  allows a better consideration of the \textit{interfering} class in low $TIR$. It brings a significant decrease of the errors for low $TIR$ as it can be see in Figure \ref{fig:TIR_class_semi}. The $\mathbf{W_r}$ composition, in the case of an \textit{alert} sub-class, is displayed in Figure \ref{fig:Y_alert-12} and this shows that the interfering class is easily integrated. The first element is mainly composed of high frequency bands which correspond to the car horns of the scene. This composition impacted directly the traffic sound level estimation as it can be seen in Figure \ref{fig:lp_alert_-12} where the traffic basics are no longer activated when the car horn sounds.
 
@@ -437,7 +439,7 @@ Consequently, with the add of a mobile part in the dictionary, $\mathbf{W_r}$, t
     \label{fig:lp_alert}
 \end{figure*}
 
-However, the degrees of freedom of S-S NMF are restrictive for high $TIR$ as the errors exceed 2 dB for all sub-classes and increase with $TIR$ = 6 dB and 12 dB. Indeed, in order to reduce $D(\mathbf{V} \vert \vert \mathbf{WH}$), without constraint, S-S NMF is free to include traffic components in $\mathbf{W_r}$. Consequently, this behavior decreases the quality of the reconstruction of the traffic component. In Figure \ref{fig:Y_alert_12} for $TIR=12$ dB, the high frequency components of car horn have disappeared for the benefit of low frequency content. Consequently, the traffic sound level estimation is then underestimate as in Figure \ref{fig:lp_alert_12}. \\
+However, the degrees of freedom of Sem NMF are restrictive for high $TIR$ as the errors exceed 2 dB for all sub-classes and increase with $TIR$ = 6 dB and 12 dB. Indeed, in order to reduce $D(\mathbf{V} \vert \vert \mathbf{WH}$), without constraint, Sem NMF is free to include traffic components in $\mathbf{W_r}$. Consequently, this behavior decreases the quality of the reconstruction of the traffic component. In Figure \ref{fig:Y_alert_12} for $TIR=12$ dB, the high frequency components of car horn have disappeared for the benefit of low frequency content. Consequently, the traffic sound level estimation is then underestimate as in Figure \ref{fig:lp_alert_12}. \\
 
 \begin{figure*}
     \centering
@@ -458,7 +460,7 @@ However, the degrees of freedom of S-S NMF are restrictive for high $TIR$ as the
 \end{figure*}
 
 
-Finally, TI NMF with a threshold fixed at $t = 0.54$ and $\beta$ = 2, offers the lowest average results (Table \ref{tab:results}). If, according to each $TIR$, this method does not propose the lowest error, it succeeds to be a compromise between the two others NMF. Unlike SUP NMF, where $\mathbf{W}$ is fixed, and S-S NMF, where only $\mathbf{W_r}$ is updated, TI NMF updates $\mathbf{W}$ entirely to be adjusted to the scene and to adapt to the different sound environments. The closest elements of the \textit{traffic} component defined in $\mathbf{W_0}$ are then extracted to deduce the traffic signal. In Figure \ref{fig:dist_-12_12}, the similarity $D_{\theta}(\mathbf{W_0}||\mathbf{W})$ is displayed for 3 sub-classes for $TIR$ = [-12, 12] dB.
+Finally, TI NMF with a threshold fixed at $t = 0.54$ and $\beta$ = 2, offers the lowest average results (Table \ref{tab:results}). If, according to each $TIR$, this method does not propose the lowest error, it succeeds to be a compromise between the two others NMF. Unlike Sup NMF, where $\mathbf{W}$ is fixed, and Sem NMF, where only $\mathbf{W_r}$ is updated, TI NMF updates $\mathbf{W}$ entirely to be adjusted to the scene and to adapt to the different sound environments. The closest elements of the \textit{traffic} component defined in $\mathbf{W_0}$ are then extracted to deduce the traffic signal. In Figure \ref{fig:dist_-12_12}, the similarity $D_{\theta}(\mathbf{W_0}||\mathbf{W})$ is displayed for 3 sub-classes for $TIR$ = [-12, 12] dB.
 
 \begin{figure}[t]
     \centering
@@ -471,7 +473,7 @@ For low $TIR$, as the traffic sound class is not predominant, the final dictiona
 
 \section{Conclusion}
 
-In this work, NMF, a source separation method, was used to estimate the road traffic sound level in urban sound mixtures. It is an adapted approach to these sound environments because it easily takes into account the overlap between the multiple sound sources present in the cities and is adapted to monophonic sensor networks. Different versions of NMF have been studied as a supervised and semi-supervised approach. On a large corpus of sound, the supervised approach proves to be too restrictive to be adapted to different sound environments whereas the semi-supervised approach has, on the contrary, too many degrees of freedom on the mobile dictionary $\mathbf{W_r}$, decreasing its performance especially when the traffic is predominant. The proposed new approach, named Threshold Initialized NMF, where $\mathbf{W}$ is initialized with road traffic spectrum, updated and where the traffic elements are extracted by hard thresholding, proposes the lowest average error. It allows a compromise between the other two approaches where a prior knowledge of the targeted sound source is given as in the SUP NMF, and offers an adaptability to the different sound mixtures by updating $ \mathbf{W}$ entirely.
+In this work, NMF, a source separation method, was used to estimate the road traffic sound level in urban sound mixtures. It is an adapted approach to these sound environments because it easily takes into account the overlap between the multiple sound sources present in the cities and is adapted to monophonic sensor networks. Different versions of NMF have been studied as a supervised and semi-supervised approach. On a large corpus of sound, the supervised approach proves to be too restrictive to be adapted to different sound environments whereas the semi-supervised approach has, on the contrary, too many degrees of freedom on the mobile dictionary $\mathbf{W_r}$, decreasing its performance especially when the traffic is predominant. The proposed new approach, named Threshold Initialized NMF, where $\mathbf{W}$ is initialized with road traffic spectrum, updated and where the traffic elements are extracted by hard thresholding, proposes the lowest average error. It allows a compromise between the other two approaches where a prior knowledge of the targeted sound source is given as in the Sup NMF, and offers an adaptability to the different sound mixtures by updating $ \mathbf{W}$ entirely.
 
 This method has the advantage to keep a low calculation cost and then can be implemented in embedded sensors. Furthermore, this approach stay adapted for other sound sources, as whistling bird, depending on what spectrum are put in $\mathbf{W}$ and can be adapted for other application than the road traffic sound level estimation. Finally, the add of constraints as sparsness \cite{hoyer2004non} and smoothness \cite{virtanen_monaural_2007} can easily be implemented and taken into account.
 

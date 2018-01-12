@@ -268,14 +268,14 @@ $\mathbf{f_c}$ (kHz) & 0.5 & 1 & 2 & 5 & 10 & 20 \\
 \rowcolor[HTML]{EFEFEF}
 $\mathbf{t}$ & \multicolumn{6}{c}{0.20:0.01:0.70} \\ \bottomrule
 \end{tabular}
-\caption{Summary of the different experimental factors taken into account in the frequency low-pass filter and NMF process and their values for the estimation of the traffic sound level}
+\caption{Summary of the different experimental factors taken into account in the frequency low-pass filter and NMF process and their evaluated values}
 \label{tab:experimental_factors}
 \end{table*}
 
 
-\subsubsection{Dictionary building}\label{part:dictionary_learning}
+\subsubsection{NMF Dictionary}\label{part:dictionary_learning}
 
-The dictionary is built from a second sound database dedicated specifically to this task. It is composed of 53 audio files of passing cars. These records have been made on the Ifsttar's runway too with the same experimental conditions that the records made for the \textit{SimScene} database but with two different cars (Dacia Sandero and Renault Clio). First, for each audio file, its spectrogram is calculated with fixed parameters ($w$, 50 $\%$ overlap, $nfft$). Then time/frequency windows of $F \times w_t $ dimension are applied without overlapping on the spectrogram in order to consider several spectrum for each audio file. $w_t$ is fixed at $wt = [0.5~1]$ second. In each window, the root mean square value is calculated on each frequency bin to reduce the windowed spectrogram in one spectra of $F \times 1$ dimension.  A special case is added where the root mean square of \textit{all} the spectrogram is applied (each audio file generates one element $k$ of $\mathbf{W}$). An example that illustrates the process can be found on Figure \ref{fig:spec_elementW} on a 3 second extract of the spectrogram of a car passage ; see Figure \ref{fig:specW}. In the case where $w_t$ = 1 second , 3 elements are therefore extracted from the spectrogram while in the case where $w_t$ = \textit{all}, all the spectrogram is reduced to one element ; see Figure \ref{fig:ElementW}.
+In order to prevent potential overfitting issues, the dictionary is built from a separate sound database dedicated specifically to this task. It is composed of 53 audio files of passing cars. These recordings have been made on the Ifsttar's runway too with the same experimental conditions that the recordings of the \textit{SimScene} database but with two different cars (Dacia Sandero and Renault Clio). First, for each audio file, its spectrogram is calculated with fixed parameters ($w$, 50 $\%$ overlap, $nfft$). Then time/frequency windows of $F \times w_t $ dimension are applied without overlapping on the spectrogram in order to consider several spectrum for each audio file. $w_t$ is fixed at $wt = [0.5~1]$ second. In each window, the root mean square value is calculated on each frequency bin to reduce the windowed spectrogram in one spectra of $F \times 1$ dimension.  A special case is added where the root mean square of \textit{all} the spectrogram is applied (each audio file generates one element $k$ of $\mathbf{W}$). An example that illustrates the process can be found on Figure \ref{fig:spec_elementW} on a 3 second extract of the spectrogram of a car passage, see Figure \ref{fig:specW}. In the case where $w_t$ = 1 second, 3 elements are therefore extracted from the spectrogram while in the case where $w_t$ = \textit{all}, all the spectrogram is reduced to one element, see Figure \ref{fig:ElementW}.
 
 \begin{figure}[t!]
     \centering
@@ -292,21 +292,25 @@ The dictionary is built from a second sound database dedicated specifically to t
         \caption{}
         \label{fig:ElementW}
     \end{subfigure}
-    \caption{Example of the dictionary building with a 3 second extract of a car passage (\ref{fig:specW}). With $w_t$ = 1 second, 3 spectrum are generated and included in $\mathbf{W}$ while for $w_t$ = $all$, the audio file is resume to 1 spectra (\ref{fig:ElementW}).}
+    \caption{Example of the dictionary building with a 3 second extract of a car passage (\ref{fig:specW}). With $w_t$ = 1 second, 3 spectra are generated and included in $\mathbf{W}$ while for $w_t$ = $all$, the audio file is reduced to 1 spectral vector. (\ref{fig:ElementW}).}
     \label{fig:spec_elementW}
 \end{figure}
 
-Since the number of elements given by this processing can be high, in order to reduce the computational time and delete redundant information, a $K$-means clustering is applied to reduce the number of spectrum to $K = \left[ 25, 50, 100, 200\right]$.
+\ml{singulier spectrum, pluriel spectra}
 
-The obtained dictionary is expressed with third octave bands and each basis vector of $\mathbf{W}$ is normalized such as $\vert \vert \mathbf{W_k} \vert \vert = 1$ with $\vert \vert \bullet \vert\vert$ the $\ell$-1 norm. Table \ref{tab:experimental_factors} summarizes the experimental factors ($K$ and $w_t$) for the dictionary building and their related values.
+Since the number of elements given by this processing can be high, in order to reduce the computational time and avoid redundant information, a $K$-means clustering is applied to reduce the number of spectrum to $K = \left[ 25, 50, 100, 200\right]$.
+
+The obtained dictionary is expressed with third octave bands and each basis vector of $\mathbf{W}$ is normalized such as $\vert \vert \mathbf{W_k} \vert \vert = 1$ with $\vert \vert \bullet \vert\vert$ the $\ell$-1 norm. Table \ref{tab:experimental_factors} summarizes the experimental factors ($K$ and $w_t$) for the dictionary building and their related values. This last step allows us to reduce the dimensionality while preserving a rich descrption of the spectral content. Experimental validation consistently showed that considering octave bands do not impact the performance for the two estimators studied in this paper.
 
 \subsubsection{Experimental factors of NMF}
 
-SUP and Sem NMF are performed for 400 iterations which is sufficiently enough to get a stabilized reconstruction. TI NMF is performed on a lower number of iteration (60) to prevent $\mathbf{W}$ to not deviate too much from the initial dictionary.
+Sup NMF and Sem NMF updates are conmputed for 400 iterations which is sufficient to reach convergence. TI NMF is performed on a lower number of iteration (60) to prevent $\mathbf{W}$ to not deviate too much from the initial dictionary.
 
-The spectrogram $\mathbf{V}$ and the dictionary $\mathbf{W}$ are expressed with third octave bands ($F$ = 29). This coarser method allows the matrix reduction and decrease the computation time. But,  must of all, by expressing the frequency axis on a log frequency axis,  the low frequencies, where the traffic energy is focused, are described more finely than the high frequencies. The case of a linear frequency axis has been investigated and offer similar results which were not better.
+\ml{ca c'est pas genial, il aurait mieux vallu utiliser un coefficient de pondération pour que W n'avance pas trop vite...}
 
-For TI NMF, the threshold is define between 0.20 and 0.70 with a 0.01 step. Table \ref{tab:experimental_factors} summarizes the experimental factors and their related values.
+The spectrogram $\mathbf{V}$ and the dictionary $\mathbf{W}$ are expressed with third octave bands ($F$ = 29). This coarser method allows the matrix reduction and decrease the computation time. But,  must of all, by expressing the frequency axis on a log frequency axis,  the low frequencies, where the traffic energy is focused, are described more finely than the high frequencies.% The case of a linear frequency axis has been investigated and offer similar results which were not better.
+
+For TI NMF, the threshold is set between 0.20 and 0.70 with a 0.01 grid search step. Table \ref{tab:experimental_factors} summarizes the experimental factors and their related values.
 
 \begin{table*}[t]
 \centering
@@ -345,13 +349,13 @@ $\mathbf{\beta}$ &  &  & 2 & 2 & 1 \\ \hline
 
 
 \subsubsection{Metrics}
-The performances of the two estimators (filter and NMF) of the road traffic sound level are assessed through the calculation of one metric, the Mean Absolute Error ($MAE$). It expresses the quality of the long-term reconstruction of the signal and consists in the average over the $M$ sound scenes of the absolute difference between the exact and estimated traffic sound level in dB,
+The performance of the two estimators (filter and NMF) of the road traffic sound level are assessed through the calculation of one metric, the Mean Absolute Error ($MAE$). It expresses the quality of the long-term reconstruction of the signal and consists in the average over the $M$ sound scenes of the absolute difference between the exact and estimated traffic sound level in dB,
 
 \begin{equation}
 MAE = \frac{\sum_{m = 1}^M\vert L^m_{p,traffic}-\tilde{L}^m_{p,traffic} \vert}{M}.
 \end{equation}
 
-In all, according Table \ref{tab:experimental_factors}, 24540 settings are performed between the different form of the dictionary $\mathbf{W}$ and the multiple experimental factors taken into account by NMF. For the filter estimator, between the $TIR$, the sub-classes and $f_c$, 180 settings are performed whereas for SUP and Sem NMF, 3780 associations of factors are made. For TI NMF, 8400 combinations can be calculated.
+In all, according Table \ref{tab:experimental_factors}, 24540 settings are performed between the different form of the dictionary $\mathbf{W}$ and the multiple experimental factors taken into account by NMF. For the filter estimator, between the $TIR$, the sub-classes and $f_c$, 180 settings are performed whereas for Sup NMF and Sem NMF, 3780 associations of factors are made. For TI NMF, 8400 combinations can be calculated.
 
 \section{Results}\label{part:results}
 
@@ -382,7 +386,7 @@ In low $TIR$, for \textit{alert} and \textit{animals}, sub-classes composed of h
 \end{figure*}
 
 
-Compare to the filter errors, the choice of some NMF approaches make it possible to decrease the road traffic sound level estimation. The supervised approach is the only method that has an average error superior to the 500 Hz filter baseline. Finally, it is the most sophisticated methods (S-S and TI NMF) that have better results. The lowest average error is obtained for TI NMF for $\beta$ = 1 and threshold $t$ = 0.42 with the dictionary factors $K$ = 200 and $w_t$ = 500 ms. On the other hand, the semi-supervised approach has a higher error but yet with a lower standard deviation.
+Compare to the filter errors, the choice of some NMF approaches make it possible to decrease the road traffic sound level estimation. The supervised approach is the only method that has an average error superior to the 500 Hz filter baseline. Finally, it is the most sophisticated methods (Sem NMF and TI NMF) that have better results. The lowest average error is obtained for TI NMF for $\beta$ = 1 and threshold $t$ = 0.42 with the dictionary factors $K$ = 200 and $w_t$ = 500 ms. On the other hand, the semi-supervised approach has a higher error but yet with a lower standard deviation.
 
 \begin{figure*}[t]
     \centering
@@ -413,7 +417,7 @@ Compare to the filter errors, the choice of some NMF approaches make it possible
         \caption{$MAE$ error for each $TIR$ and sub-class with TI NMF, $\beta$ = 1 and $t$ = 0.42}
         \label{fig:TIR_class_TI}
     \end{subfigure}
-    \caption{$MAE$ error for each sub-class and $TIR$ according to the the best results with the filter (\ref{fig:TIR_class_filter}) and each method (SUP (\ref{fig:TIR_class_sup}), S-S (\ref{fig:TIR_class_semi}) and TI (\ref{fig:TIR_class_TI} NMF))}
+    \caption{$MAE$ error for each sub-class and $TIR$ according to the the best results with the filter (\ref{fig:TIR_class_filter}) and each method (Sup NMF (\ref{fig:TIR_class_sup}), Sem NMF (\ref{fig:TIR_class_semi}) and TI NMF (\ref{fig:TIR_class_TI}))}
     \label{fig:TIR_bar}
 \end{figure*}
 

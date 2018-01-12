@@ -221,15 +221,15 @@ with the \textit{Traffic Interference Ratio} $TIR = \left[-12, -6, 0, 6, 12\righ
 
 \subsection{Experiment}
 
-The experiment consists in estimating the traffic road sound level of the 6 environmental sound sub-corpus (\textit{alert} (al), \textit{animals} (an), \textit{humans} (hu), \textit{climate} (cl), \textit{mechanics} (me), \textit{transportation} (tr)) and for 5 $TIR$ ([-12 -6 0 6 12] dB). The spectrogram $\mathbf{V}$ of each sound is built with a window size $w = 2^{12}$ with a 50 $\%$ overlap and a number of point $nfft = 2^{12}$ ($N$ = 644).
+The experiment consists in estimating the traffic road sound level of the 6 environmental sound sub-corpus (\textit{alert} (al), \textit{animals} (an), \textit{humans} (hu), \textit{climate} (cl), \textit{mechanics} (me), \textit{transportation} (tr)) and for 5 $TIR$ ([-12 -6 0 6 12] dB). The spectrogram $\mathbf{V}$ of each sound is built with a window size $w = 2^{12}$ with a 50 $\%$ overlap \ml{enlever and a number of point $nfft = 2^{12}$ ($N$ = 644)}.
 
-The first estimator to determine the traffic sound level is a frequency low-pass filter which depends only on the cut-off frequencies $f_c$ = [500 1k 2k 5k 10k 20k] Hz (see Figure \ref{fig:bloc_filtre}). The spectrogram $\mathbf{V}$ is filtered and the remaining energy is then considered as traffic component (eq. \ref{eq:v_tr_filtered}),
+Assuming that the traffic spectral profile is largely concentrated in the low regions, a first estimator to determine the traffic sound level is a frequency low-pass filter. It depends only on the cut-off frequencies $f_c$ = [500 1k 2k 5k 10k 20k] Hz (see Figure \ref{fig:bloc_filtre}). The spectrogram $\mathbf{V}$ is filtered and the remaining energy is then considered as traffic component (eq. \ref{eq:v_tr_filtered}),
 
 \begin{equation}\label{eq:v_tr_filtered}
 \mathbf{\tilde{V}}_{traffic} = \mathbf{V}_{f_c}.
 \end{equation}
 
-The second estimator is the proposed scheme, based on several flavors of the NMF framework. Multiples experimental factors are involved here between the dictionary learning and NMF (see Figure \ref{fig:bloc_nmf}).
+The second estimator is the proposed scheme, based on the three NMF schemes presented in Section \ref{part:NMF}. Multiples experimental factors are involved here between the dictionary learning and NMF (see Figure \ref{fig:bloc_nmf}).
 
 \begin{figure}
 
@@ -248,7 +248,7 @@ The second estimator is the proposed scheme, based on several flavors of the NMF
 		\label{fig:bloc_nmf}
     \end{subfigure}
 
-    \caption{Block diagrams summed up the different step of the process for the frequency low-pass filter (a) and for NMF (b)}
+    \caption{Block diagrams for the frequency low-pass filter (a) and for NMF (b) \ml{je ferais deux figures séparées, une avec le protocole avec une boite estimateur en disant dans la caption que l'estimateur est soit le filtre soit la nmf. deuxieme figure avec la nmf. Tu utilises des boites et des couleurs differentes, si cela a un sens explicite le sinon enlève, met les couleurs plus claires.}}
 \end{figure}
 
 \begin{table*}[t]

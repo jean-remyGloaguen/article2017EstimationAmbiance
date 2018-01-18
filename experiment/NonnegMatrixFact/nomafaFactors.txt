@@ -1,7 +1,7 @@
 type = 1: =  = {'filter', 'nmf'}
-frameSize = 1: = 1/2 = [0 500 1000]
+frameSize = 1: = 2/1 = [0 500 1000]
 dictionaryClass = 1: = 1/2 = {'car', 'car+bird' ,'all'}
-numberElementW = 1: = 1/2 = [25 50 100]  
+numberElementW = 1: = 1/2 = [25 50 100 200]  
 reduceSizeW	 = 1: = 1/2 = {'kmeans','kmeansMedoids','rand'}
 domain = 2: = 1/2 = {'spectra','mel','thirdOctave'}
 numberMel = 2:  = 6/2 = [40 50]
@@ -18,8 +18,8 @@ SM_weight = 2: = 1/2 = [0 1 5 10 20]
 smoothnessForm = 2: = 17/[2:4] = {'all', 'traffic'}
 SS_sizeWrand = 2: = 15/2 = [2 3]
 SS_weight = 2: = 15/2 = [0 10^9 10^12 10^15]  
-SS_betaM = 2: =  15/2 = [0 1 2]  
-SS_sensitivity = 2: = 20/2 = [1 10 100]
+SS_betaM = 2: =  20/[2 3 4] = [0 1 2]  
+SS_sensitivity = 2: = 20/[2 3 4] = [1 10 100]
 iteration = 2:s = 1/2 = (1:10)*40
 formW = 3: = 1/2 = {'full','cut'}
 temporalInterval =  =  = 1

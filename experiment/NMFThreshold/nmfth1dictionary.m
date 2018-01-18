@@ -11,7 +11,7 @@ function [config, store, obs] = nmfth1dictionary(config, setting, data)
 % Date: 01-Dec-2017                                                                
                                                                                    
 % Set behavior for debug mode                                                      
-if nargin==0, NMFThreshold('do', 1); return; else store=[]; obs=[]; end
+if nargin==0, NMFThreshold('do', 1,'mask',{1 1 1 1 1}); return; else store=[]; obs=[]; end
                                                                                    
 if strcmp(setting.type,'nmf')
     K = setting.numberElement;

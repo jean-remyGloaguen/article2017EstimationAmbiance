@@ -7,6 +7,9 @@
 % \renewcommand{\chaptermark}[1]{\markboth{\thechapter.\space#1}{}}
 \usepackage{layout}
 
+\usepackage[left,modulo]{lineno}
+\linenumbers
+
 %%%%%% SYMBOLES %%%%%
 \usepackage{tipa}	% pour avoir l'accent concave
 \usepackage{lmodern}	% pour les guillemets
@@ -46,5 +49,15 @@
 %%%%%%%%%%%%%%%%%%%%%
 \usepackage{url}	% gérer les adresses www.
 \linespread{1}	% interligne
+
+\usepackage{hyperref}  % ps2pdf car je compile via Latex -> dvips -> ps2pdf
+\hypersetup{
+    colorlinks=true,                         
+    linkcolor=blue, % Couleur des liens internes
+    citecolor=red, % Couleur des numéros de la biblio dans le corps
+    urlcolor=blue  } % Couleur des url
+   
+%\usepackage[hyperpageref]{backref}  % pour retourner à la citation à partir de la biblio
+%\usepackage{natbib} % pour changer la couleur des numéros dans la biblio
 
 \cleardoublepage

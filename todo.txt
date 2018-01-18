@@ -1,17 +1,59 @@
-figures/semi-sup_bar.pdf missing
 
-fill an experiments directory with code
 
-put the ambience dataset on zenodo, look at dcase datasets for guidance
+% fill an experiments directory with code
+% répertoire 'experiment' et mettre les programmes (avec un read me.txt)
+% préciser expérience reproductible avec données accessibles
+cloner le dossier dasn un autre endroit et faire tourner et voir là où ça beug
+
+% put the ambience dataset on zenodo, look at dcase datasets for guidance
 
 paper : 
 
-figure 1 problème mettre au niveau du protocole experimental
+% figure 1 problème mettre au niveau du protocole experimental
 
-Figure 2 mettre W en haut H a gauche pour ganger de la place
+% Figure 2 mettre W en haut H a gauche pour ganger de la place
 
-Figure 4 ca fait brutal, pourquoi ne pas utiliser les figures données par simscene ?
+% Figure 4 ca fait brutal, pourquoi ne pas utiliser les figures données par simscene ?
 
-spectral representation: on reste en 1/3 d’octave, point.
+% spectral representation: on reste en 1/3 d’octave, point.
+% préciser qu'on a regardé en linéaire et qu'on reste 
 
-Figure 10 label x, je suis pas sur que ce soit une bonne idée de la mettre
+Figure 10 label x => K, je suis pas sur que ce soit une bonne idée de la mettre
+ça ouvre un peu trop 
+
+% Socoro : dire que c'est bien qu'il existe, mais qu'on fait différemment. 
+
+ICA en ville c'est possible Microphone array 
+NMF => développement d'un réseau de capteur monaural donc NMF adapté
+
+proposed approach : énuméré les différents points qui vont suivre. 
+
+NMF pour recouvrement
+
+% Bloc diagram
+% Source sonore => séparation source => Niveau trafic 
+% Référence filtre, supervisé, semi-supervisé
+% TI NMF : constraint whithout too much
+% porposé un proto exp bien documenté pour faire de la reproductible research. (conclusion aussi)
+
+% : see Figure
+
+% facteur expérimentaux
+
+Observation qualitative la baseline on s'en sert moins comme reférence
+
+% Détailler ce qui a été fait, on a répondu a une question
+
+- Article scène grafic plus concret (code optimisé)
+- Outil NMF smooth sous C
+
+JEUDI 11 janvier 9h au plus tard
+meeting LUNDI 15 14h ECN ML
+article 1er février
+Ce qui reste à faire (smooth, grafic, semi-sup) => pour fin mars
+1 ou 2 papiers ? 
+SOUMISSION RAPPORTEUR 1er septembre (1er moitié figé vers le 15 août)
+
+
+
+

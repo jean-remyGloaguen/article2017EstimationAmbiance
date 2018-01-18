@@ -48,12 +48,12 @@ switch dataset
 end
 
 files = dir(strcat(creationSceneDir, filesep, '*.wav'));
-globalName = cell(1,length(files)/3);
+globalName = cell(1,length(files)/2);
 ind = 1;
 
 for ii = 1:length(files)
-    if isempty(strfind(files(ii).name,'traffic')) && isempty(strfind(files(ii).name,'interfering'))
-        globalName{ind} = files(ii).name(1:end-4);
+    if strfind(files(ii).name,'traffic')
+        globalName{ind} = files(ii).name(1:end-12);
         ind = ind+1;
     end
 end

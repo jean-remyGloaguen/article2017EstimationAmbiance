@@ -1,7 +1,7 @@
 type = 1: =  = {'filter', 'nmf'}
 frameSize = 1: = 2/1 = [0 500 1000]
-dictionaryClass = 1: = 1/2 = {'car', 'car+bird' ,'all'}
 numberElementW = 1: = 1/2 = [25 50 100 200]  
+dictionaryClass = 1: = 1/2 = {'car', 'car+bird' ,'all'}
 reduceSizeW	 = 1: = 1/2 = {'kmeans','kmeansMedoids','rand'}
 domain = 2: = 1/2 = {'spectra','mel','thirdOctave'}
 numberMel = 2:  = 6/2 = [40 50]

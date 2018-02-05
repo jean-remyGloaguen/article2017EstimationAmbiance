@@ -342,7 +342,7 @@ The obtained dictionary is expressed with third octave bands and each basis vect
 Sup-NMF and Sem-NMF updates are computed for 400 iterations, which is sufficient to reach convergence. TI-NMF is performed on a lower number of iterations (60) to prevent $\mathbf{W}$ to not deviate too much from the initial dictionary.
 The spectrogram $\mathbf{V}$ and the dictionary $\mathbf{W}$ are expressed with third octave bands ($F$ = 29). This coarser method allows the reduction of the matrix size and decreases the computation time. But,  must of all, by expressing the frequency axis on a log frequency axis,  the low frequencies, where the traffic energy is focused, are described more finely than the high frequencies. For TI-NMF, the threshold $t$ is set between 0.30 and 0.70 with a step of 0.01. Tables  \ref{tab:experimental_factorsFilter} and \ref{tab:experimental_factorsNMF} summarize the experimental factors and their related modalities. 
 
-Considering the experimental settings derived from the different modalities of each experimental factor described in Table \ref{tab:experimental_factorsFilter}  between the 5 levels of $TIR$, the 6 sub-classes and the 6 cut-off frequencies $f_c$, 180 settings are performed. For Sup-NMF and Sem-NMF, according to Table \ref{tab:experimental_factorsNMF},  1200 associations of factors are made where the 4 levels of $K$ are associated with $w_t \in$ [0.5 1] s whereas only 2 levels of $K$ (25 and 50) are associated with $w_t = all$, see part \ref{part:dictionary_learning}. For TI-NMF, 24000 combinations are computed. In all, 25380 settings are performed between the different forms of the dictionary $\mathbf{W}$ and the multiple experimental factors
+Considering the experimental settings derived from the different modalities of each experimental factor described in Table \ref{tab:experimental_factorsFilter}  between the 5 levels of $TIR$, the 6 sub-classes and the 6 cut-off frequencies $f_c$, 180 settings are performed. For Sup-NMF and Sem-NMF, according to Table \ref{tab:experimental_factorsNMF},  1200 associations of factors are made where the 4 levels of $K$ are associated with $w_t \in$ [0.5 1] s whereas only 2 levels of $K$ (25 and 50) are associated with $w_t = all$, see part \ref{part:dictionary_learning}. For TI-NMF, 24000 combinations are computed. In all, 25380 settings are performed between the different forms of the dictionary $\mathbf{W}$ and the multiple experimental factors.
 
 For each setting, the estimator (frequency low-pass filter or NMF) is performed on the $M$ scenes of a sub-class. For one sound scene, the average traffic sound level, $\tilde{L}_{p,traffic}$, of the entire scene is calculated, 
 
@@ -350,14 +350,14 @@ For each setting, the estimator (frequency low-pass filter or NMF) is performed 
 \tilde{L}_{p,traffic} = 20\log_{10}\left(\frac{p_{rms}}{p_0}\right)
 \end{equation}
 
-where $p_{rms}$ is the effective pressure deducted from the remaining spectrogram ($\mathbf{V}_{f_c}$ or $\left[\mathbf{WH} \right]_{traffic}$) and $p_0$ is the reference sound pressure, $p_0 = 2 \times 10^{-5} Pa$.  For each set of unique modalities of experimental factors, $M$ values of $\tilde{L}_{p,traffic}$, corresponding to the $M$ scenes, are then obtained. 
+where $p_{rms}$ is the effective pressure deducted from the remaining spectrogram ($\mathbf{V}_{f_c}$ or $\left[\mathbf{WH} \right]_{traffic}$) and $p_0$ is the reference sound pressure, $p_0 = 2 \times 10^{-5} Pa$.  For each setting of experimental factors, $M$ values of $\tilde{L}_{p,traffic}$, corresponding to the $M$ scenes, are then obtained and are compared to the $M$ exact sound level, $L_{p,traffic}$. 
 
 
 \begin{table*}[t]
 \centering
 \begin{tabular}{@{}ccccccc@{}}
 \toprule
-\textbf{method} & $f_c$ (kHz) & $\mathbf{\beta}$ & $\mathbf{K}$ & $\mathbf{w_t}$ (s) &   $\mathbf{t}$ & \textbf{$MAE$ (dB)} \\ \midrule
+\textbf{method} & $f_c$ (kHz) & $\mathbf{\beta}$ & $\mathbf{K}$ & $\mathbf{w_t}$ (s) &   $\mathbf{t}$ & \textbf{$MAE$} (dB) \\ \midrule
 filter & 20  &  &  &  &  & 4.69 ($\pm$ 4.52) \\
 filter & 0.5 &  &  &  &  & 2.89 ($\pm$ 2.84) \\ \hline \hline
 Sup-NMF &  & 1 & 50 & 0.5  &  & 3.44 ($\pm$ 3.70) \\

@@ -231,7 +231,7 @@ The second estimator is the proposed scheme, based on the three NMF schemes pres
 \begin{figure}
     \centering
     \includegraphics[width=\linewidth]{figures/bloc_diagram_NMF_EN.pdf}
-    \caption{Block diagram of the NMF experience with the dictionary design composed from a second sound database}
+    \caption{Specific block diagram of the NMF estimator with the dictionary design composed from a second sound database}
     \label{fig:bloc_nmf}
 \end{figure}
 
@@ -240,7 +240,7 @@ The second estimator is the proposed scheme, based on the three NMF schemes pres
 
 \begin{tabularx}{17.5cm}{L{3cm}@{}C{12cm}@{}C{2cm}@{}}
 	\hline
-    \textbf{\begin{tabular}[c]{@{}l@{}}experimental \\ factors\end{tabular}} & modalities & \begin{tabular}[c]{@{}l@{}}number  \\ of level\end{tabular}\\ \toprule
+    \textbf{\begin{tabular}[c]{@{}l@{}}experimental \\ factors\end{tabular}} & \textbf{modalities} & \begin{tabular}[c]{@{}C{2cm}@{}}\textbf{number}\\ \textbf{of modality}\end{tabular}\\ \toprule
 \end{tabularx}
 
 \begin{tabularx}{17.5cm}{L{3cm}@{}C{2cm}@{}C{2cm}@{}@{}C{2cm}@{}@{}C{2cm}@{}@{}C{2cm}@{}@{}C{2cm}@{}@{}C{2cm}@{}}
@@ -269,7 +269,7 @@ The second estimator is the proposed scheme, based on the three NMF schemes pres
 
 \begin{tabularx}{17.5cm}{L{3cm}@{}C{12cm}@{}@{}C{2cm}}
 	\hline
-    \textbf{\begin{tabular}[c]{@{}l@{}}experimental \\ factors\end{tabular}} & modalities & \begin{tabular}[c]{@{}l@{}}number \\ of modality\end{tabular}\\ \toprule
+    \textbf{\begin{tabular}[c]{@{}l@{}}experimental \\ factors\end{tabular}} & \textbf{modalities} &\begin{tabular}[c]{@{}C{2cm}@{}}\textbf{number}\\ \textbf{of modality}\end{tabular}\\ \toprule
 \end{tabularx}
 
 \begin{tabularx}{17.5cm}{L{3cm}@{}C{2cm}@{}C{2cm}@{}@{}C{2cm}@{}@{}C{2cm}@{}@{}C{2cm}@{}@{}C{2cm}@{}@{}C{2cm}@{}}
@@ -328,7 +328,7 @@ In order to prevent potential overfitting issues, the dictionary is built from a
         \caption{}
         \label{fig:ElementW}
     \end{subfigure}
-    \caption{Example of the dictionary building with a 3 second extract of a car passage. In dashed lines, a 1 second $w_t$ window  (\subref{fig:specW}). With $w_t$ = 1 second, 3 spectra are then generated and included in $\mathbf{W}$ while for $w_t$ = $all$, the audio file is reduced into 1 spectral vector (\subref{fig:ElementW})}
+    \caption{Example of the dictionary building with a 3 second extract of a car passage. In dashed lines, a 1 second $w_t$ window  (\subref{fig:specW}). With $w_t$ = 1 second, 3 spectra are then generated and included in $\mathbf{W}$, while for $w_t$ = $all$, the audio file is reduced into 1 spectral vector (\subref{fig:ElementW})}
     \label{fig:spec_elementW}
 \end{figure}
 

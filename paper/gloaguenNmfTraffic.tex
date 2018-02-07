@@ -8,7 +8,7 @@
 \title{Estimation of the road traffic sound levels in urban areas based on non-negative matrix factorization techniques}
 
 \author{
-    Jean-Rémy GLOAGUEN\\
+    Jean-Rémy Gloaguen\\
     Arnaud Can\\
     LAE\\
     Ifsttar\\
@@ -74,7 +74,7 @@ where $\mathbf{W} \in \mathbb{R}^+_{F \times K}$ is the \textit{dictionary} (or 
 
 \begin{figure}[t]
 \centering
-\includegraphics[width=0.9\linewidth]{figures/schema_introduction_nmf_2.pdf}
+\includegraphics[width=0.9\linewidth]{figures/schema_introduction_nmf.pdf}
 \caption{Example of a simple NMF for urban sound mixture composed of 3 sound events (car passages, car horn and bird's whistles), $\mathbf{W}$ is composed of 3 elements too ($K$ = 3) which correspond in 3 audio spectra (car passages (a), car horn (b) and bird's whistles (c))}
 \label{fig:example_NMF}
 \end{figure}
@@ -207,11 +207,11 @@ This database allows us to create a wide diversity of realistic urban sound scen
 TIR = L_{p,traffic}-L_{p,interfering}
 \end{equation}
 
-with the \textit{Traffic Interference Ratio} $TIR \in$ [-12 -6 0 6  12] dB. When $TIR < 0$ dB, the traffic component is less present than the interfering class. In the opposite, for $TIR > 0$ dB, the traffic class is louder than the interfering class. The total number of scenes designed is 750 (6 sub-corpus $\times$ 25 scenes $\times$  5 $TIR$ values). The corpora are available for download at: \url{https://zenodo.org/record/1145855#.Wl2oPnkiGos}
+with the \textit{Traffic Interference Ratio} $TIR \in$ $\lbrace$12, -6, 0, 6, 12$\rbrace$ dB. When $TIR < 0$ dB, the traffic component is less present than the interfering class. In the opposite, for $TIR > 0$ dB, the traffic class is louder than the interfering class. The total number of scenes designed is 750 (6 sub-corpus $\times$ 25 scenes $\times$  5 $TIR$ values). The corpora are available for download at: \url{https://zenodo.org/record/1145855#.Wl2oPnkiGos}
 
 \subsection{Experiment}
 
-The experiment consists in estimating the road traffic sound level of the 6 environmental sound sub-corpus (\textit{alert} (al), \textit{animals} (an), \textit{humans} (hu), \textit{climate} (cl), \textit{mechanics} (me), \textit{transportation} (tr)) composed each of 25 audio files ($M$ = 25) and for 5 $TIR$ ([-12 -6 0 6 12] dB). The spectrogram $\mathbf{V}$ of each sound scene is built with a window size $w = 2^{12}$ with a 50 $\%$ overlap, see Figure \ref{fig:bloc_experiment}.
+The experiment consists in estimating the road traffic sound level of the 6 environmental sound sub-corpus (\textit{alert} (al), \textit{animals} (an), \textit{humans} (hu), \textit{climate} (cl), \textit{mechanics} (me), \textit{transportation} (tr)) composed each of 25 audio files ($M$ = 25) and for 5 $TIR$ ($\lbrace$-12, -6, 0, 6, 12$\rbrace$ dB). The spectrogram $\mathbf{V}$ of each sound scene is built with a window size $w = 2^{12}$ with a 50 $\%$ overlap, see Figure \ref{fig:bloc_experiment}.
 
 \begin{figure}
     \centering
@@ -220,7 +220,7 @@ The experiment consists in estimating the road traffic sound level of the 6 envi
     \label{fig:bloc_experiment}
 \end{figure}
 
-Assuming that the traffic spectral profile is largely concentrated in the low frequency components, a first estimator to determine the traffic sound level is a frequency low-pass filter. It depends only on the cut-off frequencies $f_c \in $ [500 1k 2k 5k 10k 20k] Hz. The spectrogram $\mathbf{V}$ is filtered and the remaining energy is then considered as traffic component (eq. \ref{eq:v_tr_filtered}),
+Assuming that the traffic spectral profile is largely concentrated in the low frequency components, a first estimator to determine the traffic sound level is a frequency low-pass filter. It depends only on the cut-off frequencies $f_c \in  \lbrace$500, 1k, 2k, 5k, 10k, 20k$\rbrace$ Hz. The spectrogram $\mathbf{V}$ is filtered and the remaining energy is then considered as traffic component (eq. \ref{eq:v_tr_filtered}),
 
 \begin{equation}\label{eq:v_tr_filtered}
 \mathbf{\tilde{V}}_{traffic} = \mathbf{V}_{f_c}.
@@ -240,7 +240,7 @@ The second estimator is the proposed scheme, based on the three NMF schemes pres
 
 \begin{tabularx}{17.5cm}{L{3cm}@{}C{12cm}@{}C{2cm}@{}}
 	\hline
-    \textbf{\begin{tabular}[c]{@{}l@{}}experimental \\ factors\end{tabular}} & \textbf{modalities} & \begin{tabular}[c]{@{}C{2cm}@{}}\textbf{number}\\ \textbf{of modality}\end{tabular}\\ \toprule
+    \textbf{\begin{tabular}[c]{@{}l@{}}experimental \\ factors\end{tabular}} & \textbf{modalities} & \begin{tabular}[c]{@{}C{2cm}@{}}\textbf{number}\\ \textbf{of modalities}\end{tabular}\\ \toprule
 \end{tabularx}
 
 \begin{tabularx}{17.5cm}{L{3cm}@{}C{2cm}@{}C{2cm}@{}@{}C{2cm}@{}@{}C{2cm}@{}@{}C{2cm}@{}@{}C{2cm}@{}@{}C{2cm}@{}}
@@ -269,7 +269,7 @@ The second estimator is the proposed scheme, based on the three NMF schemes pres
 
 \begin{tabularx}{17.5cm}{L{3cm}@{}C{12cm}@{}@{}C{2cm}}
 	\hline
-    \textbf{\begin{tabular}[c]{@{}l@{}}experimental \\ factors\end{tabular}} & \textbf{modalities} &\begin{tabular}[c]{@{}C{2cm}@{}}\textbf{number}\\ \textbf{of modality}\end{tabular}\\ \toprule
+    \textbf{\begin{tabular}[c]{@{}l@{}}experimental \\ factors\end{tabular}} & \textbf{modalities} &\begin{tabular}[c]{@{}C{2cm}@{}}\textbf{number}\\ \textbf{of modalities}\end{tabular}\\ \toprule
 \end{tabularx}
 
 \begin{tabularx}{17.5cm}{L{3cm}@{}C{2cm}@{}C{2cm}@{}@{}C{2cm}@{}@{}C{2cm}@{}@{}C{2cm}@{}@{}C{2cm}@{}@{}C{2cm}@{}}
@@ -301,7 +301,7 @@ The second estimator is the proposed scheme, based on the three NMF schemes pres
 \end{tabularx}
 
 \begin{tabularx}{17.5cm}{L{3cm}@{}C{12cm}@{}C{2cm}@{}}
-   $\mathbf{t}$  &  from 0.30 to 0.70 with 0.01 step & 40\\
+   threshold $\mathbf{t}$  &  from 0.30 to 0.70 with 0.01 step & 41\\
    \bottomrule
 \end{tabularx}
 \caption{Summary of the different experimental factors and their modalities taken into account in NMF estimator}
@@ -311,7 +311,7 @@ The second estimator is the proposed scheme, based on the three NMF schemes pres
 
 \subsubsection{NMF Dictionary}\label{part:dictionary_learning}
 
-In order to prevent potential overfitting issues, the dictionary is built from a separate sound database dedicated specifically to this task. It is composed of 53 audio files of passing cars. These recordings have been made on the Ifsttar's runway too, with the same experimental conditions that the recordings of the \textit{SimScene} database but with two different cars (Dacia Sandero and Renault Clio). First, for each audio file, its spectrogram is calculated with fixed parameters ($w$, 50 $\%$ overlap, $nfft$). Then time/frequency windows of $F \times w_t $ dimensions are applied without overlapping on the spectrogram in order to consider several spectra for each audio file where $w_t \in [0.5~1]$ second. In each window, the root mean square value is calculated on each frequency bin to reduce the windowed spectrogram in one spectrum a of $F \times 1$ dimension. With this size of window, it is possible to obtain the characteristic pitches of the different audio samples. One obtain for each value of $w_t$, from the 53 audio samples of passing cars respectively 2218 and 1109 elements. Since the number of elements given by this processing is high, in order to reduce the computational time and avoid redundant information, a $K$-means clustering algorithm is applied to reduce the number of spectra to $K \in \left[ 25,~50,~100,~200\right]$. The $K$ centroids are then the elements considered in the dictionary. A special case is added where the root mean square of \textit{all} the spectrogram is applied ($w_t$ = $all$) in order to build a dictionary with the spectral envelope of each audio sample. In this case, 53 spectra are obtained. The $K$-means clustering algorithm is then reduced to $K \in \left[25~50 \right]$.
+In order to prevent potential overfitting issues, the dictionary is built from a separate sound database dedicated specifically to this task. It is composed of 53 audio files of passing cars. These recordings have been made on the Ifsttar's runway too, with the same experimental conditions that the recordings of the \textit{SimScene} database but with two different cars (Dacia Sandero and Renault Clio). First, for each audio file, its spectrogram is calculated with fixed parameters ($w$, 50 $\%$ overlap, $nfft$). Then time/frequency windows of $F \times w_t $ dimensions are applied without overlapping on the spectrogram in order to consider several spectra for each audio file where $w_t \in \lbrace$0.5, 1$\rbrace$ second. In each window, the root mean square value is calculated on each frequency bin to reduce the windowed spectrogram in one spectrum a of $F \times 1$ dimension. With this size of window, it is possible to obtain the characteristic pitches of the different audio samples. One obtains for each value of $w_t$, from the 53 audio samples of passing cars respectively 2218 and 1109 elements. Since the number of elements given by this processing is high, in order to reduce the computational time and avoid redundant information, a $K$-means clustering algorithm is applied to reduce the number of spectra to $K \in \lbrace$25, 50, 100, 200$\rbrace$. The $K$ centroids are then the elements considered in the dictionary. A special case is added where the root mean square of \textit{all} the spectrogram is applied ($w_t$ = $all$) in order to build a dictionary with the spectral envelope of each audio sample. In this case, 53 spectra are obtained. The $K$-means clustering algorithm is then reduced to $K \in \lbrace$25, 50$\rbrace$.
 
 \begin{figure}[t!]
     \centering
@@ -342,7 +342,7 @@ The obtained dictionary is expressed with third octave bands and each basis vect
 Sup-NMF and Sem-NMF updates are computed for 400 iterations, which is sufficient to reach convergence. TI-NMF is performed on a lower number of iterations (60) to prevent $\mathbf{W}$ to not deviate too much from the initial dictionary.
 The spectrogram $\mathbf{V}$ and the dictionary $\mathbf{W}$ are expressed with third octave bands ($F$ = 29). This coarser method allows the reduction of the matrix size and decreases the computation time. But,  must of all, by expressing the frequency axis on a log frequency axis,  the low frequencies, where the traffic energy is focused, are described more finely than the high frequencies. For TI-NMF, the threshold $t$ is set between 0.30 and 0.70 with a step of 0.01. Tables  \ref{tab:experimental_factorsFilter} and \ref{tab:experimental_factorsNMF} summarize the experimental factors and their related modalities. 
 
-Considering the experimental settings derived from the different modalities of each experimental factor described in Table \ref{tab:experimental_factorsFilter}  between the 5 levels of $TIR$, the 6 sub-classes and the 6 cut-off frequencies $f_c$, 180 settings are performed. For Sup-NMF and Sem-NMF, according to Table \ref{tab:experimental_factorsNMF},  1200 associations of factors are made where the 4 levels of $K$ are associated with $w_t \in$ [0.5 1] s whereas only 2 levels of $K$ (25 and 50) are associated with $w_t = all$, see part \ref{part:dictionary_learning}. For TI-NMF, 24000 combinations are computed. In all, 25380 settings are performed between the different forms of the dictionary $\mathbf{W}$ and the multiple experimental factors.
+Considering the experimental settings derived from the different modalities of each experimental factor described in Table \ref{tab:experimental_factorsFilter}  between the 5 levels of $TIR$, the 6 sub-classes and the 6 cut-off frequencies $f_c$, 180 settings are performed (6 $\times$ 5 $\times$ 6). For Sup-NMF and Sem-NMF, according to Table \ref{tab:experimental_factorsNMF},  1200 associations of factors are made where the 4 levels of $K$ are associated with $w_t \in$ $\lbrace$0.5 1$\rbrace$ second whereas only 2 levels of $K$ (25 and 50) are associated with $w_t = all$, see part \ref{part:dictionary_learning} (6 $\times$ 5 $\times$ 2 $\times$ (2 $\times$ 4 + 1 $\times$ 2) $\times$ 2). For TI-NMF, 24600 combinations are computed (6 $\times$ 5 $\times$ (2 $\times$ 4 + 1 $\times$ 2) $\times$ 41). In all, 25980 settings are performed between the different forms of the dictionary $\mathbf{W}$ and the multiple experimental factors.
 
 For each setting, the estimator (frequency low-pass filter or NMF) is performed on the $M$ scenes of a sub-class. For one sound scene, the average traffic sound level, $\tilde{L}_{p,traffic}$, of the entire scene is calculated, 
 
@@ -401,7 +401,7 @@ MAE = \frac{\sum_{m = 1}^M\vert L^m_{p,traffic}-\tilde{L}^m_{p,traffic} \vert}{M
 
 Table \ref{tab:results} summarizes, according to the 2 main factors (\textit{method}, $\beta$), the lowest $MAE$ error averaged on all sub-classes and all $TIR$ (750 sound mixtures in all). For the low-pass frequency filters and each NMF approaches, the best parameter combinations are detailed according to the $TIR$ in Table \ref{tab:results_TIR},  and are expanded to the sub-classes in Figures \ref{fig:TIR_class_filter}, \ref{fig:TIR_class_sup}, \ref{fig:TIR_class_semi} and \ref{fig:TIR_class_TI}. \\
 
-First, the errors produced by the filter are detailed. $f_c = 20 $ kHz is equivalent to consider all the sound mixtures without distinction between traffic and others sound sources. Consequently, in low $TIR$ (-12 dB and -6 dB), where traffic component is scarce, the error is more important than in high $TIR$ (6 dB and 12 dB) where the traffic component is predominant. $f_c = 500$ Hz is the cut-off frequency with the lowest mean error obtained. It is then considered as the baseline to compare the performances of NMF.
+First, the errors produced by the filter are detailed. $f_c = 20 $ kHz is equivalent to consider all the sound mixtures without distinction between traffic and others sound sources. Consequently, in low $TIR$ (-12 dB and -6 dB), where traffic component is scarce, the error is more important than in high $TIR$ (6 dB and 12 dB) where the traffic component is predominant. $f_c = 500$ Hz is the cut-off frequency with the lowest mean error obtained (2.89 ($\pm$ 2.84) dB). It is then considered as the baseline to compare the performances of NMF.
 
 In low $TIR$, for \textit{alert} and \textit{animals}, which are sub-classes composed of higher frequencies, this filter is efficient as it removes these frequency components. For the other sub-classes where low frequency contents are present (storm for \textit{climate}, voices in \textit{humans}, planes, tramway and train in \textit{transport} and ventilation noise in \textit{mechanics}), the filter considers all the energy located in the pass-band and then does not dissociate the traffic element from the other sound sources. The errors are then nearly all superior to 4 dB and are overestimated, see Figure \ref{fig:alert_-12}. In opposite, in high $TIR$, the error is due to the energy removed from the traffic which has the consequence to underestimate the sound levels, see Figure \ref{fig:alert_12}. The 500 Hz filter finds a balance between what is put aside in low $TIR$ and what it is remained in high $TIR$. \\
 
@@ -421,18 +421,18 @@ In low $TIR$, for \textit{alert} and \textit{animals}, which are sub-classes com
         \label{fig:alert_12}
     \end{subfigure}
 
-    \caption{Global sound levels of the traffic estimated by the frequency low-pass filter with $f_c$ = 500 Hz for the M scenes of the sub-classes \textit{alert} at $TIR = -12$ dB(\subref{fig:alert_-12}) and at $TIR$ = 12 dB (\subref{fig:alert_12})}
+    \caption{Global sound levels of the traffic estimated by the frequency low-pass filter with $f_c$ = 500 Hz for the M scenes of the sub-classes \textit{alert} at $TIR = -12$ dB (\subref{fig:alert_-12}) and at $TIR$ = 12 dB (\subref{fig:alert_12})}
     \label{fig:dictionaryExtraction}
 \end{figure*}
 
-Compared with the filter errors, the choice of some NMF approaches makes it possible to decrease the error of the road traffic sound level estimation. The supervised approach is the only method that has an average error superior to the 500 Hz filter baseline. Sem-NMF and TI-NMF have better results. The lowest average error is obtained for TI-NMF, 2.19 $\pm$ 2.18, for $\beta$ = 1 and threshold $t$ = 0.42 with the dictionary factors $K$ = 200 and $w_t$ = 500 ms. On the other hand, the semi-supervised approach has a higher error but a lower standard deviation (2.32 $\pm$ 1.26).
+Compared with the filter errors, the choice of some NMF approaches makes it possible to decrease the error of the road traffic sound level estimation. The supervised approach is the only method that has an average error superior to the 500 Hz filter baseline. Sem-NMF and TI-NMF have better results. The lowest average error is obtained for TI-NMF, 2.19 ($\pm$ 2.18) dB, for $\beta$ = 1 and threshold $t$ = 0.42 with the dictionary factors $K$ = 200 and $w_t$ = 500 ms. On the other hand, the semi-supervised approach has a higher error but a lower standard deviation (2.32 ($\pm$ 1.26) dB).
 
 \begin{figure*}[t]
     \centering
     \begin{subfigure}[t]{0.45\textwidth}
         \centering
         \includegraphics[width=\linewidth]{figures/filter_bar.pdf}
-        \caption{Frequency low-pass filter with $f_c$ = 500 Hz}
+        \caption{$MAE$ error for each $TIR$ and sub-class with the frequency low-pass filter with $f_c$ = 500 Hz}
         \label{fig:TIR_class_filter}
     \end{subfigure}%
     \hfill
@@ -505,7 +505,7 @@ However, the relatively high degrees of freedom of Sem-NMF are restrictive for h
 \end{figure}
 
 
-Finally, TI-NMF with a threshold $t = 0.42$ and $\beta$ = 1, offers the lowest average error (Table \ref{tab:results}). Unlike Sup-NMF, where $\mathbf{W}$ is fixed, and Sem-NMF, where only $\mathbf{W_r}$ is updated, TI-NMF updates $\mathbf{W}$ entirely to adjust prior knowledge to the scene under evaluation so as to adapt to the different sound environments. The closest elements of the traffic component defined in $\mathbf{W_0}$ are then extracted to deduce the traffic signal. In Figure \ref{fig:dist_-12_12}, the similarity $D_{\theta}(\mathbf{W_0}||\mathbf{W})$ is displayed for 3 sub-classes and $TIR \in $ [-12, 12] dB.
+Finally, TI-NMF with a threshold $t = 0.42$ and $\beta$ = 1, offers the lowest average error (Table \ref{tab:results}). Unlike Sup-NMF, where $\mathbf{W}$ is fixed, and Sem-NMF, where only $\mathbf{W_r}$ is updated, TI-NMF updates $\mathbf{W}$ entirely to adjust prior knowledge to the scene under evaluation so as to adapt to the different sound environments. The closest elements of the traffic component defined in $\mathbf{W_0}$ are then extracted to deduce the traffic signal. In Figure \ref{fig:dist_-12_12}, the similarity $D_{\theta}(\mathbf{W_0}||\mathbf{W})$ is displayed for 3 sub-classes and $TIR \in $ $\lbrace$-12, 12$\rbrace$ dB.
 
 \begin{figure}[t]
     \centering
@@ -516,7 +516,7 @@ Finally, TI-NMF with a threshold $t = 0.42$ and $\beta$ = 1, offers the lowest a
 
 For low $TIR$, as the traffic sound class is not predominant, the final dictionary strongly differs from the $\mathbf{W_0}$. With the thresholding, only a reduced number of basis vectors are considered as traffic components. In comparison to supervised results, this approach reduces significantly the error for the \textit{human} and \textit{transport} sub-classes.  However, for \textit{climate} and \textit{mechanics}, the errors remain important as these interfering classes have similar spectral profiles when compared to traffic ones.
 
-For high $TIR$, as the traffic is the main sound source, the similarity of the initial dictionary and $\mathbf{W}$ is higher which allows retaining more elements as traffic components and then decreases the error (< 1 dB). The kept elements are then more suited to the scenes than a fixed dictionary. The error for these $TIR$ is then due to the thresholding which put aside some elements that are nevertheless related to the traffic component. With a low threshold, it is possible to decrease the error. For $TIR$ = 12 dB, the average error on all the sub-classes is 0.22 ($\pm$ 0.08) dB with $t$ = 0.30. In opposite for $TIR$ = -12 dB, it is better to choose a high threshold $t$ = 0.55, the error decrease then to 4.46 $\pm$ 1.66. In order to generalize this method where no prior knowledge on the urban environment, the chosen threshold $t$ is then fixed to $t$ = 0.42 and is the one that best balanced these opposite cases.
+For high $TIR$, as the traffic is the main sound source, the similarity of the initial dictionary and $\mathbf{W}$ is higher which allows retaining more elements as traffic components and then decreases the error (< 1 dB). The kept elements are then more suited to the scenes than a fixed dictionary. The error for these $TIR$ is then due to the thresholding which put aside some elements that are nevertheless related to the traffic component. With a low threshold, it is possible to decrease the error. For $TIR$ = 12 dB, the average error on all the sub-classes is 0.22 ($\pm$ 0.08) dB with $t$ = 0.30. In opposite for $TIR$ = -12 dB, it is better to choose a high threshold $t$ = 0.55, the error decrease then to 4.46 ($\pm$ 1.66) dB. In order to generalize this method where no prior knowledge on the urban environment, the chosen threshold $t$ is then fixed to $t$ = 0.42 as it is the one that best balanced these opposite cases.
 
 \section{Conclusion}
 

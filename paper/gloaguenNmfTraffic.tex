@@ -347,10 +347,10 @@ Considering the experimental settings derived from the different modalities of e
 For each setting, the estimator (frequency low-pass filter or NMF) is performed on the $M$ scenes of a sub-class. For one sound scene, the average traffic sound level, $\tilde{L}_{p,traffic}$, of the entire scene is calculated, 
 
 \begin{equation}
-\tilde{L}_{p,traffic} = 20\log_{10}\left(\frac{p_{rms}}{p_0}\right)
+\tilde{L}_{p,traffic} = 20 \times \log_{10}\left(\frac{p_{rms}}{p_0}\right)
 \end{equation}
 
-where $p_{rms}$ is the effective pressure deducted from the remaining spectrogram ($\mathbf{V}_{f_c}$ or $\left[\mathbf{WH} \right]_{traffic}$) and $p_0$ is the reference sound pressure, $p_0 = 2 \times 10^{-5} Pa$.  For each setting of experimental factors, $M$ values of $\tilde{L}_{p,traffic}$, corresponding to the $M$ scenes, are then obtained and are compared to the $M$ exact sound level, $L_{p,traffic}$. 
+where $p_{rms}$ is the effective pressure deducted from the estimated traffic spectrogram $\mathbf{\tilde{V}}_{traffic}$ and $p_0$ is the reference sound pressure, $p_0 = 2 \times 10^{-5} Pa$.  For each setting of experimental factors, $M$ values of $\tilde{L}_{p,traffic}$, corresponding to the $M$ scenes, are then obtained and are compared to the $M$ exact sound level, $L_{p,traffic}$. 
 
 
 \begin{table*}[t]
@@ -456,7 +456,7 @@ Compared with the filter errors, the choice of some NMF approaches makes it poss
         \caption{$MAE$ error for each $TIR$ and sub-class with TI-NMF, $\beta$ = 1 and $t$ = 0.42}
         \label{fig:TIR_class_TI}
     \end{subfigure}
-    \caption{$MAE$ error for each sub-class and each $TIR$ according to the the best results with the filter (\subref{fig:TIR_class_filter}) and each method (Sup-NMF (\subref{fig:TIR_class_sup}), Sem-NMF (\subref{fig:TIR_class_semi}) and TI-NMF (\subref{fig:TIR_class_TI}))}
+    \caption{$MAE$ (dB) error for each sub-class and each $TIR$ according to the the best results with the filter (\subref{fig:TIR_class_filter}) and each method (Sup-NMF (\subref{fig:TIR_class_sup}), Sem-NMF (\subref{fig:TIR_class_semi}) and TI-NMF (\subref{fig:TIR_class_TI}))}
     \label{fig:TIR_bar}
 \end{figure*}
 
@@ -484,7 +484,7 @@ Consequently, with the addition of a mobile part in the dictionary, $\mathbf{W_r
     \label{fig:lp_alert}
 \end{figure*}
 
-However, the relatively high degrees of freedom of Sem-NMF are restrictive for high $TIR$ as the errors exceed 2 dB for all sub-classes and increase with $TIR$ = 6 dB and 12 dB. In order to reduce $D(\mathbf{V} \vert \vert \mathbf{WH}$), without constraint, Sem-NMF is free to include traffic components in $\mathbf{W_r}$. Consequently, this behavior decreases the quality of the reconstruction of the traffic component. In Figure \ref{fig:Y_alert_12} for $TIR=12$ dB, the high frequency components of the alert sounds are lower for the benefit of low frequency content. Consequently, the traffic sound level estimation is then underestimated as in Figure \ref{fig:lp_alert_12}. \\
+However, the relatively high degrees of freedom of Sem-NMF are restrictive for high $TIR$ as the errors exceed 2 dB for all sub-classes and increase with $TIR \in \lbrace$6, 12$\rbrace$ dB. In order to reduce $D(\mathbf{V} \vert \vert \mathbf{WH}$), without constraint, Sem-NMF is free to include traffic components in $\mathbf{W_r}$. Consequently, this behavior decreases the quality of the reconstruction of the traffic component. In Figure \ref{fig:Y_alert_12} for $TIR=12$ dB, the high frequency components of the alert sounds are lower for the benefit of low frequency content. Consequently, the traffic sound level estimation is then underestimated as in Figure \ref{fig:lp_alert_12}. \\
 
 \begin{figure}
     \centering

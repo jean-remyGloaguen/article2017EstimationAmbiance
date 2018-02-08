@@ -48,14 +48,14 @@ An alternative approach that we will follow in this paper is to consider the bli
 
 In an urban environment context, source separation can be achieved with the help of acoustic microphone arrays and beamforming \cite{saruwatari2003blind}. However, this approach requires spreading multiple microphones arrays in cities that is very expensive (even with low cost microphones) and time-consuming for calibration and maintenance. This method is then not considered here to be deployed all over cities. In the opposite, monophonic sensor networks need less microphones but the main challenge is to succeed to estimate correctly the road traffic from only one signal in which all kind of sound sources can be present. A convenient method for this is the  Non-negative Matrix Factorization (NMF) technique \cite{lee_learning_1999}. When considering audio as input, it usually consists in approximating the magnitude spectrogram of an audio file by the product of two low rank matrices, one representing the components of interest and the other the contribution at a given time of those components to approximate the input magnitude spectrogram \cite{smaragdis_non-negative_2003} \cite{wilson_speech_2008} \cite{mesaros_sound_2015}. In the audio processing domain, NMF has already been employed for the source separation task of monaural signals of speech and music \cite{wang_musical_2005} \cite{wilson_speech_2008}. By design, this method deals reasonably well with the overlapping sound sources as soon as the overlap can be resolved on the time/frequency plane.
 Closer to our application scenario, NMF has been considered by Innami and Kasai \cite{satoshi_innami_nmf-based_2012}. After having performed NMF on simulated audio files, they perform a source separation in two steps by 1) separating the sound background from the events and 2) by isolating the events using spectral features using a $k$-means procedure.
-We study in this paper different flavors of Non-Negative Matrix Factorization where the traffic component is considered in its entirely whether it is a sound background or an event. We demonstrate that supervised NMF and semi supervised NMF approaches have some interests but fail to give satisfactory results for the application at hand. We thus introduce another NMF scheme called thresholded initialized NMF that makes good use of prior knowledge about the source of interest, in our case the traffic noise, but also generalizes well to several kinds of urban areas and to traffic to interference ratio (TIR).
+We study in this paper different flavors of Non-Negative Matrix Factorization where the traffic component is considered in its entirely whether it is a sound background or an event. We demonstrate that supervised NMF and semi supervised NMF approaches have some interests but fail to give satisfactory results for the application at hand. We thus introduce another NMF scheme called thresholded initialized NMF that makes good use of prior knowledge about the source of interest, in our case the traffic noise, but also generalizes well to several kinds of urban areas and to traffic to interference ratio ($TIR$).
 
 To perform the numerical experiments, we consider a corpus of simulated sound scenes created from a built-up sound database composed of a high number of diverse sound samples. The use of simulated sound scenes is mandatory for rigorous experimental validation as it offers a high level of control on the design of the scenes and the knowledge of the exact contribution of the traffic component ($L_{p,traffic}$), which would be difficult to extract from a recording of an urban scene.
 
 \begin{figure*}[t]
 \centering
 \includegraphics[width=0.7\textwidth]{figures/bloc_diagram_source_separation.pdf}
-\caption{Block diagram of the general source separation model}
+\caption{Block diagram of the general source separation model.}
 \label{fig:diagram}
 \end{figure*}
 
@@ -75,7 +75,7 @@ where $\mathbf{W} \in \mathbb{R}^+_{F \times K}$ is the \textit{dictionary} (or 
 \begin{figure}[t]
 \centering
 \includegraphics[width=0.9\linewidth]{figures/schema_introduction_nmf.pdf}
-\caption{Example of a simple NMF for urban sound mixture composed of 3 sound events (car passages, car horn and bird's whistles), $\mathbf{W}$ is composed of 3 elements too ($K$ = 3) which correspond in 3 audio spectra (car passages (a), car horn (b) and bird's whistles (c))}
+\caption{Example of a simple NMF for urban sound mixture composed of 3 sound events (car passages, car horn and bird's whistles), $\mathbf{W}$ is composed of 3 elements too ($K$ = 3) which correspond in 3 audio spectra (car passages (a), car horn (b) and bird's whistles (c)).}
 \label{fig:example_NMF}
 \end{figure}
 
@@ -165,7 +165,7 @@ An illustrative example is displayed in Figure \ref{fig:W_TI_NMF}.\\
 \begin{figure}[hbtp]
 \centering
 \includegraphics[width=0.8\linewidth]{figures/distanceCosLinDisplay.pdf}
-\caption{Example of the $\mathbf{W}_{traffic}$ extraction from the sorted cosine similarity with a threshold $t = 0.6$. The $82$-nd first elements are considered as traffic component.}
+\caption{$\mathbf{W}_{traffic}$ extraction from the sorted cosine similarity with a threshold $t = 0.6$. The $82$-nd first elements are considered as traffic component.}
 \label{fig:W_TI_NMF}
 \end{figure}
 
@@ -184,20 +184,8 @@ This database is divided into two categories: $i)$ the \textit{event} category, 
 
 \begin{figure}[t]
     \centering
-    \begin{subfigure}[t]{0.47\linewidth}
-        \centering
-       \includegraphics[width=\linewidth]{./figures/exempleSimScene3-spectrum.png}
-       \caption{}
-       \label{fig:simScene_spec}
-    \end{subfigure}%
-    \hfill
-    \begin{subfigure}[t]{0.47\linewidth}
-        \centering
-       \includegraphics[width=\linewidth]{./figures/exempleSimScene3-timeDomain.png}
-       \caption{}
-       \label{fig:simScene_time}
-    \end{subfigure}
-    \caption{Example of a simple scene created with \textit{SimScene} software (the spectrogram (\subref{fig:simScene_spec}), the time domain \subref{fig:simScene_time})) with a sound background (road traffic in purple) and 3 sound events (car horn in red, car passage in green and whistling bird in blue)}
+       \includegraphics[width=.8\linewidth]{./figures/exampleSimScene}
+    \caption{Spectrogram of a sound scene created with \textit{SimScene} software with a sound background (road traffic in green) and 3 sound events (car horn in blue, car passage in red and whistling bird in cyan).}
     \label{fig:example_simScene}
 \end{figure}
 
@@ -216,7 +204,7 @@ The experiment consists in estimating the road traffic sound level of the 6 envi
 \begin{figure}
     \centering
     \includegraphics[width=\linewidth]{figures/bloc_diagram_estimator.pdf}
-    \caption{Block diagram of the experience with the urban sound scenes sound mixture step and the estimation step. The estimator may be a frequency low-pass filter or NMF}
+    \caption{Block diagram of the experience with the urban sound scenes sound mixture step and the estimation step. The estimator may be a frequency low-pass filter or NMF.}
     \label{fig:bloc_experiment}
 \end{figure}
 
@@ -230,8 +218,8 @@ The second estimator is the proposed scheme, based on the three NMF schemes pres
 
 \begin{figure}
     \centering
-    \includegraphics[width=\linewidth]{figures/bloc_diagram_NMF_EN.pdf}
-    \caption{Specific block diagram of the NMF estimator with the dictionary design composed from a second sound database}
+    \includegraphics[width=\linewidth]{figures/bloc_diagram_NMF_EN_2.pdf}
+    \caption{Specific block diagram of the NMF estimator with the dictionary design composed from a second sound database.}
     \label{fig:bloc_nmf}
 \end{figure}
 
@@ -259,7 +247,7 @@ The second estimator is the proposed scheme, based on the three NMF schemes pres
 \end{tabularx}
 
 
-\caption{Summary of the different experimental factors and their modalities taken into account in the frequency low-pass filter estimator}
+\caption{Summary of the different experimental factors and their modalities taken into account in the frequency low-pass filter estimator.}
 \label{tab:experimental_factorsFilter}
 \end{table*}
 
@@ -304,7 +292,7 @@ The second estimator is the proposed scheme, based on the three NMF schemes pres
    threshold $\mathbf{t}$  &  from 0.30 to 0.70 with 0.01 step & 41\\
    \bottomrule
 \end{tabularx}
-\caption{Summary of the different experimental factors and their modalities taken into account in NMF estimator}
+\caption{Summary of the different experimental factors and their modalities taken into account in NMF estimator.}
 \label{tab:experimental_factorsNMF}
 \end{table*}
 
@@ -328,7 +316,7 @@ In order to prevent potential overfitting issues, the dictionary is built from a
         \caption{}
         \label{fig:ElementW}
     \end{subfigure}
-    \caption{Example of the dictionary building with a 3 second extract of a car passage. In dashed lines, a 1 second $w_t$ window  (\subref{fig:specW}). With $w_t$ = 1 second, 3 spectra are then generated and included in $\mathbf{W}$, while for $w_t$ = $all$, the audio file is reduced into 1 spectral vector (\subref{fig:ElementW})}
+    \caption{Dictionary building on a 3 second extract of a car passage. In dashed lines, a 1 second $w_t$ window  (\subref{fig:specW}). With $w_t$ = 1 second, 3 spectra are then generated and included in $\mathbf{W}$, while for $w_t$ = $all$, the audio file is reduced into 1 spectral vector (\subref{fig:ElementW}).}
     \label{fig:spec_elementW}
 \end{figure}
 
@@ -384,7 +372,7 @@ $\mathbf{\beta}$ &  &  & 2 & 2 & 1 \\ \hline
 \textbf{6} & 0.25 ($\pm$ 0.06) & 1.03 ($\pm$ 0.26) & 0.26 ($\pm$ 0.10) & 2.25 ($\pm$ 0.19) & 0.70 ($\pm$ 0.32) \\
 \textbf{12} & 0.26 ($\pm$ 0.00) & 1.45 ($\pm$ 0.13) & 0.64 ($\pm$ 0.06) & 2.96 ($\pm$ 0.21)  & 0.84 ($\pm$ 0.24) \\ \bottomrule
 \end{tabular}
-\caption{$MAE$ error averaged on all sub-classes on each $TIR$ for the best scenario according to each method}
+\caption{$MAE$ error averaged on all sub-classes on each $TIR$ for the best scenario according to each method.}
 \label{tab:results_TIR}
 \end{table*}
 
@@ -421,7 +409,7 @@ In low $TIR$, for \textit{alert} and \textit{animals}, which are sub-classes com
         \label{fig:alert_12}
     \end{subfigure}
 
-    \caption{Global sound levels of the traffic estimated by the frequency low-pass filter with $f_c$ = 500 Hz for the M scenes of the sub-classes \textit{alert} at $TIR = -12$ dB (\subref{fig:alert_-12}) and at $TIR$ = 12 dB (\subref{fig:alert_12})}
+    \caption{Estimated global sound levels of the traffic by the frequency low-pass filter with $f_c$ = 500 Hz for the 25 scenes of the sub-classes \textit{alert} at $TIR = -12$ dB (\subref{fig:alert_-12}) and at $TIR$ = 12 dB (\subref{fig:alert_12}).}
     \label{fig:dictionaryExtraction}
 \end{figure*}
 
@@ -432,31 +420,31 @@ Compared with the filter errors, the choice of some NMF approaches makes it poss
     \begin{subfigure}[t]{0.45\textwidth}
         \centering
         \includegraphics[width=\linewidth]{figures/filter_bar.pdf}
-        \caption{$MAE$ error for each $TIR$ and sub-class with the frequency low-pass filter with $f_c$ = 500 Hz}
+        \caption{$MAE$ error for each $TIR$ and sub-class with the frequency low-pass filter with $f_c$ = 500 Hz.}
         \label{fig:TIR_class_filter}
     \end{subfigure}%
     \hfill
     \begin{subfigure}[t]{0.45\textwidth}
         \centering
         \includegraphics[width=\linewidth]{figures/sup_bar.pdf}
-        \caption{$MAE$ error for each $TIR$ and sub-class with Sup-NMF and $\beta$ = 2}
+        \caption{$MAE$ error for each $TIR$ and sub-class with Sup-NMF and $\beta$ = 2.}
                 \label{fig:TIR_class_sup}
     \end{subfigure}
 
     \begin{subfigure}[t]{0.45\textwidth}
         \centering
       	\includegraphics[width=\linewidth]{figures/semi-sup_bar.pdf}
-        \caption{$MAE$ error for each $TIR$ and sub-class with Sem-NMF and $\beta$ = 2}
+        \caption{$MAE$ error for each $TIR$ and sub-class with Sem-NMF and $\beta$ = 2.}
                 \label{fig:TIR_class_semi}
     \end{subfigure}%
     \hfill
     \begin{subfigure}[t]{0.45\textwidth}
         \centering
         \includegraphics[width=\linewidth]{figures/TI_bar}
-        \caption{$MAE$ error for each $TIR$ and sub-class with TI-NMF, $\beta$ = 1 and $t$ = 0.42}
+        \caption{$MAE$ error for each $TIR$ and sub-class with TI-NMF, $\beta$ = 1 and $t$ = 0.42.}
         \label{fig:TIR_class_TI}
     \end{subfigure}
-    \caption{$MAE$ (dB) error for each sub-class and each $TIR$ according to the the best results with the filter (\subref{fig:TIR_class_filter}) and each method (Sup-NMF (\subref{fig:TIR_class_sup}), Sem-NMF (\subref{fig:TIR_class_semi}) and TI-NMF (\subref{fig:TIR_class_TI}))}
+    \caption{$MAE$ (dB) error for each sub-class and each $TIR$ according to the the best results with the filter (\subref{fig:TIR_class_filter}) and each method (Sup-NMF (\subref{fig:TIR_class_sup}), Sem-NMF (\subref{fig:TIR_class_semi}) and TI-NMF (\subref{fig:TIR_class_TI})).}
     \label{fig:TIR_bar}
 \end{figure*}
 
@@ -480,7 +468,7 @@ Consequently, with the addition of a mobile part in the dictionary, $\mathbf{W_r
         \label{fig:lp_alert_12}
     \end{subfigure}
 
-    \caption{1 second equivalent sound pressure level of an \textit{alert} sub-class scene for supervised NMF ($\beta$ = 2, $K$ = 50, $w_t$ = 0.5 s), semi-supervised ($\beta$ = 2, $K$ = 100, $w_t$ = 0.5 s) and thresholded initialized ($\beta$ = 1, $K$ = 200, $w_t$ = 0.5 s, $t$ = 0.42) at $TIR = -12$ dB(\subref{fig:lp_alert_-12}) and $TIR$ = 12 dB (\subref{fig:lp_alert_12})}
+    \caption{1 second equivalent sound pressure level of an \textit{alert} sub-class scene for supervised NMF ($\beta$ = 2, $K$ = 50, $w_t$ = 0.5 s), semi-supervised ($\beta$ = 2, $K$ = 100, $w_t$ = 0.5 s) and thresholded initialized ($\beta$ = 1, $K$ = 200, $w_t$ = 0.5 s, $t$ = 0.42) at $TIR = -12$ dB (\subref{fig:lp_alert_-12}) and $TIR$ = 12 dB (\subref{fig:lp_alert_12}). In Figure (\subref{fig:lp_alert_12}), Sup-NMF models the interfering class increasing the estimated error while in Figure (\subref{fig:lp_alert_12}), this behavior disappear.}
     \label{fig:lp_alert}
 \end{figure*}
 
@@ -501,7 +489,7 @@ However, the relatively high degrees of freedom of Sem-NMF are restrictive for h
         \caption{}
 		\label{fig:Y_alert_12}
     \end{subfigure}
-    \caption{Comparison between the sum of the 2 elements of $\mathbf{W_r}$ with the spectra of the interfering and traffic classes for an \textit{alert} scene for $TIR$ = -12 dB (\subref{fig:Y_alert-12}) and $TIR$ = 12 dB (\subref{fig:Y_alert_12}) with $\beta = 2$, $K = 100$ and $w_t$ = 0.5 s (normalized amplitudes)}
+    \caption{Comparison between the sum of the 2 elements of $\mathbf{W_r}$ with the spectra of the interfering and traffic classes for an \textit{alert} scene for $TIR$ = -12 dB  (\subref{fig:Y_alert-12}) and $TIR$ = 12 dB (\subref{fig:Y_alert_12}) with $\beta = 2$, $K = 100$ and $w_t$ = 0.5 s (normalized amplitudes).}
 \end{figure}
 
 
@@ -510,7 +498,7 @@ Finally, TI-NMF with a threshold $t = 0.42$ and $\beta$ = 1, offers the lowest a
 \begin{figure}[t]
     \centering
     \includegraphics[width=.8\linewidth]{figures/dist_-12_12.pdf}
-    \caption{Example of the similarity $D_{\theta}\left( \mathbf{W_0} \vert \vert \mathbf{W}\right)$ for different sub-classes and for two $TIR$ (-12 dB and 12 dB) and with the threshold $t$ = 0.42 ($\beta$ = 1, $K$ = 200 and $w_t$ = 0.5 s)}
+    \caption{Example of the similarity $D_{\theta}\left( \mathbf{W_0} \vert \vert \mathbf{W}\right)$ for different sub-classes and for two $TIR$ (-12 dB and 12 dB) and with the threshold $t$ = 0.42 ($\beta$ = 1, $K$ = 200 and $w_t$ = 0.5 s).}
     \label{fig:dist_-12_12}
 \end{figure}
 
@@ -526,7 +514,7 @@ A major advantage of the proposed approach is that it is not designed for a spec
 The experimental protocol and the evaluated estimators have been implemented with the Matlab software. For reproducible purposes, the code is available online\footnote{\url{https://github.com/jean-remyGloaguen/article2017EstimationAmbiance}}. The evaluation database composed of multiple samples of urban sounds is also made available for the research community with interest in detection, separation and recognition tasks of urban sound sources.
 
 \vspace{6pt}
-\acknowledgments{The authors would like to acknowledge partial funding from the ANR under project reference ANR-16-CE22-0012.}
+%\acknowledgments{The authors would like to acknowledge partial funding from the ANR under project reference ANR-16-CE22-0012.}
 
 \footnotesize
 \bibliographystyle{unsrt}

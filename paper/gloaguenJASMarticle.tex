@@ -49,7 +49,7 @@
 %%%%%%%%%%%%%%%%%%%%%
 \usepackage{url}	% gérer les adresses www.
 
-\usepackage[colorlinks,citecolor=red,urlcolor=blue,linkcolor=blue]{hyperref}  % ps2pdf car je compile via Latex -> dvips -> ps2pdf
+\usepackage[colorlinks,citecolor=black,urlcolor=black,linkcolor=black]{hyperref}  % ps2pdf car je compile via Latex -> dvips -> ps2pdf
 
 % \usepackage{natbib} 
 
@@ -247,7 +247,7 @@ This database is divided into two categories: $i)$ the \textit{event} category, 
 
 \begin{figure}[t]
     \centering
-       \includegraphics[width=.8\linewidth]{./figures/exampleSimScene}
+       \includegraphics[width=.85\linewidth]{./figures/exampleSimScene}
     \caption{Spectrogram of a sound scene created with \textit{SimScene} software with a sound background (road traffic in green) and 3 sound events (car horn in purple, car passage in red and whistling bird in cyan).}
     \label{fig:example_simScene}
 \end{figure}
@@ -442,16 +442,7 @@ Table \ref{tab:results} summarizes, according to the 2 main factors (\textit{met
 
 First, the errors produced by the filter are detailed. $f_c = 20 $ kHz is equivalent to consider all the sound mixtures without distinction between traffic and others sound sources. Consequently, in low $TIR$ (-12 dB and -6 dB), where traffic component is scarce, the error is more important than in high $TIR$ (6 dB and 12 dB) where the traffic component is predominant. $f_c = 500$ Hz is the cut-off frequency with the lowest mean error obtained (2.89 ($\pm$ 2.84) dB). It is then considered as the baseline to compare the performances of NMF.
 
-In low $TIR$, for \textit{alert} and \textit{animals}, which are sub-classes composed of higher frequencies, this filter is efficient as it removes these frequency components. For the other sub-classes where low frequency contents are present (storm for \textit{climate}, voices in \textit{humans}, planes, tramway and train in \textit{transport} and ventilation noise in \textit{mechanics}), the filter considers all the energy located in the pass-band and then does not dissociate the traffic element from the other sound sources. The errors are then nearly all superior to 4 dB and are overestimated, see Figure \ref{fig:alert_-12}. In opposite, in high $TIR$, the error is due to the energy removed from the traffic which has the consequence to underestimate the sound levels, see Figure \ref{fig:alert_12}. The 500 Hz filter finds a balance between what is put aside in low $TIR$ and what it is remained in high $TIR$. \\
-
-\begin{figure*}[t]
-  \centering
-  \subfloat[]{\label{fig:alert_-12}\includegraphics[width=.4\linewidth]{figures/LeqTrafficComparison_filter_alert_-12.pdf}}
-  \hspace{5pt}
-  \subfloat[]{\label{fig:alert_12}\includegraphics[width=.4\linewidth]{figures/LeqTrafficComparison_filter_alert_12.pdf}}
-  \caption{Estimated global sound levels of the traffic by the frequency low-pass filter with $f_c$ = 500 Hz for the 25 scenes of the sub-classes \textit{alert} at $TIR = -12$ dB (\ref{fig:alert_-12}) and at $TIR$ = 12 dB (\ref{fig:alert_12}).}
-  \label{fig:dictionaryExtraction}
-\end{figure*}
+In low $TIR$, for \textit{alert} and \textit{animals}, which are sub-classes composed of higher frequencies, this filter is efficient as it removes these frequency components. For the other sub-classes where low frequency contents are present (storm for \textit{climate}, voices in \textit{humans}, planes, tramway and train in \textit{transport} and ventilation noise in \textit{mechanics}), the filter considers all the energy located in the pass-band and then does not dissociate the traffic element from the other sound sources. The errors are then nearly all superior to 4 dB and are overestimated. In opposite, in high $TIR$, the error is due to the energy removed from the traffic which has the consequence to underestimate the sound levels. The 500 Hz filter finds a balance between what is put aside in low $TIR$ and what it is remained in high $TIR$. \\
 
 Compared with the filter errors, the choice of some NMF approaches makes it possible to decrease the error of the road traffic sound level estimation. The supervised approach is the only method that has an average error superior to the 500 Hz filter baseline. Sem-NMF and TI-NMF have better results. The lowest average error is obtained for TI-NMF, 2.19 ($\pm$ 2.18) dB, for $\beta$ = 1 and threshold $t$ = 0.42 with the dictionary factors $K$ = 200 and $w_t$ = 500 ms. On the other hand, the semi-supervised approach has a higher error but a lower standard deviation (2.32 ($\pm$ 1.26) dB).
 
@@ -477,7 +468,7 @@ Consequently, with the addition of a mobile part in the dictionary, $\mathbf{W_r
 \begin{figure}[t]
   \centering
 	\includegraphics[width=0.45\textwidth]{figures/NMF_Lp_alert.pdf}
- \caption{1 second equivalent sound pressure level of an \textit{alert} sub-class scene for 500 Hz low-pass filter and TI-NMF($\beta$ = 1, $K$ = 200, $w_t$ = 0.5 s, $t$ = 0.42) at $TIR = -12$ dB (in full line) and $TIR$ = 12 dB (in dashed line).}
+ \caption{1 second equivalent sound pressure level of an \textit{alert} sub-class scene for 500 Hz low-pass filter and TI-NMF ($\beta$ = 1, $K$ = 200, $w_t$ = 0.5 s, $t$ = 0.42) at $TIR = -12$ dB (in full line) and $TIR$ = 12 dB (in dashed line).}
 	\label{fig:lp_alert}
 \end{figure}
 

@@ -469,10 +469,13 @@ According to Table \ref{tab:results_TIR} and Figures \ref{fig:TIR_bar}, the beha
 
 Consequently, with the addition of a mobile part in the dictionary, $\mathbf{W_r}$, the semi-supervised approach  allows a better consideration of the interfering class in low $TIR$. It brings a significant decrease of the errors for low $TIR$. However, the relatively high degrees of freedom of Sem-NMF are restrictive for high $TIR$ as the errors exceed 2 dB for all sub-classes and increase with $TIR \in \lbrace$6, 12$\rbrace$ dB. In order to reduce $D(\mathbf{V} \vert \vert \mathbf{WH}$), without constraint, Sem-NMF is free to include traffic components in $\mathbf{W_r}$. Consequently, this behavior decreases the quality of the reconstruction of the traffic component. 
 
-Finally, TI-NMF with a threshold $t = 0.42$ and $\beta$ = 1, offers the lowest average error (Table \ref{tab:results}). Unlike Sup-NMF, where $\mathbf{W}$ is fixed, and Sem-NMF, where only $\mathbf{W_r}$ is updated, TI-NMF updates $\mathbf{W}$ entirely to adjust prior knowledge to the scene under evaluation so as to adapt to the different sound environments, see Figure \ref{fig:lp_alert}. The closest elements of the traffic component defined in $\mathbf{W_0}$ are then extracted to deduce the traffic signal. 
+Finally, TI-NMF with a threshold $t = 0.42$ and $\beta$ = 1, offers the lowest average error (Table \ref{tab:results}). Unlike Sup-NMF, where $\mathbf{W}$ is fixed, and Sem-NMF, where only $\mathbf{W_r}$ is updated, TI-NMF updates $\mathbf{W}$ entirely to adjust prior knowledge to the scene under evaluation so as to adapt to the different sound environments. The closest elements of the traffic component defined in $\mathbf{W_0}$ are then extracted to deduce the traffic signal. 
 For low $TIR$, as the traffic sound class is not predominant, the final dictionary strongly differs from the $\mathbf{W_0}$. With the thresholding, only a reduced number of basis vectors are considered as traffic components. In comparison to supervised results, this approach reduces significantly the error for the \textit{human} and \textit{transport} sub-classes.  However, for \textit{climate} and \textit{mechanics}, the errors remain important as these interfering classes have similar spectral profiles when compared to traffic ones.
 
-For high $TIR$, as the traffic is the main sound source, the similarity of the initial dictionary and $\mathbf{W}$ is higher which allows retaining more elements as traffic components and then decreases the error (< 1 dB). The kept elements are then more suited to the scenes than a fixed dictionary. The error for these $TIR$ is then due to the thresholding which put aside some elements that are nevertheless related to the traffic component. With a low threshold, it is possible to decrease the error. For $TIR$ = 12 dB, the average error on all the sub-classes is 0.22 ($\pm$ 0.08) dB with $t$ = 0.30. In opposite for $TIR$ = -12 dB, it is better to choose a high threshold $t$ = 0.55, the error decrease then to 4.46 ($\pm$ 1.66) dB. In order to generalize this method where no prior knowledge on the urban environment, the chosen threshold $t$ is then fixed to $t$ = 0.42 as it is the one that best balanced these opposite cases.
+For high $TIR$, as the traffic is the main sound source, the similarity of the initial dictionary and $\mathbf{W}$ is higher which allows retaining more elements as traffic components and then decreases the error (< 1 dB). The kept elements are then more suited to the scenes than a fixed dictionary. The error for these $TIR$ is then due to the thresholding which put aside some elements that are nevertheless related to the traffic component. In Figure \ref{fig:lp_alert}, the 1 second equivalent sound pressure level of an alert scene is displayed for $TIR \in \lbrace -12,12 \rbrace$ dB for the 500 Hz low pass filter and for TI-NMF. In the case of $TIR=-12$ dB, the traffic elements selected in TI-NMF do not activated when the alarm class sounds contrary to the low-pass filter.
+
+
+With a low threshold, it is possible to decrease the error. For $TIR$ = 12 dB, the average error on all the sub-classes is 0.22 ($\pm$ 0.08) dB with $t$ = 0.30. In opposite for $TIR$ = -12 dB, it is better to choose a high threshold $t$ = 0.55, the error decrease then to 4.46 ($\pm$ 1.66) dB. In order to generalize this method where no prior knowledge on the urban environment, the chosen threshold $t$ is then fixed to $t$ = 0.42 as it is the one that best balanced these opposite cases.
 
 \section{Conclusion}
 
@@ -489,8 +492,8 @@ The authors would like to acknowledge partial funding from the ANR under project
 
 % BibTeX users please use one of
 %\bibliographystyle{spbasic}      % basic style, author-year citations
-%\bibliographystyle{spmpsci}      % mathematics and physical sciences
-\bibliographystyle{spphys}       % APS-like style for physics
+\bibliographystyle{spmpsci}      % mathematics and physical sciences
+%\bibliographystyle{spphys}       % APS-like style for physics
 \bibliography{bibliographie_jasm}   % name your BibTeX data base
 
 \end{document}

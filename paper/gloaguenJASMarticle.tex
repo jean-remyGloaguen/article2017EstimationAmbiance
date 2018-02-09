@@ -375,13 +375,6 @@ An example that illustrates the process can be found on Figure \ref{fig:spec_ele
 
 The obtained dictionary is expressed with third octave bands and each basis vector of $\mathbf{W}$ is normalized such as $\vert \vert \mathbf{W_k} \vert \vert = 1$ with $\vert \vert \bullet \vert\vert$ the $\ell$-1 norm. Table \ref{tab:experimental_factorsNMF} summarizes the experimental factors ($K$ and $w_t$) for the dictionary building and their related modalities. This last step allows us to reduce the dimensionality while preserving a rich description of the spectral content. Experimental validation consistently showed that considering octave bands do not impact the performance of the estimator studied in this paper.
 
-\subsubsection{Experimental factors of NMF}
-
-Sup-NMF and Sem-NMF updates are computed for 400 iterations, which is sufficient to reach convergence. TI-NMF is performed on a lower number of iterations (60) to prevent $\mathbf{W}$ to not deviate too much from the initial dictionary.
-The spectrogram $\mathbf{V}$, as the dictionary $\mathbf{W}$, is expressed with third octave bands ($F$ = 29). This coarser method allows the reduction of the matrix size and decreases the computation time. But,  must of all, by expressing the frequency axis on a log frequency axis,  the low frequencies, where the traffic energy is focused, are described more finely than the high frequencies. For TI-NMF, the threshold $t$ is set between 0.30 and 0.70 with a step of 0.01. Tables  \ref{tab:experimental_factorsFilter} and \ref{tab:experimental_factorsNMF} summarize the experimental factors and their related modalities.
-
-Considering the experimental settings derived from the different modalities of each experimental factor described in Table \ref{tab:experimental_factorsFilter}  between the 5 levels of $TIR$, the 6 sub-classes and the 6 cut-off frequencies $f_c$, 180 settings are performed (6 $\times$ 5 $\times$ 6). For Sup-NMF and Sem-NMF, according to Table \ref{tab:experimental_factorsNMF},  1200 associations of factors are made where the 4 levels of $K$ are associated with $w_t \in$ $\lbrace$0.5 1$\rbrace$ second whereas only 2 levels of $K$ (25 and 50) are associated with $w_t = all$, see part \ref{part:dictionary_learning} (6 $\times$ 5 $\times$ 2 $\times$ (2 $\times$ 4 + 1 $\times$ 2) $\times$ 2). For TI-NMF, beacause of the high number of threshold $t$ tested, 24600 combinations are computed (6 $\times$ 5 $\times$ (2 $\times$ 4 + 1 $\times$ 2) $\times$ 41). In all, 25980 settings are performed.
-
 \begin{table*}[t]
 \centering
 \caption{Best results for all the scenes according to the experimental factors $\beta$ and \textit{method} (in bold letter, the lowest error).}
@@ -417,6 +410,14 @@ $\mathbf{\beta}$ &  &  & 2 & 2 & 1 \\ \hline
 \label{tab:results_TIR}
 \end{table*}
 
+
+\subsubsection{Experimental factors of NMF}
+
+Sup-NMF and Sem-NMF updates are computed for 400 iterations, which is sufficient to reach convergence. TI-NMF is performed on a lower number of iterations (60) to prevent $\mathbf{W}$ to not deviate too much from the initial dictionary.
+The spectrogram $\mathbf{V}$, as the dictionary $\mathbf{W}$, is expressed with third octave bands ($F$ = 29). This coarser method allows the reduction of the matrix size and decreases the computation time. But,  must of all, by expressing the frequency axis on a log frequency axis,  the low frequencies, where the traffic energy is focused, are described more finely than the high frequencies. For TI-NMF, the threshold $t$ is set between 0.30 and 0.70 with a step of 0.01. Tables  \ref{tab:experimental_factorsFilter} and \ref{tab:experimental_factorsNMF} summarize the experimental factors and their related modalities.
+
+Considering the experimental settings derived from the different modalities of each experimental factor described in Table \ref{tab:experimental_factorsFilter}  between the 5 levels of $TIR$, the 6 sub-classes and the 6 cut-off frequencies $f_c$, 180 settings are performed (6 $\times$ 5 $\times$ 6). For Sup-NMF and Sem-NMF, according to Table \ref{tab:experimental_factorsNMF},  1200 associations of factors are made where the 4 levels of $K$ are associated with $w_t \in$ $\lbrace$0.5 1$\rbrace$ second whereas only 2 levels of $K$ (25 and 50) are associated with $w_t = all$, see part \ref{part:dictionary_learning} (6 $\times$ 5 $\times$ 2 $\times$ (2 $\times$ 4 + 1 $\times$ 2) $\times$ 2). For TI-NMF, beacause of the high number of threshold $t$ tested, 24600 combinations are computed (6 $\times$ 5 $\times$ (2 $\times$ 4 + 1 $\times$ 2) $\times$ 41). In all, 25980 settings are performed.
+
 For each setting, the estimator (frequency low-pass filter or NMF) is performed on the $M$ scenes of a sub-class. For one sound scene, the average traffic sound level, $\tilde{L}_{p,traffic}$, of the entire scene is calculated,
 
 \begin{equation}
@@ -435,16 +436,12 @@ The performance of the road traffic sound level estimator is assessed through th
 MAE = \frac{\sum_{m = 1}^M\vert L^m_{p,traffic}-\tilde{L}^m_{p,traffic} \vert}{M}.
 \end{equation}
 
-
-\section{Results}\label{part:results}
-
-Table \ref{tab:results} summarizes, according to the 2 main factors (\textit{method}, $\beta$), the lowest $MAE$ error averaged on all sub-classes and all $TIR$ (750 sound mixtures in all). For the low-pass frequency filters and each NMF approaches, the best parameter combinations are detailed according to the $TIR$ in Table \ref{tab:results_TIR},  and are expanded to the sub-classes in Figures \ref{fig:TIR_class_filter}, \ref{fig:TIR_class_sup}, \ref{fig:TIR_class_semi} and \ref{fig:TIR_class_TI}. \\
-
-First, the errors produced by the filter are detailed. $f_c = 20 $ kHz is equivalent to consider all the sound mixtures without distinction between traffic and others sound sources. Consequently, in low $TIR$ (-12 dB and -6 dB), where traffic component is scarce, the error is more important than in high $TIR$ (6 dB and 12 dB) where the traffic component is predominant. $f_c = 500$ Hz is the cut-off frequency with the lowest mean error obtained (2.89 ($\pm$ 2.84) dB). It is then considered as the baseline to compare the performances of NMF.
-
-In low $TIR$, for \textit{alert} and \textit{animals}, which are sub-classes composed of higher frequencies, this filter is efficient as it removes these frequency components. For the other sub-classes where low frequency contents are present (storm for \textit{climate}, voices in \textit{humans}, planes, tramway and train in \textit{transport} and ventilation noise in \textit{mechanics}), the filter considers all the energy located in the pass-band and then does not dissociate the traffic element from the other sound sources. The errors are then nearly all superior to 4 dB and are overestimated. In opposite, in high $TIR$, the error is due to the energy removed from the traffic which has the consequence to underestimate the sound levels. The 500 Hz filter finds a balance between what is put aside in low $TIR$ and what it is remained in high $TIR$. \\
-
-Compared with the filter errors, the choice of some NMF approaches makes it possible to decrease the error of the road traffic sound level estimation. The supervised approach is the only method that has an average error superior to the 500 Hz filter baseline. Sem-NMF and TI-NMF have better results. The lowest average error is obtained for TI-NMF, 2.19 ($\pm$ 2.18) dB, for $\beta$ = 1 and threshold $t$ = 0.42 with the dictionary factors $K$ = 200 and $w_t$ = 500 ms. On the other hand, the semi-supervised approach has a higher error but a lower standard deviation (2.32 ($\pm$ 1.26) dB).
+\begin{figure}[t]
+  \centering
+	\includegraphics[width=0.45\textwidth]{figures/NMF_Lp_alert.pdf}
+ \caption{1 second equivalent sound pressure level of an \textit{alert} sub-class scene for 500 Hz low-pass filter and TI-NMF ($\beta$ = 1, $K$ = 200, $w_t$ = 0.5 s, $t$ = 0.42) at $TIR = -12$ dB (in full line) and $TIR$ = 12 dB (in dashed line).}
+	\label{fig:lp_alert}
+\end{figure}
 
 \begin{figure*}[t]
   \centering
@@ -458,19 +455,19 @@ Compared with the filter errors, the choice of some NMF approaches makes it poss
   \caption{$MAE$ (dB) error for each sub-class and each $TIR$ according to the the best results with the filter (\ref{fig:TIR_class_filter}) and each method (Sup-NMF (\ref{fig:TIR_class_sup}), Sem-NMF (\ref{fig:TIR_class_semi}) and TI-NMF (\ref{fig:TIR_class_TI})).}
 	\label{fig:TIR_bar}
 \end{figure*}
+\section{Results}\label{part:results}
 
+Table \ref{tab:results} summarizes, according to the 2 main factors (\textit{method}, $\beta$), the lowest $MAE$ error averaged on all sub-classes and all $TIR$ (750 sound mixtures in all). For the low-pass frequency filters and each NMF approaches, the best parameter combinations are detailed according to the $TIR$ in Table \ref{tab:results_TIR},  and are expanded to the sub-classes in Figures \ref{fig:TIR_class_filter}, \ref{fig:TIR_class_sup}, \ref{fig:TIR_class_semi} and \ref{fig:TIR_class_TI}. \\
 
+First, the errors produced by the filter are detailed. $f_c = 20 $ kHz is equivalent to consider all the sound mixtures without distinction between traffic and others sound sources. Consequently, in low $TIR$ (-12 dB and -6 dB), where traffic component is scarce, the error is more important than in high $TIR$ (6 dB and 12 dB) where the traffic component is predominant. $f_c = 500$ Hz is the cut-off frequency with the lowest mean error obtained (2.89 ($\pm$ 2.84) dB). It is then considered as the baseline to compare the performances of NMF.
+
+In low $TIR$, for \textit{alert} and \textit{animals}, which are sub-classes composed of higher frequencies, this filter is efficient as it removes these frequency components. For the other sub-classes where low frequency contents are present (storm for \textit{climate}, voices in \textit{humans}, planes, tramway and train in \textit{transport} and ventilation noise in \textit{mechanics}), the filter considers all the energy located in the pass-band and then does not dissociate the traffic element from the other sound sources. The errors are then nearly all superior to 4 dB and are overestimated. In opposite, in high $TIR$, the error is due to the energy removed from the traffic which has the consequence to underestimate the sound levels. The 500 Hz filter finds a balance between what is put aside in low $TIR$ and what it is remained in high $TIR$. \\
+
+Compared with the filter errors, the choice of some NMF approaches makes it possible to decrease the error of the road traffic sound level estimation. The supervised approach is the only method that has an average error superior to the 500 Hz filter baseline. Sem-NMF and TI-NMF have better results. The lowest average error is obtained for TI-NMF, 2.19 ($\pm$ 2.18) dB, for $\beta$ = 1 and threshold $t$ = 0.42 with the dictionary factors $K$ = 200 and $w_t$ = 500 ms. On the other hand, the semi-supervised approach has a higher error but a lower standard deviation (2.32 ($\pm$ 1.26) dB).
 
 According to Table \ref{tab:results_TIR} and Figures \ref{fig:TIR_bar}, the behavior between the 3 versions of NMF differs. In the case of Sup-NMF, it fails to improve the filtering performances despite good results in high $TIR$. The errors are too important for low $TIR$ and this for all the sub-classes. This method reveals to be too rigid as $\mathbf{W}$ is composed of fixed traffic spectra. In the case of low $TIR$, in the aim to reduce the objective function, see eq. \ref{eq:min-D-WH}, traffic elements are used whatever the sound event in the  sound scene. Thus forcing the dictionary to be only traffic spectra is not a sufficient way to estimate correctly the traffic sound level, $\tilde{L}_{p,traffic}$.
 
 Consequently, with the addition of a mobile part in the dictionary, $\mathbf{W_r}$, the semi-supervised approach  allows a better consideration of the interfering class in low $TIR$. It brings a significant decrease of the errors for low $TIR$. However, the relatively high degrees of freedom of Sem-NMF are restrictive for high $TIR$ as the errors exceed 2 dB for all sub-classes and increase with $TIR \in \lbrace$6, 12$\rbrace$ dB. In order to reduce $D(\mathbf{V} \vert \vert \mathbf{WH}$), without constraint, Sem-NMF is free to include traffic components in $\mathbf{W_r}$. Consequently, this behavior decreases the quality of the reconstruction of the traffic component. 
-
-\begin{figure}[t]
-  \centering
-	\includegraphics[width=0.45\textwidth]{figures/NMF_Lp_alert.pdf}
- \caption{1 second equivalent sound pressure level of an \textit{alert} sub-class scene for 500 Hz low-pass filter and TI-NMF ($\beta$ = 1, $K$ = 200, $w_t$ = 0.5 s, $t$ = 0.42) at $TIR = -12$ dB (in full line) and $TIR$ = 12 dB (in dashed line).}
-	\label{fig:lp_alert}
-\end{figure}
 
 Finally, TI-NMF with a threshold $t = 0.42$ and $\beta$ = 1, offers the lowest average error (Table \ref{tab:results}). Unlike Sup-NMF, where $\mathbf{W}$ is fixed, and Sem-NMF, where only $\mathbf{W_r}$ is updated, TI-NMF updates $\mathbf{W}$ entirely to adjust prior knowledge to the scene under evaluation so as to adapt to the different sound environments, see Figure \ref{fig:lp_alert}. The closest elements of the traffic component defined in $\mathbf{W_0}$ are then extracted to deduce the traffic signal. 
 For low $TIR$, as the traffic sound class is not predominant, the final dictionary strongly differs from the $\mathbf{W_0}$. With the thresholding, only a reduced number of basis vectors are considered as traffic components. In comparison to supervised results, this approach reduces significantly the error for the \textit{human} and \textit{transport} sub-classes.  However, for \textit{climate} and \textit{mechanics}, the errors remain important as these interfering classes have similar spectral profiles when compared to traffic ones.

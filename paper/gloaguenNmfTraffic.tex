@@ -19,6 +19,10 @@
 \usepackage{tipa}	% pour avoir l'accent concave
 \usepackage{lmodern}	% pour les guillemets
 \usepackage{nth}	% pour ^th près des chiffres
+\usepackage{nomencl}
+\makenomenclature
+
+\renewcommand{\nomname}{List of Abbreviations}
 
 %%%%%% EQUATION %%%%%%
 \usepackage{amssymb}
@@ -47,7 +51,7 @@
 \newcolumntype{R}[1]{>{\raggedleft\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
 
 %%%%%%%%%%%%%%%%%%%%%
-\usepackage{url}	% gérer les adresses www.
+\usepackage[hyphens]{url}	% gérer les adresses www.
 
 \usepackage[colorlinks,citecolor=black,urlcolor=black,linkcolor=black]{hyperref}  % ps2pdf car je compile via Latex -> dvips -> ps2pdf
 
@@ -66,17 +70,19 @@
 		Jean-Fran\c cois Petiot.}
 
 \institute{J.-R. Gloaguen \at
-              Ifsttar Centre de Nantes\\
-              UMRAE\\
-              All\'ee des Ponts et Chauss\'ees\\
-              44344 Bouguenais\\
-              \email{jean-remy.gloaguen@ifsttar.fr}           %  \\
-           \and
-           M. Lagrange \at
+              Ifsttar Centre de Nantes UMRAE\\
+              All\'ee des Ponts et Chauss\'ees 44344 Bouguenais\\
+              \email{jean-remy.gloaguen@ifsttar.fr}
+\and
+			M. Lagrange \at
               LS2N
-              1 rue de la Noe\\
-              44321 Nantes\\
+              1 rue de la Noe 44321 Nantes\\
               \email{mathieu.lagrange@cnrs.fr}
+\and
+			A.Can \at
+              \email{arnaud.can@ifsttar.fr}           \and
+			J.-F. Petiot \at
+              \email{jean-francois.petiot@ls2n.fr}
 }
 
 \date{Received: date / Accepted: date}
@@ -263,7 +269,7 @@ This database allows the creation of a wide diversity of realistic urban sound s
 TIR = L_{p,traffic}-L_{p,interfering}
 \end{equation}
 
-with the \textit{Traffic Interference Ratio} $TIR \in$ $\lbrace$12, -6, 0, 6, 12$\rbrace$ dB. When $TIR < 0$ dB, the traffic component is less present than the interfering class. In the opposite, for $TIR > 0$ dB, the traffic class is louder than the interfering class. The total number of scenes designed is 750 (6 sub-corpus $\times$ 25 scenes $\times$  5 $TIR$ values). The corpora are available for download at: \url{https://zenodo.org/record/1145855#.Wl2oPnkiGos}
+with the \textit{Traffic Interference Ratio} $TIR \in$ $\lbrace$12, -6, 0, 6, 12$\rbrace$ dB. When $TIR < 0$ dB, the traffic component is less present than the interfering class. In the opposite, for $TIR > 0$ dB, the traffic class is louder than the interfering class. The total number of scenes designed is 750 (6 sub-corpus $\times$ 25 scenes $\times$  5 $TIR$ values).
 
 \subsection{Experiment}
 
@@ -487,18 +493,68 @@ With a low threshold, it is possible to decrease the error. For $TIR$ = 12 dB, t
 In this work the non negative metric factorization framework  was used to estimate the road traffic sound level in urban sound mixtures. It is a well suited approach to these sound environments because it easily takes into account the overlap between the multiple sound sources present in the cities and it is adapted to monophonic sensor networks. Different versions of NMF have been studied as a supervised and semi-supervised approach. On a large corpus of sounds, the supervised approach proves to be too restrictive to be adapted to different sound environments whereas the semi-supervised approach has, on the contrary, too many degrees of freedom on the mobile dictionary $\mathbf{W_r}$, decreasing its performance especially when the traffic is predominant. The proposed approach, named threshold initialized NMF achieves the lowest average error. With this method, the $\mathbf{W}$ is initialized with road traffic spectra, updated and the dictionary elements that are similar to the road traffic spectra are then extracted by hard thresholding.
 A major advantage of the proposed approach is that it is not designed for a specific source. Even though the experiments described in this paper focused on traffic sounds, changing the dictionary to contain bird sounds would lead to an estimator of the presence of birds. Extending the apporach to other sources is thus of intetrest for future research. Also, performance improvement could be achieved by the addition of constraints such as sparsness \cite{hoyer2004non} and smoothness \cite{virtanen_monaural_2007} of the low rank matrices.
 
-The experimental protocol and the evaluated estimators have been implemented with the Matlab software. For reproducible purposes, the code is available online\footnote{\url{https://github.com/jean-remyGloaguen/article2017EstimationAmbiance}}. The evaluation database composed of multiple samples of urban sounds is also made available for the research community with interest in detection, separation and recognition tasks of urban sound sources.
+The experimental protocol and the evaluated estimators have been implemented with the Matlab software. For reproducible purposes, the code is available online. The evaluation database composed of multiple samples of urban sounds is also made available for the research community with interest in detection, separation and recognition tasks of urban sound sources.
 
 %\vspace{6pt}
 
-\begin{acknowledgements}
-The authors would like to acknowledge partial funding from the ANR under project reference ANR-16-CE22-0012.
-\end{acknowledgements}
+\section*{Declarations}
+
+\nomenclature{NMF}{Non-negative Matrix Factorization}
+\nomenclature{Sup-NMF}{Supervised Non-negative Matrix Factorization}
+\nomenclature{Sem-NMF}{Semi-Supervised Non-negative Matrix Factorization}
+\nomenclature{TI-NMF}{Thresholded Initialized Non-negative Matrix Factorization}
+\nomenclature{$TIR$}{Traffic Interfering Ratio}
+\nomenclature{$\mathbf{V}$}{Magnitude spectrogram of the audio sample}
+\nomenclature{$\mathbf{\tilde{V}}$}{Approximated spectrogram by the estimator}
+\nomenclature{$\mathbf{\tilde{V}}_{traffic}$}{Approximated spectrogram of the traffic by the estimator}
+\nomenclature{$\mathbf{W}$}{Dictionary matrix}
+\nomenclature{$\mathbf{H}$}{Activation matrix}
+\nomenclature{$\mathbf{W_s}$}{Fixed dictionary matrix for Sem-NMF}
+\nomenclature{$\mathbf{W_r}$}{Mobile dictionary matrix for Sem-NMF}
+\nomenclature{$\mathbf{H_s}$}{Activation matrix for $\mathbf{W_s}$}
+\nomenclature{$\mathbf{H_r}$}{Activation matrix for $\mathbf{W_r}$}
+\nomenclature{$\mathbf{W_0}$}{Initial dictionary matrix for TI-NMF}
+\nomenclature{$\mathbf{W'}$}{Updated dictionary for TI-NMF}
+\nomenclature{$MAE$}{Mean Absolute Error (dB)}
+\nomenclature{$\mathbf{f_c}$}{Cut-off frequency (Hz)}
+\nomenclature{$\mathbf{K}$}{Number of elements in $\mathbf{W}$}
+\nomenclature{$\mathbf{w_t}$}{Rectangular window (second)}
+\nomenclature{$\mathbf{t}$}{threshold value}
+\nomenclature{$\beta$}{Divergence class}
+\printnomenclature 
+
+\section*{Availability of data and materials}
+The dataset supporting the conclusions of this article is available in the \textit{urban$\_$traffic$\_$nmf$\_$dataset.zip}  repository, \url{https://zenodo.org/record/1145855#.Wl2oPnkiGos}. 
+The software supporting the conclusions of this article is available in 
+
+\begin{itemize}
+\item Project name: article2017EstimationAmbiance
+\item Project home page: \url{https://github.com/jean-remyGloaguen/article2017EstimationAmbiance}
+\item Archived version: \url{https://doi.org/10.5281/zenodo.1145855}
+\item Programming language: Matlab
+\item Other requirements: Matlab 2016b or higher
+\item License: GNU GPL
+\item Any restrictions to use by non-academics: license needed 
+\end{itemize}
+
+
+\section*{Competing interests}
+The authors declare that they have no competing interests.
+
+\section*{Funding}
+This study is co-funded by Ifsttar and Pays de la Loire region with a partial funding from the ANR under project reference ANR-16-CE22-0012.
+
+\section*{Authors' contributions}
+JG carried out the numerical experience and drafted the manuscript. ML, AC and JP participated in the design of the study and helped to draft the manuscript. 
+All authors read and approved the final manuscript. 
+
+% \section*{Acknowledgements}
 
 % BibTeX users please use one of
 %\bibliographystyle{spbasic}      % basic style, author-year citations
 \bibliographystyle{spmpsci}      % mathematics and physical sciences
 %\bibliographystyle{spphys}       % APS-like style for physics
 \bibliography{bibliographie_jasm}   % name your BibTeX data base
+
 
 \end{document}

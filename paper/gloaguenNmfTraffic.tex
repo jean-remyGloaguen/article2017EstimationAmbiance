@@ -38,6 +38,7 @@
 \usepackage{graphicx}	% insérer des graphiques
 \usepackage{subfig}	% utiliser subfigure
 \usepackage{float}	% utiliser H dans les figures
+\usepackage[nolists]{endfloat}
 
 %%%%%% TABLEAUX %%%%%%
 \usepackage{array,multirow,makecell}
@@ -372,7 +373,7 @@ The second estimator is the proposed scheme, based on the three NMF approaches p
 
 In order to prevent potential overfitting issues, the dictionary is built from a separate sound database dedicated specifically to this task. It is composed of 53 audio files of passing cars. These recordings have been made on the Ifsttar's runway too, with the same experimental conditions that the recordings of the \textit{SimScene} database but with two different cars (Dacia Sandero and Renault Clio). First, for each audio file, its spectrogram is calculated with fixed parameters ($w$, 50 $\%$ overlap, $nfft$). Then time/frequency windows of $F \times w_t $ dimensions are applied without overlapping on the spectrogram in order to consider several spectra for each audio file where $w_t \in \lbrace$0.5, 1$\rbrace$ second. In each window, the root mean square value is calculated on each frequency bin to reduce the windowed spectrogram in one spectrum a of $F \times 1$ dimension. With this size of window, it is possible to obtain the characteristic pitches of the different audio samples. One obtains for each value of $w_t$, from the 53 audio samples of passing cars respectively 2218 and 1109 elements. Since the number of elements given by this processing is high, in order to reduce the computational time and avoid redundant information, a $K$-means clustering algorithm is applied to reduce the number of spectra to $K \in \lbrace$25, 50, 100, 200$\rbrace$. The $K$ centroids are then the elements considered in the dictionary. A special case is added where the root mean square of \textit{all} the spectrogram is applied ($w_t$ = $all$) to build a dictionary with the spectral envelope of each audio sample. In this case, 53 spectra are obtained. The $K$-means clustering algorithm is then reduced to $K \in \lbrace$25, 50$\rbrace$.
 
-\begin{figure}[htp]
+\begin{figure}[t]
   \centering
   \subfloat[]{\label{fig:specW}\includegraphics[height=4cm]{figures/dictionary3.pdf}}
   \hspace{5pt}
@@ -449,7 +450,7 @@ MAE = \frac{\sum_{m = 1}^M\vert L^m_{p,traffic}-\tilde{L}^m_{p,traffic} \vert}{M
 
 \begin{figure}[t]
   \centering
-	\includegraphics[width=\linewidth]{figures/NMF_Lp_alert.pdf}
+	\includegraphics[width=\textwidth]{figures/NMF_Lp_alert.pdf}
  \caption{1 second equivalent sound pressure level of an \textit{alert} sub-class scene for 500 Hz low-pass filter and TI-NMF ($\beta$ = 1, $K$ = 200, $w_t$ = 0.5 s, $t$ = 0.42) at $TIR = -12$ dB (in full line) and $TIR$ = 12 dB (in dashed line).}
 	\label{fig:lp_alert}
 \end{figure}
@@ -466,6 +467,7 @@ MAE = \frac{\sum_{m = 1}^M\vert L^m_{p,traffic}-\tilde{L}^m_{p,traffic} \vert}{M
   \caption{$MAE$ (dB) error for each sub-class and each $TIR$ according to the the best results with the filter (\ref{fig:TIR_class_filter}) and each method (Sup-NMF (\ref{fig:TIR_class_sup}), Sem-NMF (\ref{fig:TIR_class_semi}) and TI-NMF (\ref{fig:TIR_class_TI})).}
 	\label{fig:TIR_bar}
 \end{figure*}
+
 \section{Results}\label{part:results}
 
 Table \ref{tab:results} summarizes, according to the 2 main factors (\textit{method}, $\beta$), the lowest $MAE$ error averaged on all sub-classes and all $TIR$ (750 sound mixtures in all). For the low-pass frequency filters and each NMF approaches, the best parameter combinations are detailed according to the $TIR$ in Table \ref{tab:results_TIR},  and are expanded to the sub-classes in Figures \ref{fig:TIR_class_filter}, \ref{fig:TIR_class_sup}, \ref{fig:TIR_class_semi} and \ref{fig:TIR_class_TI}. \\

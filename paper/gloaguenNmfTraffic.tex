@@ -53,6 +53,7 @@
 
 %%%%%%%%%%%%%%%%%%%%%
 \usepackage[hyphens]{url}	% gérer les adresses www.
+\usepackage[hyphenbreaks]{breakurl}
 
 \usepackage[colorlinks,citecolor=black,urlcolor=black,linkcolor=black]{hyperref}  % ps2pdf car je compile via Latex -> dvips -> ps2pdf
 
@@ -509,8 +510,10 @@ The experimental protocol and the evaluated estimators have been implemented wit
 \nomenclature{$\mathbf{V}$}{Magnitude spectrogram of the audio sample}
 \nomenclature{$\mathbf{\tilde{V}}$}{Approximated spectrogram by the estimator}
 \nomenclature{$\mathbf{\tilde{V}}_{traffic}$}{Approximated spectrogram of the traffic by the estimator}
+\nomenclature{$\mathbf{V}_{f_c}$}{Approximated spectrogram resulting from the low-pass filter}
 \nomenclature{$\mathbf{W}$}{Dictionary matrix}
 \nomenclature{$\mathbf{H}$}{Activation matrix}
+\nomenclature{$\mathbf{W_f}$}{$k$ element of the dictionary matrix}
 \nomenclature{$\mathbf{W_s}$}{Fixed dictionary matrix for Sem-NMF}
 \nomenclature{$\mathbf{W_r}$}{Mobile dictionary matrix for Sem-NMF}
 \nomenclature{$\mathbf{H_s}$}{Activation matrix related $\mathbf{W_s}$ in Sem-NMF}
@@ -526,12 +529,12 @@ The experimental protocol and the evaluated estimators have been implemented wit
 \printnomenclature 
 
 \section*{Availability of data and materials}
-The dataset supporting the conclusions of this article is available in the \textit{urban$\_$traffic$\_$nmf$\_$dataset.zip}  repository, \url{https://zenodo.org/record/1145855#.Wl2oPnkiGos}. 
+The dataset supporting the conclusions of this article is available in the \textit{urban$\_$traffic$\_$nmf$\_$dataset.zip}  repository,  \sloppy \burl{https://zenodo.org/record/1145855#.Wl2oPnkiGos}. 
 The software supporting the conclusions of this article is available in 
 
 \begin{itemize}
 \item Project name: article2017EstimationAmbiance
-\item Project home page: \url{https://github.com/jean-remyGloaguen/article2017EstimationAmbiance}
+\item \sloppy Project home page: \burl{https://github.com/jean-remyGloaguen/article2017EstimationAmbiance}
 \item Archived version: \url{https://doi.org/10.5281/zenodo.1145855}
 \item Programming language: Matlab
 \item Other requirements: Matlab 2016b or higher

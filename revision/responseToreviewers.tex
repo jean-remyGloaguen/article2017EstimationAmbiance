@@ -20,34 +20,42 @@ And the work previously published by the same authors in DCASE 2016:
 \item Jean-Rémy Gloaguen, Arnaud Can, Mathieu Lagrange, Jean-François Petiot. "Estimating traffic noise levels using acoustic monitoring: a preliminary study." Detection and Classification of Acoustic Scenes and Events (DCASE 2016), September 2016, Budapest, Hungary.
 \end{itemize}
 Both papers should be included as related work explicitly explaining the main differences with respect to the presented work.}
-$\rightarrow$ 
+
+$\rightarrow$ Done.
 
 \item \emph{The authors argue that "Prior to data assimiliation, the issue of the correct estimation of the traffic sound level from acoustic measurements is still unsolved [31]", being [31] a reference from 2011. The authors should rephrase the sentence or change the reference in order to update the current state of the art in this field. For instance, only reference [35] is included describing deep learning approaches, which is one of the relevant approaches in this research field during the last years.}
+
 $\rightarrow$ 
 
 \item \emph{As a final suggestion, I would recommend the authors completing the review of the state of the art by including a specific section about the Related Work in the manuscript. Although this section is not mandatory according to the guide for authors in this journal, it would help to clarify the contribution of the authors with respect to previous similar approaches.}
-$\rightarrow$ 
+
+$\rightarrow$ Done.
 
 \end{enumerate}
 
 \subsection{Metric and results}
 
 \begin{enumerate}
-\item \emph{Since Lp values are in dB, you cannot average them linearly as considered in your proposed metric MAE of eq. (15). The values must be averaged in their linear representation before converting them into dBs again. This error may have a dramatic impact on your results.}
-$\rightarrow$ 
+\item \emph{Since Lp values are in dB, you cannot average them linearly as considered in your proposed metric MAE of eq. (15). The values must be averaged in their linear representation before converting them into dBs again. This error may have a dramatic impact on your results.}\\
+$\rightarrow$ First we consider logarithmic value in dB as it allows the calibration of the traffic sound level and being less sensitive to high values as it occurs in linear field. 
+The logarithmic mean is then more sensitive to high error than linear mean. As the errors are rteated in a statistical point of view we consider that this operation is suited.
+Furthermore the use of arithmetic operators on logarithmic values is a common pratice in the urban acoustics field (see Aumond et al. "" and Morillas et al. "").
 
 \item \emph{First, the results obtained when considering fc=20Khz ("fc = 20 kHz is equivalent to consider all the sound mixtures without distinction between traffic and others sound sources") show the lowest MAE for TIR={6,12}, where "the traffic is the main sound source". 
---> Have the authors realized the consequences of these results? From these them someone can conclude that it is better to process nothing when interfering sources are 6 and 12 dB lower with respect to the traffic noise level!!}
-$\rightarrow$ 
+--> Have the authors realized the consequences of these results? From these them someone can conclude that it is better to process nothing when interfering sources are 6 and 12 dB lower with respect to the traffic noise level!!}\\
+$\rightarrow$ This result may be disappointing but it has to be remind that the TIR value is unknown when measurements is made on streets. Then it is impossible to determine when these cases occur. If the LP filter is the best at fc = 20 kHz for TIR = {6,12} dB, it is not efficient when the TIR is negative. We made the precision () : 
+'Even if the performances for the positive $TIR$ values are high, it has to be remind that in practice, the $TIR$ value is not know. In consequence, without a priori knowledge, this approach cannot be applied.' (section 5).
 
 \item \emph{Second, for the remaining studied scenarios, i.e., TIR={-12,-6,0}, the lowest averaged MAE values are obtained by the Sem-NMF, and not by the proposed TI-NMF.
 Therefore, from these results, it cannot be concluded that TI-NMF is the best approach in the considered experimental framework. Even more, if you remove from Table 4 the aforementioned values obtained with TIR={-12,-6}, Sem-NMF becomes the best approach with an averaged MAE of 2.12, whereas TI-NMF yield an averaged MAE of 3.14, following the same analysis scheme proposed by the authors.}
-$\rightarrow$ 
+$\rightarrow$ We made a precision at the end of section 2 : 'The aim is then to find a flavor of NMF that could propose the minimum error on the integral corpus as it is consider that no prior knowledge on the sound sources or on the traffic predominance are available as it is when measurements are made in city.'
 
 \item \emph{Finally, I would recommend the authors to consider including a statistical analysis to prove that differences between the different approaches are statistically significant or not.}
+
 $\rightarrow$ 
 
 \item \emph{Last but not least, please review the results of the low pass filter approach with fc=20kHz in Table 4 and 3, since the global averaged MAE in Table is 4.54, while in Table 3 is 4.69.}
+
 $\rightarrow$ Done. The value at TIR = 6 was a misprint, it has been corrected.
 
 
@@ -57,7 +65,9 @@ $\rightarrow$ Done. The value at TIR = 6 was a misprint, it has been corrected.
 
 \begin{enumerate}
 \item \emph{The baseline approach considered by the authors is a low-pass filter with different cut-off frequencies "fc={500, 1k, 2k, 5k, 10k, 20k} Hz.". First, this baseline may be understood as too simple for the problem at hand by the research community since, at least, supervised NMF has been already considered in the literature. Second, no comparison with [38] or other previous attempts to apply NMF to the problem at hand is provided. To this aim, it would be especially interesting the comparison with (Dikmen and Mesaros, 2013). Finally, after introducing the fc sweep in section 3.2, only fc={500, 20k}Hz are the subsequently considered with no further justification.}
-$\rightarrow$ 
+
+$\rightarrow$ The baseline of the low-pass filter, even if it seems too simple, is very effective in some cases. As in the environmental acoustics community, this method would have been easily seen as a tool, we decided to consider it. We did not summarize all the results for the low pass filter in order to be too focused on this method.
+As for the comparison with (Dikmen and Mesaros, 2013), even if they use the NMF framework, they develop a detection tool that is not adapted to this study. We believe that it was, first, wiser to use a low-pass filter and to monitor NMF as baselines than an advanced method.
 
 \item \emph{The authors have considered a database composed of artificially mixed sound sources. They argue this decision as follows: "The use of simulated sound scenes is mandatory for rigorous experimental validation as it offers a high level of control on the design of the scenes" --$>$ I would suggest removing the term "mandatory" from the argumentation. Maybe the sentence could be rewritten as: "The use of simulated sound scenes allows…" }
 
@@ -71,7 +81,7 @@ $\rightarrow$ Done. 'What is called traffic component is the sum of the road tra
 
 \item \emph{Furthermore, the authors provide a lot of information about the configurations of the different approaches. However, I would recommend including specific information about the total duration of the train and test databases (e.g., not only saying "750 sound mixtures"), besides explicitly explaining the test scheme considered to guarantee that train and test data is decoupled when evaluating the considered sub-classes.}
 
-$\rightarrow$ Done. 'each scene during 30 seconds, it leads to a full duration of 6 hours and 30 minutes.' (3.1)
+$\rightarrow$ Done. For the test database : 'each scene during 30 seconds, it leads to a full duration of 6 hours and 30 minutes.' (3.1), for the train database : 'It is composed of 53 audio files of isolated passing cars with a 18 minutes cumulative duration.' (3.2.1)
 
 
 \item \emph{Finally, it is worth mentioning that considering TIR={-6,-12,0,6,12} may yield to conclusions far from what can be found in real-life environments, as discussed in the literature (e.g. see [42]). Thus, I would recommend rephrasing the following sentence: "This database allows the creation of a wide diversity of realistic urban sound scenes from the road traffic point of view [16]" accordingly}
@@ -86,7 +96,7 @@ $\rightarrow$ Done. 'This database allows the creation of a wide diversity of ur
 \begin{enumerate}
 \item \emph{In the introduction, the authors explain that road traffic noise maps show Lden and LN considering the A-weighted equivalent sound pressure level, thus, expressing the noise levels in dBA. However, their work only focuses on the equivalent sound pressure level in dB, why? }
 
-$\rightarrow$ Done 'The $A$-weighted of the sound level is not considered here as it decreases the low frequencies levels where the road traffic components are mainly present.' (3.2.2)
+$\rightarrow$ Done 'The $A$-weightind of the sound levels is not considered here as it decreases the low frequencies levels where the road traffic components are mainly present.' (4.2.2)
 
 \item \emph{Sections 2.1, 2.2 and 2.3 describing NMF, Supervised and Semi-Supervised NMF could be removed after extending the related work. This way, the manuscript could emphasize the proposal TI-NMF with respect to similar works.}
 
@@ -94,15 +104,15 @@ $\rightarrow$ This work is addressed to the urban acoustic community. As NMF is 
 
 \item \emph{The authors state that "Sup-NMF and Sem-NMF updates are computed for 400 iterations, which is sufficient to reach convergence. TI-NMF is performed on a lower number of iterations (60) to prevent W to not deviate too much from the initial dictionary." --> Please, justify this qualitative argumentation.}
 
-$\rightarrow$ 
+$\rightarrow$ We used to number of iteration, that was not relevant to compare fairly the approaches. In consequence, we decided to fix at 100 the number of iterations. '100 iterations are performed for all NMF.'100 iterations are performed for all NMF.' (4.2.2)
 
 \item \emph{Different kind of space reduction and data representation are included to reduce the computational time, e.g. K-means and third octave bands. --> I would recommend the authors to include some kind of diagram to better explain their approach, and, if possible, to include some experiments to argue their argumentation, for instance, to explain why you have chosen third octave bands in front of other possible parameterization such as MFCC.}
 
-$\rightarrow$ About the choice of third-octave bands, we specify 'The spectrogram $\mathbf{V}$ and the dictionary $\mathbf{W}$ are expressed with third octave bands ($F$ = 29). This coarser method allows us to reduce the dimensionality and then decrease the computation time. Furthermore, by expressing the frequency axis on a log frequency axis, the low frequencies, where the traffic energy is focused, are described more finely than the high frequencies. Experimental validation consistently showed that considering third octave bands do not impact the performance of the estimator studied in this paper. But, most of all, it is a suited representation to this sound environment as this kind of representation is widely used in the urban acoustic field, compare to MFCC for instance.'
+$\rightarrow$ About the choice of third-octave bands, we specify 'The spectrogram $\mathbf{V}$ and the dictionary $\mathbf{W}$ are expressed with third octave bands ($F$ = 29). This coarser method allows us to reduce the dimensionality and then decrease the computation time. Furthermore, by expressing the frequency axis on a log frequency axis, the low frequencies, where the traffic energy is focused, are described more finely than the high frequencies. Experimental validation consistently showed that considering third octave bands do not impact the performance of the estimator studied in this paper. But, most of all, it is a suited representation to this sound environment as this kind of representation is widely used in the urban acoustic field, compare to MFCC for instance.'. Also, we add a block diagram which details the dictionary building steps and makes clearer these different elements.
 
 \item \emph{"The threshold t is set between 0.30 and 0.70 with a step of 0.01" -- > Please include some argumentation or reference to justify the range selected for the experiments beyond the ones reported in Table 3. Please, include more information of these experiments.}
 
-$\rightarrow$ 
+$\rightarrow$ Done. 'For TI-NMF, a preliminary study reveals that the threshold $t$ value range can be reduce between  0.30 and 0.70. An increment step of 0.01 has been considered as being sufficiently precise.'
 
 \item \emph{All the analyses are done considering t=0.42 as the best threshold for the TI-NMF approach. Nevertheless, the authors stand that "With a low threshold, it is possible to decrease the error", and present some examples subsequently to demonstrate that for high TIR=12 dB, the averaged MAE can be decreased by reducing the threshold value from t=0.42 to t=0.30. Correspondingly, the threshold should be moved from t=0.42 to t=0.55 to improve the results for low TIR=-12 dB. To what extent these values show better performance or they are due to overfitting?}
 
@@ -131,9 +141,9 @@ $\rightarrow$ Done.
 
 \item \emph{Fig 8. The y-axis range does not show the minimum values of the alarm Lp,1s lower than 50dB. Please, include them to better understand the impact of the alarm on the Lp computation. Moreover, to better understand the example, I would recommend the authors to append the spectrogram of the example to the Lp.1s (dB) figure.}
 
-$\rightarrow$ 
+$\rightarrow$ The car horn sound level is null outside the range of the y-axis that's why we put aside the the low sound level to weep a wide range to see, at best, the curves. We made the precision on the legend.
 
-\item \emph{Fig 9. Caption: "according to the the best" --> remove one 'the}
+\item \emph{Fig 9. Caption: "according to the the best" --$>$ remove one 'the}
 
 $\rightarrow$ Done.
 
@@ -141,7 +151,7 @@ $\rightarrow$ Done.
 \subsection{English writing}
 
 \begin{enumerate}
-\item \emph{Section 1: "Prior to data assimiliation," --> assimilation}
+\item \emph{Section 1: "Prior to data assimiliation," --$>$ assimilation}
 
 $\rightarrow$ Done.
 
@@ -158,7 +168,7 @@ $\rightarrow$ Done, 'First, the errors calculated from the traffic sound estimat
 
 $\rightarrow$ Done, 'the traffic elements selected in TI-NMF are not activated'
 
-\item \emph{Section 5. "In this work the non negative metric factorization framework was used" --> I would recommend using present perfect instead of past tense in the conclusions.}
+\item \emph{Section 5. "In this work the non negative matrix factorization framework was used" --> I would recommend using present perfect instead of past tense in the conclusions.}
 
 $\rightarrow$ Done, 'In this work the non negative metric factorization framework is used \dots'
 
@@ -178,23 +188,25 @@ $\rightarrow$ Done, 'The task is to the best of our knowledge never been conside
 
 \item \emph{"Their spectra can be obtained and be a basis of W." The procedure is not clear and is only described in the experimental part. This sentence seems to mean that the matrix W is comprised of exemplars (e.g. see $http://www.cs.tut.fi/sgn/arg/music/tuomasv/chime-enhancement/pP4_gemmeke.pdf$), which is not the case. In supervised NMF framework, the basis matrix W is usually pre-trained applying NMF to the training data. It would be interesting to compare such approach to the proposed K-means procedure.}
 
-$\rightarrow$ 
+$\rightarrow$ The K-mean and NMF procedure can be considered as similar approaches as a clustering tool (see Ding et al., 2005), so it has not been tested.
+A bloc diagram has been added to better explain dictionary learning.
+
 
 \item \emph{One type of vehicles (passenger car) is addressed in the simulations. Authors may want to comment on why other types like motorcycles, which generate a palpable amount of noise and may have different acoustic characteristics, are not considered.}
 
-$\rightarrow$ 
+$\rightarrow$ Done, 'It has to be noticed that the method would gain to be tested on larger dataset with, for instance, motorcycles, noisy traffic elements which are absent here.' (Conclusion)
 
 \item \emph{Is also interesting to know if the distribution of microphones in a realistic noise level measurement scenario is taken into account during the simulations.}
 
-$\rightarrow$ 
+$\rightarrow$ The purpose of this study is to propose a tool that could be integrated into a sensor network. The distribution of the microphone is not a question dealt with in this work.
 
-\item \emph{"The obtained dictionary is expressed with third octave bands", "The spectrogram V, as the dictionary W, is expressed with third octave bands (F = 29)." - please, clarify. Perhaps is better to join the description of this representation with the section 3.2.1.}
+\item \emph{"The obtained dictionary is expressed with third octave bands", "The spectrogram V, as the dictionary W, is expressed with third octave bands (F = 29)." - please, clarify. Perhaps is better to join the description of this representation with the section 4.2.1.}
 
-$\rightarrow$ Done, 'The spectrogram $\mathbf{V}$ and the dictionary $\mathbf{W}$ are expressed with third octave bands ($F$ = 29). This coarser method allows us to reduce the dimensionality and then decrease the computation time. Furthermore, by expressing the frequency axis on a log frequency axis, the low frequencies, where the traffic energy is focused, are described more finely than the high frequencies. Experimental validation consistently showed that considering third octave bands do not impact the performance of the estimator studied in this paper. But, most of all, it is a suited representation to this sound environment as this kind of representation is widely used in the urban acoustic field, compare to MFCC for instance.'(3.2.2)
+$\rightarrow$ Done, 'The spectrogram $\mathbf{V}$ and the dictionary $\mathbf{W}$ are expressed with third octave bands ($F$ = 29). This coarser method allows us to reduce the dimensionality and then decrease the computation time. Furthermore, by expressing the frequency axis on a log frequency axis, the low frequencies, where the traffic energy is focused, are described more finely than the high frequencies. Experimental validation consistently showed that considering third octave bands do not impact the performance of the estimator studied in this paper. But, most of all, it is a suited representation to this sound environment as this kind of representation is widely used in the urban acoustic field, compare to MFCC for instance.'(4.2.2)
 
 \item \emph{As for the sound level calculation itself, it is not clear if A-weighting is applied.}
 
-$\rightarrow$ Done, 'The $A$-weighted of the sound level is not considered here as it decreases the low frequencies levels where the road traffic components are mainly present.' (3.2.2)
+$\rightarrow$ Done, 'The $A$-weighting of the sound levels is not considered here as it decreases the low frequencies levels where the road traffic components are mainly present.' (4.2.2)
 
 \item \emph{Also, the terminology is a bit confusing. E.g. Figure 8 "1 second equivalent sound pressure level" - to my understanding, the equivalent sound pressure level Leq is an average over the specified period of time and, therefore, would correspond to a single value. If the goal is to eventually simulate the output of a sound pressure level meter, some calibration would be needed.}
 
@@ -202,11 +214,11 @@ $\rightarrow$ The title has been corrected ('Evolution of 1 second equivalent so
 
 \item \emph{It is not clear what is the number of iterations that was used for each NMF version. It might make sense to use the reduced number of iterations for Sup-NMF as it is done for TI-NMF.}
 
-$\rightarrow$ 
+$\rightarrow$ We used to number of iteration, that was not relevant to compare fairly the approaches. In consequence, we decided to fix at 100 the number of iterations. '100 iterations are performed for all NMF.'100 iterations are performed for all NMF.' (4.2.2)
 
-\item \emph{Is it true that the dictionaries W in Sup-NMF, Ws in Sem-NMF and W0 in TI-NMF are the same? Authors may want to state it clearly in Section 3.2.1.}
+\item \emph{Is it true that the dictionaries W in Sup-NMF, Ws in Sem-NMF and W0 in TI-NMF are the same? Authors may want to state it clearly in Section 4.2.1.}
 
-$\rightarrow$ Done, 'The 10 versions of the built dictionary are then used for NMF. In Sup-NMF, these 10 versions simply correspond to $\mathbf{W}$, in Sem-NMF, they correspond to the fixed part $\mathbf{W_s}$ and for TI-NMF, they are the initial dictionaries $\mathbf{W_0}$ that are next updated.' (3.2.1)
+$\rightarrow$ Done, 'The 10 versions of the built dictionary are then used for NMF. In Sup-NMF, these 10 versions simply correspond to $\mathbf{W}$, in Sem-NMF, they correspond to the fixed part $\mathbf{W_s}$ and for TI-NMF, they are the initial dictionaries $\mathbf{W_0}$ that are next updated.' (4.2.1)
 
 \end{enumerate}
 \subsection{Minor points}

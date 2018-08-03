@@ -37,13 +37,13 @@ $\rightarrow$ Done.
 
 \begin{enumerate}
 \item \emph{Since Lp values are in dB, you cannot average them linearly as considered in your proposed metric MAE of eq. (15). The values must be averaged in their linear representation before converting them into dBs again. This error may have a dramatic impact on your results.}\\
-$\rightarrow$ First we consider logarithmic value in dB as it allows the calibration of the traffic sound level and being less sensitive to high values as it occurs in linear field. 
-The logarithmic mean is then more sensitive to high error than linear mean. As the errors are rteated in a statistical point of view we consider that this operation is suited.
-Furthermore the use of arithmetic operators on logarithmic values is a common pratice in the urban acoustics field (see Aumond et al. "" and Morillas et al. "").
+$\rightarrow$ First we have considered logarithmic value in dB as it allows the calibration of the traffic sound level and being less sensitive to high values as it occurs in linear field. 
+The logarithmic mean is then more sensitive to high error than linear mean. As the errors are treated in a statistical point of view we consider that this operation is suited.
+Furthermore the use of arithmetic operators on logarithmic values is a common practice in the urban acoustics field (see Aumond et al. "Kriging-based spatial interpolation from measurements for sound level mapping in urban areas." and Morillas et al. "Uncertainty evaluation of continuous noise sampling."). We add a comment on the paper 'The use of a this metric is justify by the aim of this study that is to find the best association of experimental factors that obtain the lower mean error on all the corpus. The $MAE$ error with logarithmic values allows an equal weight between each difference in sound level and makes it possible to be less sensitive to high energies. It is also a common practice in the environmental acoustics field' (section 4.2.3)
 
 \item \emph{First, the results obtained when considering fc=20Khz ("fc = 20 kHz is equivalent to consider all the sound mixtures without distinction between traffic and others sound sources") show the lowest MAE for TIR={6,12}, where "the traffic is the main sound source". 
 --> Have the authors realized the consequences of these results? From these them someone can conclude that it is better to process nothing when interfering sources are 6 and 12 dB lower with respect to the traffic noise level!!}\\
-$\rightarrow$ This result may be disappointing but it has to be remind that the TIR value is unknown when measurements is made on streets. Then it is impossible to determine when these cases occur. If the LP filter is the best at fc = 20 kHz for TIR = {6,12} dB, it is not efficient when the TIR is negative. We made the precision () : 
+$\rightarrow$ This result may be disappointing but it has to be remind that the TIR value is unknown when measurements is made on streets. Then it is impossible to determine when these cases occur. If the LP filter is the best at fc = 20 kHz for TIR = {6,12} dB, it is not efficient when the TIR is negative. We made the precision : 
 'Even if the performances for the positive $TIR$ values are high, it has to be remind that in practice, the $TIR$ value is not know. In consequence, without a priori knowledge, this approach cannot be applied.' (section 5).
 
 \item \emph{Second, for the remaining studied scenarios, i.e., TIR={-12,-6,0}, the lowest averaged MAE values are obtained by the Sem-NMF, and not by the proposed TI-NMF.
@@ -66,7 +66,7 @@ $\rightarrow$ Done. The value at TIR = 6 was a misprint, it has been corrected.
 \begin{enumerate}
 \item \emph{The baseline approach considered by the authors is a low-pass filter with different cut-off frequencies "fc={500, 1k, 2k, 5k, 10k, 20k} Hz.". First, this baseline may be understood as too simple for the problem at hand by the research community since, at least, supervised NMF has been already considered in the literature. Second, no comparison with [38] or other previous attempts to apply NMF to the problem at hand is provided. To this aim, it would be especially interesting the comparison with (Dikmen and Mesaros, 2013). Finally, after introducing the fc sweep in section 3.2, only fc={500, 20k}Hz are the subsequently considered with no further justification.}
 
-$\rightarrow$ The baseline of the low-pass filter, even if it seems too simple, is very effective in some cases. As in the environmental acoustics community, this method would have been easily seen as a tool, we decided to consider it. We did not summarize all the results for the low pass filter in order to be too focused on this method.
+$\rightarrow$ The baseline of the low-pass filter, even if it seems too simple, is very effective in some cases. As in the environmental acoustics community, this method would have been easily seen as a tool, we decided to consider it. We summarized all the results for the low pass filter according to the cut-off frequency in order to be more precise (Figure 9).
 As for the comparison with (Dikmen and Mesaros, 2013), even if they use the NMF framework, they develop a detection tool that is not adapted to this study. We believe that it was, first, wiser to use a low-pass filter and to monitor NMF as baselines than an advanced method.
 
 \item \emph{The authors have considered a database composed of artificially mixed sound sources. They argue this decision as follows: "The use of simulated sound scenes is mandatory for rigorous experimental validation as it offers a high level of control on the design of the scenes" --$>$ I would suggest removing the term "mandatory" from the argumentation. Maybe the sentence could be rewritten as: "The use of simulated sound scenes allows…" }
@@ -116,7 +116,7 @@ $\rightarrow$ Done. 'For TI-NMF, a preliminary study reveals that the threshold 
 
 \item \emph{All the analyses are done considering t=0.42 as the best threshold for the TI-NMF approach. Nevertheless, the authors stand that "With a low threshold, it is possible to decrease the error", and present some examples subsequently to demonstrate that for high TIR=12 dB, the averaged MAE can be decreased by reducing the threshold value from t=0.42 to t=0.30. Correspondingly, the threshold should be moved from t=0.42 to t=0.55 to improve the results for low TIR=-12 dB. To what extent these values show better performance or they are due to overfitting?}
 
-$\rightarrow$ 
+$\rightarrow$ This improvement is due to a decreasing of the number of element considered as traffic component. As in TIR = -12 dB, the interfering class is more present, it takes more basis in W'. By increasing the threshold, we put aside more elements from W' that can belong to this sound class. It is equivalent, in detection task, to reduce the number of false-positive. It has been precised in the end of the section 5.
 
 \item \emph{I would recommend including all the tuning and sweep analysis within an Appendix at the end of the manuscript.}
 

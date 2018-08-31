@@ -196,46 +196,46 @@ $\rightarrow$ The sentence is now rephrased to: 'In this work the non negative m
 \begin{enumerate}
 \item \emph{As the previous work has been already published, the authors should provide references to it and clearly state the new contributions of the presented paper. I believe there may be a substantial overlap with the authors' paper Gloaguena, J. R., Cana, A., Lagrangeb, M., $\&$ Petiotb, J. F. Estimation du niveau sonore du trafic routier au sein de mixtures sonores urbaines par la Factorisation en Matrices Non négatives, 2018.}
 
-$\rightarrow$ The paper 'Gloaguen, J. R., Can, A., Lagrange, M., $\&$ Petiot, J. F. Estimation du niveau sonore du trafic routier au sein de mixtures sonores urbaines par la Factorisation en Matrices Non négatives, 2018' is a congress article without review submitted after the submission of the present paper. It deals with a similar approach but on a different sound corpus.  Furthermore, as it is written in french we prefer cited other references such as 'Gloaguen, J.R., Can, A., Lagrange, M., Petiot, J.F.: Estimating traffic noise levels using acoustic monitoring: A preliminary study'.
+$\rightarrow$ The paper 'Gloaguen, J. R., Can, A., Lagrange, M., $\&$ Petiot, J. F. Estimation du niveau sonore du trafic routier au sein de mixtures sonores urbaines par la Factorisation en Matrices Non négatives, 2018' is a congress article without review submitted after the submission of the present paper. It deals with a similar approach but on a different sound corpus.  Furthermore, as it is written in french we chose to alternatively cite 'Gloaguen, J.R., Can, A., Lagrange, M., Petiot, J.F.: Estimating traffic noise levels using acoustic monitoring: A preliminary study' which is written in English and deals with the same corpus.
 
 
 \item \emph{Some sentences in the abstract are not well formulated and are hard to follow. E.g. "The task being to the best of our knowledge never been considered in the literature, we propose an experimental protocol to validate the studied approaches that complies with standard reproducible research recommendations." should be splitted, "being" should be omitted; "raise this kind of innovative approaches" - the verb "raise" is confusing; "based on non-negative factorization framework" - the word "matrix" is missing. The authors may want to be more specific about the obtained results.}
 
-$\rightarrow$ Done, 'The task is to the best of our knowledge never been considered in the literature. We propose\dots' (l 19-20), 'Among the technical issues that bring this kind of innovative approaches,\dots ' (l 12-13), 'several techniques based on non-negative matrix  factorization framework' (l 17-18).
+$\rightarrow$ The bastract have been rewritten to take those requests into account: 'The task is to the best of our knowledge never been considered in the literature. We propose\dots' (l 19-20), 'Among the technical issues that bring this kind of innovative approaches,\dots ' (l 12-13), 'several techniques based on non-negative matrix  factorization framework' (l 17-18).
 
 \item \emph{"Their spectra can be obtained and be a basis of W." The procedure is not clear and is only described in the experimental part. This sentence seems to mean that the matrix W is comprised of exemplars (e.g. see $http://www.cs.tut.fi/sgn/arg/music/tuomasv/chime-enhancement/pP4_gemmeke.pdf$), which is not the case. In supervised NMF framework, the basis matrix W is usually pre-trained applying NMF to the training data. It would be interesting to compare such approach to the proposed K-means procedure.}
 
-$\rightarrow$ The K-mean and NMF procedure can be considered as similar approaches as a clustering tool (see Ding et al., 2005), so it has not been tested.
-A bloc diagram has been added to better explain dictionary learning (Figure 7).
+$\rightarrow$ The K-means and NMF procedures can be considered as similar approaches for a clustering tool (see Ding et al., 2005), so it has not been tested.
+A block diagram has been added to better explain the dictionary learning process shown in Figure 7 of the updated manuscript.
 
 
 \item \emph{One type of vehicles (passenger car) is addressed in the simulations. Authors may want to comment on why other types like motorcycles, which generate a palpable amount of noise and may have different acoustic characteristics, are not considered.}
 
-$\rightarrow$ Done, 'It has to be noticed that the method would gain to be tested on larger dataset with, for instance, motorcycles, noisy traffic elements which are absent here.' (Conclusion, l 729-733)
+$\rightarrow$ This important limitation of the presented study is now clearly stated as future work of interest in the conclusion : 'It has to be noticed that the method would gain to be tested on larger dataset with, for instance, motorcycles, and other noisy traffic elements which are not considered in this study.'
 
 \item \emph{Is also interesting to know if the distribution of microphones in a realistic noise level measurement scenario is taken into account during the simulations.}
 
-$\rightarrow$ The purpose of this study is to propose a tool that could be integrated into a sensor network. The distribution of the microphone is not a question dealt with in this work.
+$\rightarrow$ The purpose of this study is to propose a tool that could be integrated into a sensor network. The distribution of the microphone is not a question dealt with in this work. The proposed method is designed to perform with a monophonic input. That being said, considering the inputs of multiple sensors may help to achieve more consistent estimates. This is left for potential future work.
 
 \item \emph{"The obtained dictionary is expressed with third octave bands", "The spectrogram V, as the dictionary W, is expressed with third octave bands (F = 29)." - please, clarify. Perhaps is better to join the description of this representation with the section 4.2.1.}
 
-$\rightarrow$ Done, 'The spectrogram $\mathbf{V}$ and the dictionary $\mathbf{W}$ are expressed with third octave bands ($F$ = 29). This coarser method allows us to reduce the dimensionality and then decrease the computation time. Furthermore, by expressing the frequency axis on a log frequency axis, the low frequencies, where the traffic energy is focused, are described more finely than the high frequencies. Experimental validation consistently showed that considering third octave bands do not impact the performance of the estimator studied in this paper. But, most of all, it is a suited representation to this sound environment as this kind of representation is widely used in the urban acoustic field, compare to MFCC for instance.'(section 4.2.2, l 484-497)
+$\rightarrow$ The manuscript have been updated, see Section 4.2.2: 'The spectrogram $\mathbf{V}$ and the dictionary $\mathbf{W}$ are expressed with third octave bands ($F$ = 29). This coarser method allows us to reduce the dimensionality and then decrease the computation time. Furthermore, by expressing the frequency axis on a log frequency axis, the low frequencies, where the traffic energy is focused, are described more finely than the high frequencies. Experimental validation consistently showed that considering third octave bands do not impact the performance of the estimator studied in this paper. But, most of all, it is a suited representation to this sound environment as this kind of representation is widely used in the urban acoustic field, compared to MFCCs for instance.'
 
 \item \emph{As for the sound level calculation itself, it is not clear if A-weighting is applied.}
 
-$\rightarrow$ Done, 'The $A$-weighting of the sound levels is not considered here as it decreases the low frequencies levels where the road traffic components are mainly present.' (section 4.2.2, l 522-525)
+$\rightarrow$ As now explicitly stated in Section 4.2.2, 'The $A$-weighting of the sound levels is not considered here as it decreases the low frequencies levels where the road traffic components are mainly present.'
 
 \item \emph{Also, the terminology is a bit confusing. E.g. Figure 8 "1 second equivalent sound pressure level" - to my understanding, the equivalent sound pressure level Leq is an average over the specified period of time and, therefore, would correspond to a single value. If the goal is to eventually simulate the output of a sound pressure level meter, some calibration would be needed.}
 
-$\rightarrow$ The title has been corrected ('Evolution of 1 second equivalent sound pressure levels'). The calibration step is here not necessary as all the sound level are relatives.
+$\rightarrow$ The caption of the Figure 8 has been corrected ('Evolution of 1 second equivalent sound pressure levels'). The calibration step is here not necessary as all the sound level are relatives.
 
 \item \emph{It is not clear what is the number of iterations that was used for each NMF version. It might make sense to use the reduced number of iterations for Sup-NMF as it is done for TI-NMF.}
 
-$\rightarrow$ We used to number of iteration, that was not relevant to compare fairly the approaches. In consequence, we decided to fix at 100 the number of iterations. '100 iterations are performed for all NMF. (section 4.2.2, l 484)
+$\rightarrow$ As stated in Section 4.2.2, 100 iterations are performed for every NMF types.
 
 \item \emph{Is it true that the dictionaries W in Sup-NMF, Ws in Sem-NMF and W0 in TI-NMF are the same? Authors may want to state it clearly in Section 4.2.1.}
 
-$\rightarrow$ Yes it is, it has been clarified, 'The 10 versions of the built dictionary are then used for NMF. In Sup-NMF, these 10 versions correspond to $\mathbf{W}$, in Sem-NMF, they correspond to the fixed part $\mathbf{W_s}$ and for TI-NMF, they are the initial dictionaries $\mathbf{W_0}$ that are next updated.' (section 4.2.1, l 477-481)
+$\rightarrow$ Yes it is, it has been clarified in the updated version of the manuscript in Section 4.2.1: 'The 10 versions of the built dictionary are then used for NMF. In Sup-NMF, these 10 versions correspond to $\mathbf{W}$, in Sem-NMF, they correspond to the fixed part $\mathbf{W_s}$ and for TI-NMF, they are the initial dictionaries $\mathbf{W_0}$ that are next updated.'
 
 \end{enumerate}
 \subsection{Minor points}
@@ -243,47 +243,52 @@ $\rightarrow$ Yes it is, it has been clarified, 'The 10 versions of the built di
 \begin{enumerate}
 \item \emph{"at fixed stations spread all over the cities [31] [30], which would make available of the long-term evolution of the traffic noise" - better "which would make the long-term evolution of the traffic noise available".}
 
-$\rightarrow$ Done.
+$\rightarrow$ The sentence is rewritten.
 
 \item \emph{"A two-step process is generally followed :" - there is an extra space before the word "followed" }
 
-$\rightarrow$ Done.
+$\rightarrow$ Fixed.
 
 \item \emph{"In the opposite" - better "On the contrary"}
 
-$\rightarrow$ Done.
+$\rightarrow$ Fixed.
 
 \item \emph{"to some extend" should be "to some extent}
 
-$\rightarrow$ Done.
+$\rightarrow$ Fixed.
 
 \item \emph{"by forcing its initiation" should be "by forcing its initialization"}
 
-$\rightarrow$ Done.
+$\rightarrow$ Fixed.
 
 \item \emph{•Figure 2 caption, please change to "of an urban", "correspond to".}
 
-$\rightarrow$ Done.
+$\rightarrow$ Fixed.
 
 \item \emph{Figure 3 caption, the sentence "The 82-nd first elements are considered as traffic component." is confusing.}
 
-$\rightarrow$ Done.
+$\rightarrow$ The sentence is rewritten.
 
 \item \emph{Figure 5 caption, "experience" should be "experiment"?}
 
-$\rightarrow$ Done.
+$\rightarrow$ Indeed, fixed.
 
 \item \emph{"The choice of the dimensions is often made so that F × K + K × N $<$ F × N ." - could you please provide a reference for this statement? }
 
-$\rightarrow$ Done.
+$\rightarrow$ The reference \cite{fevotte_nonnegative_2009} is added.
 
 \item \emph{"must of all" should probably be "most of all" }
 
-$\rightarrow$ Done.
+$\rightarrow$ Indeed, fixed.
 
 \item \emph{"The errors are too important for low TIR and this for all the sub-classes." - the sentence is not clear.}
 
-$\rightarrow$ Done, 'Errors are too important for all sub-classes at low $TIR$.'
+$\rightarrow$ The sentence is rewritten to: 'Errors are too important for all sub-classes at low $TIR$.'
 
 \end{enumerate}
+
+\bibliographystyle{spmpsci}      % mathematics and physical sciences
+%\bibliographystyle{spphys}       % APS-like style for physics
+\bibliography{bibliographie_jasm}
+
 \end{document}

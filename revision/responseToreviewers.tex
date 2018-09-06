@@ -47,14 +47,14 @@ The use of arithmetic operators on logarithmic values is also a common practice 
 
 \item \emph{First, the results obtained when considering fc=20Khz ("fc = 20 kHz is equivalent to consider all the sound mixtures without distinction between traffic and others sound sources") show the lowest MAE for TIR={6,12}, where "the traffic is the main sound source".
 --> Have the authors realized the consequences of these results? From these them someone can conclude that it is better to process nothing when interfering sources are 6 and 12 dB lower with respect to the traffic noise level!!}\\
-$\rightarrow$ This results suggests that the user does not apply any treatment in cases where road traffic predominates. This is not inconsistent with the purpose of this paper for two reasons: (i) a user would not call for signal processing in situations where road traffic is largely dominating such as in the vicinity of a ring road, (ii) the TIR value is an unknown parameter: the high errors of the filter fr negative TIR values discredit its use. We made the precision :
-'Even if the performances for the positive $TIR$ values are high, it has to be reminded that in practice, the $TIR$ value is not known. In consequence, without any prior knowledge, this approach cannot be applied.' (please see Section 5).
+$\rightarrow$ This results suggests that the user does not apply any treatment in cases where road traffic predominates. This is not inconsistent with the purpose of this paper for two reasons: (i) a user would not call for signal processing in situations where road traffic is largely dominating such as in the vicinity of a ring road, (ii) the TIR value is an unknown parameter: the high errors of the filter for negative TIR values discredit its use. We made the precision :
+'Even if the performances for the positive $TIR$ values are high, it has to be reminded that in practice, the $TIR$ value is not known. In consequence, without any prior knowledge, this approach cannot be applied.' (please see the beginning of Section 5).
 
 
 
 \item \emph{Second, for the remaining studied scenarios, i.e., TIR={-12,-6,0}, the lowest averaged MAE values are obtained by the Sem-NMF, and not by the proposed TI-NMF.
 Therefore, from these results, it cannot be concluded that TI-NMF is the best approach in the considered experimental framework. Even more, if you remove from Table 4 the aforementioned values obtained with TIR={-12,-6}, Sem-NMF becomes the best approach with an averaged MAE of 2.12, whereas TI-NMF yield an averaged MAE of 3.14, following the same analysis scheme proposed by the authors.}
-$\rightarrow$ We made a precision at the end of section 2 : 'The aim is to find the type of NMF that gives the minimal error on the reconstruction of the traffic noise signal on the whole corpus.'
+$\rightarrow$ We made a precision at the end of section 2 : 'The aim is to find the type of NMF that gives the minimal error on the reconstruction of the traffic noise signal on the whole corpus to be applied to all the different possible urban noise environments.'
 
 In addition, in the urban sound environments, TIRs are mainly focused in the range $\left[-6, 12\right]$ dB \cite{gloaguen_creation_2017}. 
 $TIR$ = -12 dB is a rarer case in urban environment but it is still added in order to test the limits of the methods.  Its weight on the reconstruction error must still be moderate. This has been precised at the end of section 4.1.
@@ -62,7 +62,7 @@ $TIR$ = -12 dB is a rarer case in urban environment but it is still added in ord
 
 \item \emph{Finally, I would recommend the authors to consider including a statistical analysis to prove that differences between the different approaches are statistically significant or not.}
 
-$\rightarrow$ As suggested by the reviewers, we added a Student t-test in section 5 with the results exposed in Table 3. This test revealed that the distribution of the traffic sound level estimations between the best methods exposed in Table 2 are statistically different.
+$\rightarrow$ As suggested by the reviewers, we added a Student t-test in Section 5 with the results exposed in Table 3. This test revealed that the distribution of the traffic sound level estimations between the best methods exposed in Table 2 are statistically different.
 
 \item \emph{Last but not least, please review the results of the low pass filter approach with fc=20kHz in Table 4 and 3, since the global averaged MAE in Table is 4.54, while in Table 3 is 4.69.}
 
@@ -86,7 +86,7 @@ $\rightarrow$ The sentence have been rephrased to : 'The use of simulated sound 
 
 \item \emph{Moreover, for this reviewer it is not clear what is considered traffic and not traffic by the authors in order to compute $Lp_traffic$. The "environmental sound scene corpus" is composed of "constant traffic noise" and "passing cars", which have been recorded in a real life environment by the authors. The car pass-bys are then used in several figures. For instance, Fig.4 shows an example created with the SimScene software showing background road traffic noise together with three overlapped sound sources: car horn, car passage and whistling birds. Does this mean that the car pass-by is considered as an interfering noise source? I would recommend the authors to clarify this point since a car pass-by is also traffic noise.}
 
-$\rightarrow$ This important point is now clarified in the manuscript: 'What is called traffic component is the sum of the road traffic background noise and the sound events generated by the passing car class. On the contrary, the \textit{interfering} sound class includes all the other sound sources not related to it. Car horn sound class belongs to this component as it is considered as a warning signal' (section 4.1).
+$\rightarrow$ This important point is now clarified in the manuscript: 'What is called traffic component is the sum of the road traffic background noise and the sound events generated by the passing car class. On the contrary, the \textit{interfering} sound class includes all the other sound sources not related to it. Car horn sound class belongs to this component as it is considered as a warning signal' (Section 4.1).
 
 
 \item \emph{Furthermore, the authors provide a lot of information about the configurations of the different approaches. However, I would recommend including specific information about the total duration of the train and test databases (e.g., not only saying "750 sound mixtures"), besides explicitly explaining the test scheme considered to guarantee that train and test data is decoupled when evaluating the considered sub-classes.}

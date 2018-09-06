@@ -196,12 +196,11 @@ $\rightarrow$ The paper 'Gloaguen, J. R., Can, A., Lagrange, M., $\&$ Petiot, J.
 
 \item \emph{Some sentences in the abstract are not well formulated and are hard to follow. E.g. "The task being to the best of our knowledge never been considered in the literature, we propose an experimental protocol to validate the studied approaches that complies with standard reproducible research recommendations." should be splitted, "being" should be omitted; "raise this kind of innovative approaches" - the verb "raise" is confusing; "based on non-negative factorization framework" - the word "matrix" is missing. The authors may want to be more specific about the obtained results.}
 
-$\rightarrow$ The abstract have been rewritten to take those requests into account: 'The task is to the best of our knowledge never been considered in the literature. We propose\dots', 'Among the technical issues that bring this kind of innovative approaches,\dots ', 'several techniques based on non-negative matrix  factorization framework'.
+$\rightarrow$ The abstract have been rewritten to take those requests into account: 'The task is to the best of our knowledge never been considered in the literature. We propose\dots', 'Among the technical issues that bring this kind of innovative approaches,\dots ', 'several techniques based on  the non-negative matrix  factorization framework'.
 
 \item \emph{"Their spectra can be obtained and be a basis of W." The procedure is not clear and is only described in the experimental part. This sentence seems to mean that the matrix W is comprised of exemplars (e.g. see $http://www.cs.tut.fi/sgn/arg/music/tuomasv/chime-enhancement/pP4_gemmeke.pdf$), which is not the case. In supervised NMF framework, the basis matrix W is usually pre-trained applying NMF to the training data. It would be interesting to compare such approach to the proposed K-means procedure.}
 
-$\rightarrow$ The K-means and NMF procedures can be considered as similar approaches for a clustering tool (see Ding et al., 2005), so it has not been tested.
-A block diagram has been added to better explain the dictionary learning process shown in Figure 7 of the updated manuscript.
+$\rightarrow$ A block diagram has been added to better explain the dictionary learning process shown in Figure 7 of the updated manuscript. Performing an NMF training have also been tested with no significant improvements.
 
 
 \item \emph{One type of vehicles (passenger car) is addressed in the simulations. Authors may want to comment on why other types like motorcycles, which generate a palpable amount of noise and may have different acoustic characteristics, are not considered.}
@@ -222,11 +221,11 @@ $\rightarrow$ As now explicitly stated in Section 4.2.2, 'The $A$-weighting of t
 
 \item \emph{Also, the terminology is a bit confusing. E.g. Figure 8 "1 second equivalent sound pressure level" - to my understanding, the equivalent sound pressure level Leq is an average over the specified period of time and, therefore, would correspond to a single value. If the goal is to eventually simulate the output of a sound pressure level meter, some calibration would be needed.}
 
-$\rightarrow$ The caption of the Figure 8 has been corrected ('Evolution of 1 second equivalent sound pressure levels'). The calibration step is here not necessary as all the sound level are relatives.
+$\rightarrow$ The caption of the Figure 8 has been corrected to: 'Evolution of 1 second equivalent sound pressure levels'. The calibration step is here not necessary as all the sound levels are  set relatively.
 
 \item \emph{It is not clear what is the number of iterations that was used for each NMF version. It might make sense to use the reduced number of iterations for Sup-NMF as it is done for TI-NMF.}
 
-$\rightarrow$ This remark has been considered: to better compare the different NMF version, 100 iterations are performed for every NMF types. Please see section 4.2.2 ('100 iterations are performed for every NMF types.')
+$\rightarrow$ To better compare the different NMF version, 100 iterations are now performed for every NMF types, see section 4.2.2.
 
 \item \emph{Is it true that the dictionaries W in Sup-NMF, Ws in Sem-NMF and W0 in TI-NMF are the same? Authors may want to state it clearly in Section 4.2.1.}
 

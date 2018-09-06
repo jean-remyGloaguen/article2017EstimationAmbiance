@@ -32,7 +32,7 @@ $\rightarrow$  The sentence has been rephrased with updated references (please s
 
 \item \emph{As a final suggestion, I would recommend the authors completing the review of the state of the art by including a specific section about the Related Work in the manuscript. Although this section is not mandatory according to the guide for authors in this journal, it would help to clarify the contribution of the authors with respect to previous similar approaches.}
 
-$\rightarrow$ This section has been added as Section 2 of the updated manuscript where related work is presented and highlight the differences between those works and the approach taken in our contribution.
+$\rightarrow$ This section has been added as Section 2 of the updated manuscript where related work is now presented and where we highlight the differences between those works and the approach taken in our contribution.
 
 \end{enumerate}
 
@@ -40,10 +40,13 @@ $\rightarrow$ This section has been added as Section 2 of the updated manuscript
 
 \begin{enumerate}
 \item \emph{Since Lp values are in dB, you cannot average them linearly as considered in your proposed metric MAE of eq. (15). The values must be averaged in their linear representation before converting them into dBs again. This error may have a dramatic impact on your results.}\\
-$\rightarrow$ We have considered logarithmic value in dB as it allows the calibration of the traffic sound level and being less sensitive to high values.
-The logarithmic mean is then more sensitive to high error than linear mean. As the errors are treated in a statistical point of view we consider that this operation is well suited.
+$\rightarrow$
 
-The use of arithmetic operators on logarithmic values is also a common practice in the urban acoustics field when dealing with errors (see Aumond et al. "Kriging-based spatial interpolation from measurements for sound level mapping in urban areas." \cite{aumond2018kriging}  and Morillas et al. "Uncertainty evaluation of continuous noise sampling." \cite{morillas2014uncertainty}). In order to  better position our design choice in terms of metrics a paragraph is now added in Section 4.2.3. %, line 539-546) : 'The use of a this metric is justified by the aim of this study that is to find the best association of experimental factors that obtain the lower mean error on all the corpus. The $MAE$ error with logarithmic values allows an equal weight between each difference in sound level and makes it possible to be less sensitive to high energies. It is also a common practice in the environmental acoustics field'.
+The use of arithmetic operators on logarithmic values is a common practice in the urban acoustics field when dealing with errors (see Aumond et al. "Kriging-based spatial interpolation from measurements for sound level mapping in urban areas." \cite{aumond2018kriging}  and Morillas et al. "Uncertainty evaluation of continuous noise sampling." \cite{morillas2014uncertainty}). In order to  better position our design choice in terms of metrics a paragraph is now added in Section 4.2.3.
+
+We acknowledge that strictly physically speaking this might be considered as a mistake but we chose to follow this approach as we believe it allows the calibration of the traffic sound level and  to monitor metrics that are less sensitive to high values. As the errors are treated in a statistical point of view we consider that this operation is well suited.
+
+ %, line 539-546) : 'The use of a this metric is justified by the aim of this study that is to find the best association of experimental factors that obtain the lower mean error on all the corpus. The $MAE$ error with logarithmic values allows an equal weight between each difference in sound level and makes it possible to be less sensitive to high energies. It is also a common practice in the environmental acoustics field'.
 
 \item \emph{First, the results obtained when considering fc=20Khz ("fc = 20 kHz is equivalent to consider all the sound mixtures without distinction between traffic and others sound sources") show the lowest MAE for TIR={6,12}, where "the traffic is the main sound source".
 --> Have the authors realized the consequences of these results? From these them someone can conclude that it is better to process nothing when interfering sources are 6 and 12 dB lower with respect to the traffic noise level!!}\\
@@ -56,8 +59,8 @@ $\rightarrow$ This results suggests that the user does not apply any treatment i
 Therefore, from these results, it cannot be concluded that TI-NMF is the best approach in the considered experimental framework. Even more, if you remove from Table 4 the aforementioned values obtained with TIR={-12,-6}, Sem-NMF becomes the best approach with an averaged MAE of 2.12, whereas TI-NMF yield an averaged MAE of 3.14, following the same analysis scheme proposed by the authors.}
 $\rightarrow$ We made a precision at the end of section 2 : 'The aim is to find the type of NMF that gives the minimal error on the reconstruction of the traffic noise signal on the whole corpus to be applied to all the different possible urban noise environments.'
 
-In addition, in the urban sound environments, TIRs are mainly focused in the range $\left[-6, 12\right]$ dB \cite{gloaguen_creation_2017}. 
-$TIR$ = -12 dB is a rarer case in urban environment but it is still added in order to test the limits of the methods.  Its weight on the reconstruction error must still be moderate. This has been precised at the end of section 4.1.
+Furthermore, as now explained at the end of section 4.1, in urban sound environments, TIRs are mainly focused in the range $\left[-6, 12\right]$ dB \cite{gloaguen_creation_2017}.
+$TIR$ = -12 dB is a rarer case in urban environment but it is still added in order to show the limits of the evaluated methods.  %Its weight on the reconstruction error must still be moderate. This has been precised at the end of section 4.1.
 
 
 \item \emph{Finally, I would recommend the authors to consider including a statistical analysis to prove that differences between the different approaches are statistically significant or not.}
@@ -76,7 +79,7 @@ $\rightarrow$ The value at TIR = 6 was a misprint, it has been corrected.
 \begin{enumerate}
 \item \emph{The baseline approach considered by the authors is a low-pass filter with different cut-off frequencies "fc={500, 1k, 2k, 5k, 10k, 20k} Hz.". First, this baseline may be understood as too simple for the problem at hand by the research community since, at least, supervised NMF has been already considered in the literature. Second, no comparison with [38] or other previous attempts to apply NMF to the problem at hand is provided. To this aim, it would be especially interesting the comparison with (Dikmen and Mesaros, 2013). Finally, after introducing the fc sweep in section 3.2, only fc={500, 20k}Hz are the subsequently considered with no further justification.}
 
-$\rightarrow$ The baseline of the low-pass filter, even if it seems too simple, is very effective in some cases. As in the environmental acoustics community, this method would have been easily seen as a tool, we decided to consider it. We summarized all the results for the low pass filter according to the cut-off frequency in order to be more precise (Figure 9).
+$\rightarrow$ The baseline of the low-pass filter, even if it seems too simple, is very effective in some cases. As in the environmental acoustics community, this method would have been easily seen as a tool, we decided to consider it. We summarized all the results for the low pass filter according to the cut-off frequency in order to be more complete (Figure 9).
 As for the comparison with (Dikmen and Mesaros, 2013), even if they use the NMF framework, they develop a detection tool that is not adapted to this study. We believe that it was wiser to use a low-pass filter as a low complexity baseline.
 
 \item \emph{The authors have considered a database composed of artificially mixed sound sources. They argue this decision as follows: "The use of simulated sound scenes is mandatory for rigorous experimental validation as it offers a high level of control on the design of the scenes" --$>$ I would suggest removing the term "mandatory" from the argumentation. Maybe the sentence could be rewritten as: "The use of simulated sound scenes allows…" }
@@ -95,12 +98,12 @@ $\rightarrow$ Those numbers are now added to the manuscript. For the test databa
 
 \item \emph{Finally, it is worth mentioning that considering TIR={-6,-12,0,6,12} may yield to conclusions far from what can be found in real-life environments, as discussed in the literature (e.g. see [42]). Thus, I would recommend rephrasing the following sentence: "This database allows the creation of a wide diversity of realistic urban sound scenes from the road traffic point of view [16]" accordingly}
 
-$\rightarrow$ the sentence is now rephrased in section 4.1 to: 'This database allows the creation of a wide diversity of urban sound scenes from the road traffic point of view' (section 4.1) \dots 
-In addition the precision provided at the end of this section on the range values of the TIR complete the reviewer's remark.
+$\rightarrow$ The sentence is now rephrased in section 4.1 to: 'This database allows the creation of a wide diversity of urban sound scenes from the road traffic point of view' \dots
+In addition, at the end of section 4.1 the motivation behind the choice of the range of TIR values  is now discussed in depth, highlighting the fact that, indeed, the range is definitely wider than what can be found in realistic settings. The results are also now discussed by considering this matter into account.
 
 \end{enumerate}
 
-\subsection{Minors comment}
+\subsection{Minors comments}
 
 \begin{enumerate}
 \item \emph{In the introduction, the authors explain that road traffic noise maps show Lden and LN considering the A-weighted equivalent sound pressure level, thus, expressing the noise levels in dBA. However, their work only focuses on the equivalent sound pressure level in dB, why? }
@@ -125,13 +128,11 @@ $\rightarrow$ This matter is now discussed in Section 4.2.2. 'For TI-NMF, a prel
 
 \item \emph{All the analyses are done considering t=0.42 as the best threshold for the TI-NMF approach. Nevertheless, the authors stand that "With a low threshold, it is possible to decrease the error", and present some examples subsequently to demonstrate that for high TIR=12 dB, the averaged MAE can be decreased by reducing the threshold value from t=0.42 to t=0.30. Correspondingly, the threshold should be moved from t=0.42 to t=0.55 to improve the results for low TIR=-12 dB. To what extent these values show better performance or they are due to overfitting?}
 
-$\rightarrow$ This improvement is due to a decreasing of the number of elements considered as traffic components. As in TIR = -12 dB, the interfering class is more present, it takes more basis in W'. By increasing the threshold, we put aside more elements from W' that can belong to this sound class. It is equivalent, in detection task, to reduce the number of false-positive. It is now discussed further in the end of the section 5: 'It would be possible to decrease the error by adapting the threshold according to the $TIR$. For instance at $TIR$ = 12 dB, the average error on all the sub-classes would decrease to 0.30 ($\pm$ 0.11) with $t$ = 0.34 where 191 elements are considered as traffic component. In the contrary, at $TIR$ = -12 dB, by increasing the threshold to 0.53, the error would decrease to 4.49 ($\pm$ 1.75) with in average 73 elements considered as \textit{traffic} elements.'
+$\rightarrow$ This improvement is due to a decrease of the number of elements considered as traffic components. As in TIR = -12 dB, the interfering class is more present, it takes more basis in W'. By increasing the threshold, we put aside more elements from W' that can belong to this sound class. It is equivalent, in detection task, to a reduction of the number of false-positive. It is now discussed further in the end of the section 5: 'It would be possible to decrease the error by adapting the threshold according to the $TIR$. For instance at $TIR$ = 12 dB, the average error on all the sub-classes would decrease to 0.30 ($\pm$ 0.11) with $t$ = 0.34 where 191 elements are considered as traffic component. In the contrary, at $TIR$ = -12 dB, by increasing the threshold to 0.53, the error would decrease to 4.49 ($\pm$ 1.75) with in average 73 elements considered as \textit{traffic} elements.'
 
 \item \emph{I would recommend including all the tuning and sweep analysis within an Appendix at the end of the manuscript.}
 
-$\rightarrow$ As lots of results have been generated by this experience, we prefer to not add all the results in tables which might be too long.
-
-\ml{a rediscuter, je ne vois pas de quoi on parle}
+$\rightarrow$ As lots of results have been generated by those experiments, we chose to detail only some of the parameters that may influence the performance of the studied algorithms.
 
 \end{enumerate}
 
@@ -140,7 +141,7 @@ $\rightarrow$ As lots of results have been generated by this experience, we pref
 \begin{enumerate}
 \item \emph{A -12 is missing in the enumeration of TIR values after eq. (12). Nevertheless, I would recommend removing this enumeration from the explanation of the equation since these values should be included in the Experiments section, where they are indeed included.}
 
-$\rightarrow$ This part has been removed thank to the reviewer's suggestion.
+$\rightarrow$ This part has been removed.
 
 \item \emph{Tables 1 and 2 could be fused within the same Table.}
 
@@ -156,7 +157,7 @@ $\rightarrow$ Outside these emergences, the car horn sound level is null, that i
 
 \item \emph{Fig 9. Caption: "according to the the best" --$>$ remove one 'the}
 
-$\rightarrow$ As pointed by the reviewer, the caption title has been fixed.
+$\rightarrow$ The caption title has been fixed.
 
 \end{enumerate}
 \subsection{English writing}

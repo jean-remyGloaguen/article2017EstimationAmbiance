@@ -62,6 +62,8 @@
 
 \newcommand{\ml}[1]{\textcolor{red}{ML : #1}}
 
+\graphicspath{{figures/}{./}}
+
 \journalname{EURASIP Journal on Audio, Speech and Music Processing}
 
 \begin{document}
@@ -113,7 +115,7 @@ The use of acoustic measurements could facilitate their updating or even the gen
 
 \begin{figure}[t]
 \centering
-\includegraphics[width=\linewidth]{figures/bloc_diagram_source_separation.pdf}
+\includegraphics[width=\linewidth]{bloc_diagram_source_separation.pdf}
 \caption{Block diagram of the general source separation model.}
 \label{fig:diagram}
 \end{figure}
@@ -156,7 +158,7 @@ where $\mathbf{W} \in \mathbb{R}^+_{F \times K}$ is the \textit{dictionary} (or 
 
 \begin{figure}[t]
 \centering
-\includegraphics[width=0.9\linewidth]{figures/schema_introduction_nmf.pdf}
+\includegraphics[width=0.9\linewidth]{schema_introduction_nmf.pdf}
 \caption{NMF decomposition of an urban sound mixture comprising 3 sound events (car passages, car horn and bird's whistles), $\mathbf{W}$ is composed of 3 elements too ($K$ = 3) which correspond to 3 audio spectra (car passages (a), car horn (b) and bird's whistles (c)).}
 \label{fig:example_NMF}
 \end{figure}
@@ -247,7 +249,7 @@ An illustrative example is displayed in Figure \ref{fig:W_TI_NMF}.\\
 
 \begin{figure}[t]
 \centering
-\includegraphics[width=0.8\linewidth]{figures/distanceCosLinDisplay.pdf}
+\includegraphics[width=0.8\linewidth]{distanceCosLinDisplay.pdf}
 \caption{$\mathbf{W}_{traffic}$ extraction from the sorted cosine similarity with a threshold $t = 0.6$. The first $82$ elements are here considered as traffic component.}
 \label{fig:W_TI_NMF}
 \end{figure}
@@ -267,7 +269,7 @@ This database is divided into two categories: $i)$ the \textit{event} category, 
 
 \begin{figure}[t]
     \centering
-       \includegraphics[width=.9\linewidth]{./figures/exampleSimScene}
+       \includegraphics[width=.9\linewidth]{./exampleSimScene}
     \caption{Spectrogram of a sound scene created with \textit{SimScene} software with a sound background (road traffic in green) and 3 sound events (car horn in purple, car passage in red and whistling bird in cyan).}
     \label{fig:example_simScene}
 \end{figure}
@@ -288,7 +290,7 @@ The spectrogram $\mathbf{V}$ of each sound scene is built with a window size $w 
 
 \begin{figure}
     \centering
-    \includegraphics[width=\linewidth]{figures/bloc_diagram_estimator.pdf}
+    \includegraphics[width=\linewidth]{bloc_diagram_estimator.pdf}
     \caption{Block diagram of the experiment with the urban sound scenes sound mixture step and the estimation step. The estimator may be a frequency low-pass filter or NMF.}
     \label{fig:bloc_experiment}
 \end{figure}
@@ -303,7 +305,7 @@ The second estimator is the proposed scheme, based on one of the three NMF appro
 
 \begin{figure}
     \centering
-    \includegraphics[width=\linewidth]{figures/bloc_diagram_NMF_EN_2.pdf}
+    \includegraphics[width=\linewidth]{bloc_diagram_NMF_EN_2.pdf}
     \caption{Specific block diagram of the NMF estimator with the dictionary design composed from a second sound database.}
     \label{fig:bloc_nmf}
 \end{figure}
@@ -364,7 +366,7 @@ In order to prevent potential overfitting issues, the dictionary is built from a
 
 \begin{figure}[t]
 \centering
-\includegraphics[width=\linewidth]{figures/creation_W_EN.pdf}
+\includegraphics[width=\linewidth]{creation_W_EN.pdf}
 \caption{Steps involved in the dictionary learning.}
 \label{fig:creation_W}
 \end{figure}
@@ -373,9 +375,9 @@ In order to prevent potential overfitting issues, the dictionary is built from a
 
 \begin{figure}[t]
   \centering
-  \subfloat[]{\label{fig:specW}\includegraphics[width=.45\linewidth]{figures/dictionary3.pdf}}
+  \subfloat[]{\label{fig:specW}\includegraphics[width=.45\linewidth]{dictionary3.pdf}}
 %  \hspace{5pt}
-  \subfloat[]{\label{fig:ElementW}\includegraphics[width=.45\linewidth]{figures/dictionary4.pdf}}
+  \subfloat[]{\label{fig:ElementW}\includegraphics[width=.45\linewidth]{dictionary4.pdf}}
   \caption{Dictionary building on a 3 second extract of a car passage. In dashed lines, a 1 second $w_t$ window  (\ref{fig:specW}). With $w_t$ = 1 second, 3 spectra are then generated and included in $\mathbf{W}$, while for $w_t$ = $all$, the audio file is reduced into 1 spectral vector (\ref{fig:ElementW}).}
   \label{fig:spec_elementW}
 \end{figure}
@@ -432,7 +434,7 @@ The $MAE$ is a performance index without dimension. The use of such a metric is 
 
 \begin{figure}[t]
 \centering
-\includegraphics[width=\linewidth]{./figures/filter_bar_integrate.pdf}
+\includegraphics[width=\linewidth]{./filter_bar_integrate.pdf}
 \caption{Average $MAE$ errors for the LP filter on all the corpus.}
 \label{fig:filter_intergate}
 \end{figure}
@@ -483,13 +485,13 @@ $\mathbf{\beta}$ & - & - & 2 & 2 & 1 \\ \hline
 
 \begin{figure*}[t]
   \centering
-  \subfloat[$MAE$ error for each $TIR$ and sub-class with the frequency low-pass filter with $f_c$ = 500 Hz.]{\label{fig:TIR_class_filter}\includegraphics[width=0.45\textwidth]{figures/filter_bar.pdf}}
+  \subfloat[$MAE$ error for each $TIR$ and sub-class with the frequency low-pass filter with $f_c$ = 500 Hz.]{\label{fig:TIR_class_filter}\includegraphics[width=0.45\textwidth]{filter_bar.pdf}}
   \hspace{5pt}
-  \subfloat[$MAE$ error for each $TIR$ and sub-class with Sup-NMF and $\beta$ = 2.]{\label{fig:TIR_class_sup}\includegraphics[width=0.45\linewidth]{figures/sup_bar.pdf}}
+  \subfloat[$MAE$ error for each $TIR$ and sub-class with Sup-NMF and $\beta$ = 2.]{\label{fig:TIR_class_sup}\includegraphics[width=0.45\linewidth]{sup_bar.pdf}}
   \hspace{5pt}
-  \subfloat[$MAE$ error for each $TIR$ and sub-class with Sem-NMF and $\beta$ = 1.]{\label{fig:TIR_class_semi}\includegraphics[width=.45\linewidth]{figures/semi-sup_bar.pdf}}
+  \subfloat[$MAE$ error for each $TIR$ and sub-class with Sem-NMF and $\beta$ = 1.]{\label{fig:TIR_class_semi}\includegraphics[width=.45\linewidth]{semi-sup_bar.pdf}}
   \hspace{5pt}
-  \subfloat[$MAE$ error for each $TIR$ and sub-class with TI-NMF, $\beta$ = 1 and $t$ = 0.41.]{\label{fig:TIR_class_TI}\includegraphics[width=.45\linewidth]{figures/TI_bar}}
+  \subfloat[$MAE$ error for each $TIR$ and sub-class with TI-NMF, $\beta$ = 1 and $t$ = 0.41.]{\label{fig:TIR_class_TI}\includegraphics[width=.45\linewidth]{TI_bar}}
   \caption{$MAE$ (dB) error for each sub-class and each $TIR$ according to the best results with the filter (\ref{fig:TIR_class_filter}) and each method (Sup-NMF (\ref{fig:TIR_class_sup}), Sem-NMF (\ref{fig:TIR_class_semi}) and TI-NMF (\ref{fig:TIR_class_TI})).}
 	\label{fig:TIR_bar}
 \end{figure*}
@@ -500,7 +502,7 @@ With the addition of a mobile part in the dictionary, $\mathbf{W_r}$, the semi-s
 
 The TI-NMF behavior, with a threshold $t = 0.41$ and $\beta$ = 1, generates smaller errors compared to the baseline for all the $TIR$ values, with the exception at $TIR$ = 0 dB. If this approach gives the lowest error on all the corpus, it is not the one that propose on each $TIR$ the best performances: SUP-NMF has lower errors for positive $TIR$ while SEM-NMF surpasses it for $TIR \in \left\lbrace -12, -6\right\rbrace$. But the specific case $TIR = -12 dB$ is a less likely limit case in urban environment. Putting this specific case aside, TI-NMF is the only approach that propose an error inferior to 3 dB for $TIR \in \left\lbrace -6, 12 \right\rbrace$ dB. Unlike Sup-NMF, where $\mathbf{W}$ is fixed, and Sem-NMF, where only $\mathbf{W_r}$ is updated, TI-NMF updates $\mathbf{W}$ entirely to adjust prior knowledge to the scene under evaluation so as to adapt to the different sound environments. The closest elements of the traffic component defined in $\mathbf{W_0}$ are then extracted to deduce the traffic signal.
 
-For low $TIR$, as the traffic sound class is not predominant, the final dictionary $\mathbf{W'}$ strongly differs from $\mathbf{W_0}$. With the thresholding, only a reduced number of basis vectors are considered as traffic components: from the 200 basis contained in $\mathbf{W'}$, 106 are considered as \textit{traffic}  component in $TIR$ = -12 dB. In comparison to supervised results, this approach reduces significantly the error for the \textit{human} and \textit{transport} sub-classes.  However, for \textit{climate} and \textit{mechanics}, the errors remain important as these interfering classes have similar spectral profiles when compared to traffic ones. 
+For low $TIR$, as the traffic sound class is not predominant, the final dictionary $\mathbf{W'}$ strongly differs from $\mathbf{W_0}$. With the thresholding, only a reduced number of basis vectors are considered as traffic components: from the 200 basis contained in $\mathbf{W'}$, 106 are considered as \textit{traffic}  component in $TIR$ = -12 dB. In comparison to supervised results, this approach reduces significantly the error for the \textit{human} and \textit{transport} sub-classes.  However, for \textit{climate} and \textit{mechanics}, the errors remain important as these interfering classes have similar spectral profiles when compared to traffic ones.
 
 For high $TIR$, as the traffic is the main sound source, the similarity of the initial dictionary and $\mathbf{W}$ is higher which allows us to retain more elements as traffic components (181 basis for $TIR$ = 12 dB) and then decreases the error ($MAE$ < 1). The kept elements are then more suited to the scenes than a fixed dictionary. The error for these $TIR$ is then due to the thresholding which put aside some elements that can be related to the traffic component.
 
@@ -512,9 +514,9 @@ In Figure \ref{fig:specLp}, the spectrogram of an alert scene is displayed ($TIR
 
 \begin{figure*}[t]
   \centering
-  \subfloat[]{\label{fig:specLp}\includegraphics[width=.45\linewidth]{figures/specAlert.pdf}}
+  \subfloat[]{\label{fig:specLp}\includegraphics[width=.45\linewidth]{specAlert.pdf}}
 %  \hspace{5pt}
-  \subfloat[]{\label{fig:lp_alert}\includegraphics[width=.45\linewidth]{figures/NMF_Lp_alert.pdf}}
+  \subfloat[]{\label{fig:lp_alert}\includegraphics[width=.45\linewidth]{NMF_Lp_alert.pdf}}
   \caption{Spectrogram of an \textit{alert} sub-class scene (\ref{fig:specLp}) and evolution of 1 second equivalent sound pressure level (\ref{fig:lp_alert}) for 500 Hz low-pass filter and TI-NMF ($\beta$ = 1, $K$ = 200, $w_t$ = 0.5 s, $t$ = 0.42) at $TIR = -12$ dB (in full line) and $TIR$ = 12 dB (in dashed line).}
   \label{fig:spec_alert}
 \end{figure*}
@@ -522,7 +524,7 @@ In Figure \ref{fig:specLp}, the spectrogram of an alert scene is displayed ($TIR
 \section{Conclusion}
 
 The non negative matrix factorization framework has been considered to estimate the road traffic sound level in urban sound mixtures. We found that it is a well suited approach to these sound environments because it easily takes into account the overlap between the multiple sound sources present in the cities and it is adapted to monophonic sensor networks. Different versions of NMF have been studied as a supervised and semi-supervised approach. On a large corpus of sounds, the supervised approach proves to be too restrictive to be adapted to different sound environments whereas the semi-supervised approach has, on the contrary, too many degrees of freedom on the mobile dictionary $\mathbf{W_r}$, decreasing its performance especially when the traffic is predominant. The proposed approach, named threshold initialized NMF achieves the lowest average error on the entire corpus. With this method, the $\mathbf{W}$ is initialized with road traffic spectra, updated and the dictionary elements that are similar to the road traffic spectra are then extracted by hard thresholding.
-The study of the error according each $TIR$ reveals that this method is not the most efficient on each $TIR$. But it should be remind that one case, $TIR$ = -12 dB, is a rarer case than other values in an urban environment and is intended to test the performance limitations of the NMF TI. If this case was putted aside, TI-NMF reveals to be the only method to reach an $MAE$ error inferior  to 3 dB. The MAE error in Table 2 would decrease to 1.39 while SEM NMF would be 2.15 and the baseline would be 1.77. Consequently, for an urban application where the $TIR$ is an unknown information, TI NMF seems to be the most suited version. 
+The study of the error according each $TIR$ reveals that this method is not the most efficient on each $TIR$. But it should be remind that one case, $TIR$ = -12 dB, is a rarer case than other values in an urban environment and is intended to test the performance limitations of the NMF TI. If this case was putted aside, TI-NMF reveals to be the only method to reach an $MAE$ error inferior  to 3 dB. The MAE error in Table 2 would decrease to 1.39 while SEM NMF would be 2.15 and the baseline would be 1.77. Consequently, for an urban application where the $TIR$ is an unknown information, TI NMF seems to be the most suited version.
 A major advantage of the proposed approach is that it is not designed for a specific source. Extending the proposed approach to other sources is also of interest for future research. The method should thus be tested and validated further on a larger and more diverse dataset with, for instance, motorcycles and other noisy traffic elements which are not considered in this study. Furthermore, even if the experiments described in this paper focused on road traffic level detection, changing the dictionary to contain bird sounds would lead to an estimator of the presence of birds.
 
 The experimental protocol and the evaluated estimators have been implemented with the Matlab software. For reproducible purposes, the code is available online. The evaluation database composed of multiple samples of urban sounds is also made available for the research community with interest in detection, separation and recognition tasks of urban sound sources.

@@ -139,8 +139,7 @@ On a preliminary study \cite{gloaguen2016estimating}, supervised Non-Negative Ma
 
 
 Here, we extend this approach with more flavors of NMF on more challenging sound scenes. The corpus of simulated sound scenes considered here is created from a built-up sound database composed of a large number of diverse sound samples in order to encompass a wide variety of sound environment with a variable presence of road traffic noise. The use of simulated sound scenes allows rigorous experimental validation as it offers a high level of control on the design of the scenes and the knowledge of the exact contribution of the traffic component ($L_{p,traffic}$), which would be difficult to extract from a recording of an urban scene.
-The aim is to find the type of NMF that gives the minimal error on the estimation of the traffic noise signal level on the whole corpus.% to be applied to all the different possible urban noise environments.
-We demonstrate that supervised NMF and semi supervised NMF approaches have some interests but do not give satisfactory results for the application at hand. We thus introduce another scheme called thresholded initialized NMF that makes good use of prior knowledge about the source of interest, in our case the traffic noise, but also generalizes well to several kinds of urban areas and to traffic to interference ratio ($TIR$).
+The aim is to find the type of NMF that gives the minimal error on the estimation of the traffic noise signal level on the whole corpus. We demonstrate that supervised NMF and semi supervised NMF approaches have some interests but do not give satisfactory results for the application at hand. We thus introduce another scheme called thresholded initialized NMF that makes good use of prior knowledge about the source of interest, in our case the traffic noise, but also generalizes well to several kinds of urban areas and to traffic to interference ratio ($TIR$).
 
 The remaining of the paper is organized as follows. Section \ref{part:nmf} details the technical aspects of NMF and describes the 3 approaches considered in this paper to achieve the task at hand. Section \ref{part:protocol} describes the corpus of environmental sound scenes and the experimental protocol setup. Section \ref{part:results} presents and discusses the outcomes of the numerical results.
 
@@ -427,7 +426,7 @@ The performance of the road traffic sound level estimator is assessed through th
 MAE = \frac{\sum_{m = 1}^M\vert L^m_{p,traffic}-\tilde{L}^m_{p,traffic} \vert}{M}.
 \end{equation}
 
-The $MAE$ is a performance index without dimension. The use of such a metric is justified by the aim of this study that is to find the best association of experimental factors that obtain the lower mean error on all the corpus. The $MAE$ error with logarithmic values gives an equal weight to each difference for any given sound level and makes it possible to be less sensitive to high energies. It is also a common practice in the environmental acoustics field when dealing with errors  \cite{morillas2014uncertainty} \cite{aumond2018kriging}.
+The $MAE$ is a performance index without dimension. The use of such a metric is justified by the aim of this study that is to find the best association of experimental factors that obtains the lower mean error on all the corpus. The $MAE$ error with logarithmic values gives an equal weight to each difference for any given sound level and makes it possible to be less sensitive to errors in high pressure levels (in accordance with human perception). It is also a common practice in the environmental acoustics field when dealing with errors  \cite{morillas2014uncertainty} \cite{aumond2018kriging}.
 
 \section{Results}\label{part:results}
 
@@ -445,7 +444,7 @@ In low $TIR$, for \textit{alert} and \textit{animals}, which are sub-classes com
 
 Table \ref{tab:results} summarizes, according to the 2 main factors (\textit{method}, $\beta$), the lowest $MAE$ error averaged on all sub-classes and all $TIR$ (750 sound mixtures in all) for NMF. For the low-pass frequency filters and each NMF approaches, the best parameter combinations are detailed according to the $TIR$ in Table \ref{tab:results_TIR},  and are expanded to the sub-classes in Figures \ref{fig:TIR_class_filter}, \ref{fig:TIR_class_sup}, \ref{fig:TIR_class_semi} and \ref{fig:TIR_class_TI}. Compared with the filter errors, the choice of some NMF approaches makes it possible to decrease the error of the road traffic sound level estimation. The supervised approach is the only method that has an average error superior to the 500 Hz filter baseline. Sem-NMF and TI-NMF have better results. The lowest average error is obtained for TI-NMF,  2.15 ($\pm$ 2.10), for $\beta$ = 1 and threshold $t$ = 0.41 with the dictionary factors $K$ = 200 and $w_t$ = 500 ms. On the other hand, the semi-supervised approach has a higher error but a lower standard deviation ($MAE$ = 2.32 ($\pm$ 1.15)). TI-NMF seems to be the most efficient approach on all corpus without requiring strong prior knowledge about the interfering sound class or the $TIR$ value.
 
-As the mean error between the best SUP-NMF ($\beta$ = 2, $K$ = 25, $w_t$ = 2 s), SEM-NMF ($\beta$ = 1, $K$ = 200, $w_t$ = 2 s) and TI-NMF ($\beta$ = 1, $K$ = 200, $w_t$ = 0.5 s, $t$ = 0.41) approaches are close, a Student's t-test is performed to evaluate the statistical differences between them. It is performed on the 750 estimated traffic sound levels for each couple of method (SUP/SEM NMF, SUP/TI NMF, SEM/TI NMF). The test estimates a $p$-value which is confronted to a threshold $\alpha$ = 5 $\%$ that evaluates the $H_0$ hypothesis about the similarity between the distribution of the sound levels ($p$-value $> \alpha$). The $p$-values are summarized in the Table \ref{tab:student_test} with the $t$-values and the degrees of freedom (Dof).
+As the mean error between the best SUP-NMF ($\beta$ = 2, $K$ = 25, $w_t$ = 2 s), SEM-NMF ($\beta$ = 1, $K$ = 200, $w_t$ = 2 s) and TI-NMF ($\beta$ = 1, $K$ = 200, $w_t$ = 0.5 s, $t$ = 0.41) approaches are close, a Student's t-test is performed to evaluate the statistical differences between them. It is performed on the 750 estimated traffic sound levels for each couple of methods (SUP/SEM NMF, SUP/TI NMF, SEM/TI NMF). The test estimates the $p$-value which is confronted to a threshold $\alpha$ = 5 $\%$. The $p$-values are summarized in the Table \ref{tab:student_test} with the $t$-values and the degrees of freedom (Dof).
 
 \begin{table}[t]
 \centering
@@ -453,17 +452,17 @@ As the mean error between the best SUP-NMF ($\beta$ = 2, $K$ = 25, $w_t$ = 2 s),
 \toprule
   & SUP/SEM NMF & SUP/TI NMF & SEM/TI NMF \\
 \midrule
+t-test & Welch & Welch & Student \\
 $t$-value & 7.81 & 2.84 & 4.60\\
 Dof & 1478 & 1470 & 1498\\
-$p$-value & \textbf{5.33 $\times 10^{-15}$} & \textbf{1.32 $\times 10^{-3}$} & \textbf{4.57 $\times 10^{-4}$} \\
+$p$-value & \textbf{1.06 $\times 10^{-14}$} & \textbf{4.49 $\times 10^{-3}$} & \textbf{4.39 $\times 10^{-6}$} \\
 \bottomrule
 \end{tabular}
-\caption{$p$-values deducted from the Student's test. In bold letters, the $p$-values that reject the $H_0$ hypothesis ($p$-value $\leq \alpha$).}
+\caption{$p$-values deducted from the paired sample one-sided t-test of the SUP , SEM and TI NMF that offer the lowest $MAE$ error. In bold letters, the $p$-values that reject the $H_0$ hypothesis ($p$-value $\leq \alpha$).}
 \label{tab:student_test}
 \end{table}
 
-For each couple of methods, the $H_0$ hypothesis is rejected meaning that the distributions of the sound level estimations according to the approaches are significantly different despite similar mean errors.
-To better understand these differences, the errors made according to the $TIR$ and for each sound environment are displayed in Table \ref{tab:results_TIR} and in Figure \ref{fig:TIR_bar}.
+For each couple of methods, the $H_0$ hypothesis is rejected meaning that the distributions of the sound level estimations according to the approaches are significantly different despite similar mean errors. In the case of the comparison of the distributions of the SEM NMF with the TI NMF, a Student's t-test is calculated. But since the standard deviations are different between the SUP NMF and SEM NMF distributions and between the SUP NMF and TI NMF distributions, a Welch's t-test is performed, which is an adaptation of the Student's t-test. Consequently, the calculation of the degree of freedom is then obtained as a function of these variances and differs from that obtained by the Student t-test. To better understand these differences, the errors made according to the $TIR$ and for each sound environment are displayed in Table \ref{tab:results_TIR} and in Figure \ref{fig:TIR_bar}.
 
 \begin{table*}[t]
 \centering
